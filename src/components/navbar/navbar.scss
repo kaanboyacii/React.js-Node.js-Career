@@ -1,4 +1,3 @@
-// navbar.scss
 .navbar {
   background-color: #ffffff;
   color: #0c356a;
@@ -8,6 +7,11 @@
   left: 0;
   right: 0;
   z-index: 1000;
+
+  .menu-icon {
+    display: none;
+  }
+
   .container {
     display: flex;
     justify-content: space-between;
@@ -19,6 +23,12 @@
     @media (max-width: 768px) {
       flex-direction: column;
       text-align: center;
+
+      .menu-icon {
+        display: block;
+        font-size: 24px;
+        cursor: pointer;
+      }
     }
   }
 
@@ -56,18 +66,15 @@
       }
 
       @media (max-width: 768px) {
-        margin: 2px 0; // Mobil görünümde linkler arasında ve altında boşluk ekleyin
+        display: none;
+        margin: 2px 0;
         &:before {
-          display: none; // Mobil görünümde altındaki animasyonu kaldırın
+          display: none;
         }
       }
     }
 
-    @media (max-width: 768px) {
-      flex-direction: column;
-      text-align: center;
-      margin-top: 15px;
-    }
+
   }
 
   .user-actions {
@@ -86,6 +93,7 @@
       }
 
       @media (max-width: 768px) {
+        display: none;
         margin: 10px 0;
         margin-right: 5px;
       }
@@ -103,6 +111,26 @@
 
     @media (max-width: 768px) {
       margin-top: 15px;
+    }
+  }
+
+  .mobile-menu {
+    display: none;
+    @media (max-width: 768px) {
+      display: block;
+      text-align: center;
+
+      a {
+        display: block;
+        padding: 10px 0;
+        text-decoration: none;
+        color: #0c356a;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #0174be;
+        }
+      }
     }
   }
 }

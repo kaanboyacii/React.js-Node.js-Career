@@ -1,11 +1,32 @@
 import "./navbar.scss";
 import { DarkModeContext } from "../../context/darkModeContext";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Logo from "../../img/logo.png"
+import Logo from "../../img/logo.png";
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Ekran genişliği değiştiğinde durumu izlemek için useEffect kullanıyoruz.
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
     <div className="navbar">
@@ -19,12 +40,24 @@ const Navbar = () => {
           <a href="/">Etkinlikler</a>
           <a href="/">Kurslarım</a>
           <a href="/">Hakkımızda</a>
-          {/* Add more navigation links as needed */}
         </div>
         <div className="user-actions">
           <a href="/">Giriş Yap</a>
           <a href="/">Üye Ol</a>
         </div>
+        <MenuIcon className="menu-icon" onClick={toggleMobileMenu} />
+        {isMobileMenuOpen && (
+          <div className="mobile-menu">
+            {/* Mobil menü içeriği */}
+            <a href="/">Anasayfa</a>
+            <a href="/">İş İlanları</a>
+            <a href="/">Etkinlikler</a>
+            <a href="/">Kurslarım</a>
+            <a href="/">Hakkımızda</a>
+            <a href="/">Giriş Yap</a>
+            <a href="/">Üye Ol</a>
+          </div>
+        )}
       </div>
     </div>
   );

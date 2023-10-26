@@ -1,12 +1,18 @@
+import React from "react";
 import Navbar from "../../components/navbar/Navbar";
+import Hero from "../../components/hero/Hero";
+
 import "./home.scss";
 
 const Home = () => {
+
   return (
     <div className="home">
-      <div className="homeContainer">
-        <Navbar />
+      <Navbar />
+      <div className="hero">
+        <Hero/>
       </div>
+    
     </div>
   );
 };

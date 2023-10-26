@@ -1,0 +1,80 @@
+.hero {
+  height: calc(100vh - 30vh);
+  overflow: hidden;
+  background: linear-gradient(180deg, #0C356A, #0174BE);
+  position: relative;
+
+  .wrapper {
+    max-width: 1366px;
+    height: 100%;
+    margin: auto;
+
+    .textContainer {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 40px;
+
+      h2 {
+        font-size: 30px;
+        color: #0174BE;
+        letter-spacing: 10px;
+      }
+
+      h1 {
+        font-size: 88px;
+        color: #FFC436;
+      }
+    //   .buttons {
+    //     button {
+    //       padding: 20px;
+    //       border: 1px solid white;
+    //       border-radius: 10px;
+    //       background-color: transparent;
+    //       color: white;
+    //       margin-right: 20px;
+    //       margin-bottom: 75px;
+    //       cursor: pointer;
+    //       font-weight: 300;
+    //       pointer-events: auto; // Butonlar animasyon sırasında etkileşime açık
+      
+    //       &:hover {
+    //         color: #0174BE;
+    //         background-color: white;
+    //       }
+    //     }
+    //   }
+      
+      img {
+        width: 50px;
+      }
+    }
+  }
+
+  .imageContainer {
+    height: 100%;
+    position: absolute;
+    top: 60px;
+    right: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .slidingTextContainer {
+    position: absolute;
+    font-size: 60vh;
+    bottom: -60px;
+    white-space: nowrap;
+    color: #ffffff09;
+    width: 50%;
+    font-weight: bold;
+    user-select: none;
+  }
+  
+}

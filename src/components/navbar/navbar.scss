@@ -1,0 +1,108 @@
+// navbar.scss
+.navbar {
+  background-color: #ffffff;
+  color: #0c356a;
+  padding: 15px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  .logo {
+    img {
+      max-width: 100px;
+      height: auto;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+
+    a {
+      position: relative;
+      color: #0c356a;
+      margin: 0 15px;
+      text-decoration: none;
+
+      &:before {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: #ffc436;
+        transform: scaleX(0);
+        transition: transform 0.3s;
+      }
+
+      &:hover:before {
+        transform: scaleX(1);
+      }
+
+      @media (max-width: 768px) {
+        margin: 2px 0; // Mobil görünümde linkler arasında ve altında boşluk ekleyin
+        &:before {
+          display: none; // Mobil görünümde altındaki animasyonu kaldırın
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+      margin-top: 15px;
+    }
+  }
+
+  .user-actions {
+    a {
+      display: inline-block;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      margin-right: 10px;
+
+      &:hover {
+        background-color: #0c356a;
+        color: #fff;
+      }
+
+      @media (max-width: 768px) {
+        margin: 10px 0;
+        margin-right: 5px;
+      }
+    }
+
+    a:first-child {
+      background-color: #ffc436;
+      color: #0174be;
+    }
+
+    a:last-child {
+      background-color: #0174be;
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      margin-top: 15px;
+    }
+  }
+}

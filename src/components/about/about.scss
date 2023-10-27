@@ -1,6 +1,7 @@
-@import "../../app.scss";
+@import "../../style/app.scss";
+@import "../../style/color.scss";
 .events {
-  //   background: linear-gradient(180deg, #fff, #FFC436);
+  //   background: linear-gradient(180deg, #fff, $accent-color);
   background-color: #fff;
   height: 100%;
   display: flex;
@@ -23,7 +24,7 @@
     p {
       font-weight: 200;
       font-size: 20px;
-      color: #FFC436;
+      color: $accent-color;
       text-align: right;
     }
 
@@ -83,7 +84,7 @@
         width: 300px;
         height: 100px;
         border-radius: 50px;
-        background-color: #FFC436;
+        background-color: $accent-color;
         border: none;
         font-size: 24px;
         cursor: pointer;
@@ -132,16 +133,16 @@
     
       button {
         padding: 10px;
-        background-color: #FFC436;
+        background-color: $accent-color;
         border: none;
         cursor: pointer;
         margin-top: 15px;
     
         @include mobile {
           background-color: transparent;
-          border: 1px solid #FFC436;
+          border: 1px solid $accent-color;
           border-radius: 5px;
-          color: #FFC436;
+          color: $accent-color;
           width: 50%;
           padding: 5px;
         }

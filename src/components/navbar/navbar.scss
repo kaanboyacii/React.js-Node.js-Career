@@ -1,6 +1,8 @@
+@import "../../style/color.scss";
+
 .navbar {
   background-color: #ffffff;
-  color: #0c356a;
+  color: $primary-color;
   padding: 15px 0;
   position: fixed;
   top: 0;
@@ -34,7 +36,7 @@
 
   .logo {
     img {
-      max-width: 100px;
+      max-width: 160px;
       height: auto;
     }
   }
@@ -45,7 +47,7 @@
 
     a {
       position: relative;
-      color: #0c356a;
+      color: $primary-color;
       margin: 0 15px;
       text-decoration: none;
 
@@ -56,7 +58,7 @@
         left: 0;
         right: 0;
         height: 2px;
-        background-color: #ffc436;
+        background-color: $accent-color;
         transform: scaleX(0);
         transition: transform 0.3s;
       }
@@ -85,10 +87,9 @@
       border-radius: 5px;
       text-decoration: none;
       transition: background-color 0.3s;
-      margin-right: 10px;
-
+      margin: 2px;
       &:hover {
-        background-color: #0c356a;
+        background-color: $primary-color;
         color: #fff;
       }
 
@@ -100,12 +101,12 @@
     }
 
     a:first-child {
-      background-color: #ffc436;
-      color: #0174be;
+      background-color: $accent-color;
+      color: $secondary-color;
     }
 
     a:last-child {
-      background-color: #0174be;
+      background-color: $secondary-color;
       color: #fff;
     }
 
@@ -124,11 +125,11 @@
         display: block;
         padding: 10px 0;
         text-decoration: none;
-        color: #0c356a;
+        color: $primary-color;
         transition: color 0.3s;
 
         &:hover {
-          color: #0174be;
+          color: $secondary-color;
         }
       }
     }

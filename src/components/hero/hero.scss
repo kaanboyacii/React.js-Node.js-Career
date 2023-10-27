@@ -1,13 +1,17 @@
+@import "../../style/color.scss";
+
 .hero {
   height: calc(100vh - 30vh);
   overflow: hidden;
-  background: linear-gradient(180deg, #0c356a, #0174be);
+  background: linear-gradient(180deg, $primary-color, $secondary-color);
   position: relative;
+  border-radius: 30px;
 
   .wrapper {
     height: 100%;
     margin: auto;
-    max-width: 1200px;
+    padding-left: 5vh;
+    
     .textContainer {
       width: 100%;
       height: 55%;
@@ -16,25 +20,18 @@
       justify-content: center;
       h2 {
         font-size: 24px;
-        color: #0174be;
+        color: $secondary-color;
         letter-spacing: 10px;
       }
-
       h1 {
         font-size: 72px;
-        color: #ffc436;
-      }
-
-      img {
-        width: 50px;
+        color: $accent-color;
       }
     }
     .searchContainer {
       position: absolute;
       display: flex;
-      top: 50%;
-      left: 21%; /* Orta yatay konum */
-      transform: translate(-50%, -50%); /* Dikey ve yatayda ortalamayı sağlar */
+      top: 40%;
       background: #fff;
       border-radius: 10px;
       padding: 8px;
@@ -68,7 +65,7 @@
   .hero {
     height: 80vh;
     overflow: hidden;
-    background: linear-gradient(180deg, #0c356a, #0174be);
+    background: linear-gradient(180deg, $primary-color, $secondary-color);
     .wrapper {
       max-width: 1366px;
       height: 100%;
@@ -83,13 +80,13 @@
         
         h2 {
           font-size: 30px;
-          color: #0174be;
+          color: $secondary-color;
           letter-spacing: 5px;
         }
   
         h1 {
           font-size: 88px;
-          color: #ffc436;
+          color: $accent-color;
           margin-bottom: 11rem;
         }
   
@@ -135,7 +132,7 @@
 
       h2 {
         font-size: 30px;
-        color: #0174be;
+        color: $secondary-color;
         letter-spacing: 10px;
         text-align: center;
       }
@@ -143,13 +140,13 @@
       h1 {
         font-size: 88px;
         text-align: center;
-        color: #ffc436;
+        color: $accent-color;
       }
     }
     .hero {
       height: 80vh;
       overflow: hidden;
-      background: linear-gradient(180deg, #0c356a, #0174be);
+      background: linear-gradient(180deg, $primary-color, $secondary-color);
       position: relative;
       .imageContainer {
         height: 50vh;

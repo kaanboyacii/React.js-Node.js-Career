@@ -1,5 +1,7 @@
 .home {
   position: relative;
+  max-width: 1200px; /* Ekle: Maksimum genişliği 1200px olarak ayarla */
+  margin: 0 auto; /* Ekle: Sayfayı ortala */
 }
 
 .navbar {

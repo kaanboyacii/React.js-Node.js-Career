@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+
+  .card {
+    cursor: pointer;
+    flex: 0 1 calc(20% - 20px);
+    height: 100px;
+    padding: 20px;
+    border: 1px solid #bbb;
+    margin: 10px;
+    box-shadow: 0 5px 8px #0c356a;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card h3 {
+    font-size: 1.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .card p {
+    font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+}

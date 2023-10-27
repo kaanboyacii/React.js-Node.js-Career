@@ -1,0 +1,60 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  h1 {
+    font-size: 10vh;
+    text-align: center;
+    margin-top: 5vh;
+    color: #0c356a;
+  }
+  
+  .event-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    border-left: 1px solid #0c356a; 
+    border-right: 1px solid #0c356a; 
+    padding: 20px;
+    margin: 10px;
+    margin-top: 3vh;
+    margin-bottom: 5vh;
+    text-align: center;
+
+    img {
+      max-width: 80%; /* Resmi kartın içine sığdır */
+      height: auto;
+      margin: 0 auto; /* Resmi yatayda ortala */
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 10px;
+    }
+
+    p {
+      color: #555;
+      margin-top: 10px;
+      text-align: center; /* Yazıları ortala */
+      padding: 30px; /* İçeriğin etrafına boşluk bırak */
+      max-height: 100px; /* Yazının maksimum yüksekliği */
+      overflow: hidden; /* Taşan yazıları gizle */
+      text-overflow: ellipsis; /* Taşan yazının sonunu "..." ile göster */
+    }
+
+    button {
+      background-color: #0174be;
+      color: #fff;
+      border: none;
+      margin-top: 5vh;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #0c356a;
+      }
+    }
+  }
+}

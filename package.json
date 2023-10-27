@@ -18,7 +18,9 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.17.0",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
     "sass": "^1.49.9",
+    "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

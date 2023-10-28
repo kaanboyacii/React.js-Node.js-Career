@@ -5,6 +5,7 @@ import Hero from "../../components/hero/Hero";
 import About from "../../components/about/About";
 import Services from "../../components/services/Services";
 import EventSlider from "../../components/eventslider/EventSlider";
+import Footer from "../../components/footer/Footer";
 
 const Home = () => {
   return (
@@ -21,6 +22,9 @@ const Home = () => {
       </div>
       <div className="about">
         <About />
+      </div>
+      <div className="footer">
+        <Footer />
       </div>
     </div>
   );

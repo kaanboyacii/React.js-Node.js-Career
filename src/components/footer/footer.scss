@@ -1,0 +1,92 @@
+@import "../../style/color.scss";
+
+.footer {
+  background-color: #fff;
+  width: 100%;
+  padding: 40px 0;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.footer-logo {
+  display: block;
+  align-items: center;
+  height: 15vh;
+  margin: 10px;
+  p {
+    font-size: 1.1rem;
+    text-align: center;
+    margin-right: 4vh;
+  }
+}
+.footer-logo img {
+  width: 100%;
+  height: 75%;
+}
+
+.footer-links h1,
+.footer-social h1 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: $primary-color;
+  position: relative;
+}
+
+/* Başlıkların altına çizgi ekleyen stil tanımlamaları */
+.footer-links h1::after,
+.footer-social h1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px; /* Çizginin alt boşluğunu ayarlayabilirsiniz */
+  width: 100%; /* Çizgi uzunluğunu ayarlayabilirsiniz */
+  height: 2px; /* Çizgi kalınlığını ayarlayabilirsiniz */
+  background-color: $accent-color; /* Çizgi rengini ayarlayabilirsiniz */
+}
+
+.footer-links ul,
+.footer-social ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li,
+.footer-social li {
+  margin-bottom: 10px;
+}
+
+.footer-links a,
+.footer-social a {
+  text-decoration: none;
+  color: $primary-color;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover,
+.footer-social a:hover {
+  color: $accent-color; /* Vurgulama rengi */
+}
+
+.footer-bottom {
+  background-color: $primary-color;
+  padding: 20px 0;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Media sorguları ekleyerek responsive tasarım ekleyebilirsiniz */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+  }
+  .footer-logo {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}

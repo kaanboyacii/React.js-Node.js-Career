@@ -22,6 +22,7 @@
     border-radius: 10px;
     height: 100%;
     width: 100%;
+    font-family: 'Ubuntu', sans-serif;
     &:hover {
       background-color: $accent-color;
       color: $primary-color;
@@ -30,6 +31,7 @@
   .MuiTypography-h4 {
     color: $primary-color;
     text-align: center;
+    font-family: 'Ubuntu', sans-serif;
   }
   .MuiTypography-body1 {
     display: -webkit-box;
@@ -37,5 +39,6 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     color: #000000;
+    font-family: 'Ubuntu', sans-serif;
   }
 }

@@ -1,0 +1,41 @@
+@import "../../style/color.scss";
+
+.eventSlider {
+  justify-content: center;
+  width: 100%;
+  margin-top: 5vh;
+  height: auto;
+
+  h1 {
+    color: $primary-color;
+    font-size: 40px;
+    text-align: center;
+    margin: 10px;
+  }
+  .MuiButton-root {
+    margin-top: 1.3rem;
+    color: #fff;
+    background-color: $primary-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    &:hover {
+      background-color: $accent-color;
+      color: $primary-color;
+    }
+  }
+  .MuiTypography-h4 {
+    color: $primary-color;
+    text-align: center;
+  }
+  .MuiTypography-body1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #000000;
+  }
+}

@@ -3,7 +3,8 @@ import "./home.scss";
 import Navbar from "../../components/navbar/Navbar";
 import Hero from "../../components/hero/Hero";
 import About from "../../components/about/About";
-import Services from "../../components/services/Services"; // Services bileşenini içeri aktardığınızdan emin olun
+import Services from "../../components/services/Services";
+import EventSlider from "../../components/eventslider/EventSlider";
 
 const Home = () => {
   return (
@@ -14,6 +15,9 @@ const Home = () => {
       </div>
       <div className="services">
         <Services />
+      </div>
+      <div className="eventSlider">
+        <EventSlider />
       </div>
       <div className="about">
         <About />

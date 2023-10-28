@@ -4,12 +4,13 @@ import "./services.scss";
 
 const cardContents = [
   {
-    title: "CV Hazırlama",
-    content: "Sizi ön plana çıkaracak CV'yi oluştur.",
+    title: "İş İlanları",
+    content: "Size uygun iş pozisyonlarını bul.",
+
   },
   {
-    title: "İş İlanlar",
-    content: "Size uygun iş pozisyonlarını bul.",
+    title: "CV Hazırlama",
+    content: "Sizi ön plana çıkaracak CV'yi oluştur.",
   },
   {
     title: "Kariyer Etkinlikleri",

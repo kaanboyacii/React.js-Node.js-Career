@@ -1,0 +1,100 @@
+@import "../../style/color.scss";
+
+.signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.left-side {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.right-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-container {
+  text-align: center;
+  hr {
+    margin-top: 10px;
+    color: $primary-color;
+  }
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+
+  .MuiFormControlLabel-label {
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+}
+form {
+  width: 100%;
+  max-width: 300px;
+  h1 {
+    font-size: 2.5rem;
+    color: $primary-color;
+  }
+}
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+input {
+  width: 90%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 0.7rem;
+  background-color: $secondary-color;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: $accent-color;
+}
+.signup-link {
+  margin-top: 10px;
+  a {
+    font-size: 0.9rem;
+    margin: 5px;
+    color: $secondary-color;
+    transition: color 0.3s ease;
+    &:hover {
+      color: $accent-color;
+    }
+  }
+}

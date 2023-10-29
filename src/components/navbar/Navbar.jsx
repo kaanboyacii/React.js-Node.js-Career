@@ -42,8 +42,8 @@ const Navbar = () => {
           <a href="/">Hakkımızda</a>
         </div>
         <div className="user-actions">
-          <a href="/">Giriş Yap</a>
-          <a href="/">Üye Ol</a>
+          <a href="/login">Giriş Yap</a>
+          <a href="/signup">Üye Ol</a>
         </div>
         <MenuIcon className="menu-icon" onClick={toggleMobileMenu} />
         {isMobileMenuOpen && (

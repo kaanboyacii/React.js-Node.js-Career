@@ -48,7 +48,7 @@ const Login = () => {
               </div>
               <a href="/sifremi-unuttum">Şifremi Unuttum</a>
             </div>
-            <button>Giriş Yap</button>
+            <button className="login-button">Giriş Yap</button>
             <div className="signup-link">
               <span>Hesabınız yok mu ?</span>
               <a href="/signup">Üye Ol</a>

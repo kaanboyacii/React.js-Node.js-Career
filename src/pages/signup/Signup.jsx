@@ -65,7 +65,7 @@ const Signup = () => {
                 required
               />
             </div>
-            <button>Üye Ol</button>
+            <button className="signup-button">Üye Ol</button>
             <div className="signup-link">
               <span>Zaten hesabınız var mı ?</span>
               <a href="/login">Giriş Yap</a>

@@ -79,7 +79,7 @@ input {
   font-size: 16px;
 }
 
-button {
+.login-button {
   width: 100%;
   padding: 0.7rem;
   background-color: $secondary-color;
@@ -91,8 +91,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: $accent-color;
+.login-button:hover {
 }
 .signup-link {
   margin-top: 10px;

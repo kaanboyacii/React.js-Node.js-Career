@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./joblist.scss";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const countries = [
   { code: "AD", label: "Andorra", phone: "376" },
@@ -73,57 +74,88 @@ const countries = [
   { code: "ZW", label: "Zimbabwe", phone: "263" },
 ];
 const jobCardsData = [
-    {
-      title: "Software Developer",
-      company: "İzmir Yazılım",
-      location: "İzmir / Konak",
-      category: "Yazılım",
-    },
-    {
-      title: "Software Developer",
-      company: "İzmir Yazılım",
-      location: "İzmir / Konak",
-      category: "Yazılım",
-    },
-    {
-      title: "Software Developer",
-      company: "İzmir Yazılım",
-      location: "İzmir / Konak",
-      category: "Yazılım",
-    },
-    {
-      title: "Software Developer",
-      company: "İzmir Yazılım",
-      location: "İzmir / Konak",
-      category: "Yazılım",
-    },
-    {
-      title: "Software Developer",
-      company: "İzmir Yazılım",
-      location: "İzmir / Konak",
-      category: "Yazılım",
-    },
-    {
-      title: "Software Developer",
-      company: "İzmir Yazılım",
-      location: "İzmir / Konak",
-      category: "Yazılım",
-    },
-    {
-      title: "Software Developer",
-      company: "İzmir Yazılım",
-      location: "İzmir / Konak",
-      category: "Yazılım",
-    },
-    {
-      title: "Software Developer",
-      company: "İzmir Yazılım",
-      location: "İzmir / Konak",
-      category: "Yazılım",
-    },
-  ];
-  
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+  {
+    title: "Software Developer",
+    company: "İzmir Yazılım",
+    location: "İzmir / Konak",
+    category: "Yazılım",
+  },
+];
+
 const Joblist = () => {
+  const [visibleJobCards, setVisibleJobCards] = useState(8);
   return (
     <div className="joblist">
       <Navbar />
@@ -196,16 +228,23 @@ const Joblist = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-           {jobCardsData.map((job, index) => (
+          {jobCardsData.slice(0, visibleJobCards).map((job, index) => (
             <div className="job-card" key={index}>
               <h3>{job.title}</h3>
               <p>Şirket: {job.company}</p>
               <p>Lokasyon: {job.location}</p>
               <p>Kategori: {job.category}</p>
-              <button>Başvur</button>
+              <Link to="/job">
+                <button>Daha Fazla Göster</button>
+              </Link>{" "}
             </div>
           ))}
         </motion.div>
+      </div>
+      <div className="more-button">
+        <button onClick={() => setVisibleJobCards(visibleJobCards + 4)}>
+          Daha Fazla Göster
+        </button>
       </div>
       <Footer />
     </div>

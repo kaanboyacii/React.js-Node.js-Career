@@ -6,6 +6,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
 import Joblist from "./pages/joblist/Joblist";
+import Job from "./pages/job/Job";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -19,6 +20,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="job-list" element={<Joblist />} />
+            <Route path="job" element={<Job />} />
           </Route>
         </Routes>
       </BrowserRouter>

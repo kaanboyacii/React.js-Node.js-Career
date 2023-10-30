@@ -36,7 +36,7 @@ const Navbar = () => {
         </div>
         <div className="nav-links">
           <a href="/">Anasayfa</a>
-          <a href="/">İş İlanları</a>
+          <a href="/job-list">İş İlanları</a>
           <a href="/">Etkinlikler</a>
           <a href="/">Kurslarım</a>
           <a href="/">Hakkımızda</a>

@@ -46,6 +46,7 @@
     align-items: center;
 
     a {
+      font-size: 1rem;
       position: relative;
       color: $primary-color;
       margin: 0 15px;
@@ -81,6 +82,7 @@
 
   .user-actions {
     a {
+      font-size: 1rem;
       display: inline-block;
       padding: 10px 20px;
       border: none;

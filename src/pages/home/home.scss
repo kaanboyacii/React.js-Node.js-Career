@@ -1,16 +1,9 @@
 .home {
   position: relative;
-  max-width: 1200px; /* Ekle: Maksimum genişliği 1200px olarak ayarla */
-  margin: 0 auto; /* Ekle: Sayfayı ortala */
+  max-width: 1200px;
+  margin: 0 auto; 
 }
 
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-}
 
 .hero {
   margin-top: 10px;

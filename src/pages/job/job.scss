@@ -1,0 +1,21 @@
+@import "../../style/color.scss";
+
+.job {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  .jobcontainer {
+    margin-top: 10vh;
+    display: flex;
+    width: 100%;
+    .left-side {
+      flex: 2;
+      background-color: #ff213f;
+    }
+    .right-side {
+      flex: 1;
+      background-color: #212f69;
+
+    }
+  }
+}

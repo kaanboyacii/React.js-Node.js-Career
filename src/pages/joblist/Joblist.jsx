@@ -1,11 +1,13 @@
 import React from "react";
 import "./joblist.scss";
 import Navbar from "../../components/navbar/Navbar";
+import Footer from "../../components/footer/Footer";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { motion } from "framer-motion";
 
 const countries = [
   { code: "AD", label: "Andorra", phone: "376" },
@@ -42,7 +44,7 @@ const countries = [
     label: "Bosnia and Herzegovina",
     phone: "387",
   },
- 
+
   {
     code: "VC",
     label: "Saint Vincent and the Grenadines",
@@ -70,13 +72,68 @@ const countries = [
   { code: "ZM", label: "Zambia", phone: "260" },
   { code: "ZW", label: "Zimbabwe", phone: "263" },
 ];
-
+const jobCardsData = [
+    {
+      title: "Software Developer",
+      company: "İzmir Yazılım",
+      location: "İzmir / Konak",
+      category: "Yazılım",
+    },
+    {
+      title: "Software Developer",
+      company: "İzmir Yazılım",
+      location: "İzmir / Konak",
+      category: "Yazılım",
+    },
+    {
+      title: "Software Developer",
+      company: "İzmir Yazılım",
+      location: "İzmir / Konak",
+      category: "Yazılım",
+    },
+    {
+      title: "Software Developer",
+      company: "İzmir Yazılım",
+      location: "İzmir / Konak",
+      category: "Yazılım",
+    },
+    {
+      title: "Software Developer",
+      company: "İzmir Yazılım",
+      location: "İzmir / Konak",
+      category: "Yazılım",
+    },
+    {
+      title: "Software Developer",
+      company: "İzmir Yazılım",
+      location: "İzmir / Konak",
+      category: "Yazılım",
+    },
+    {
+      title: "Software Developer",
+      company: "İzmir Yazılım",
+      location: "İzmir / Konak",
+      category: "Yazılım",
+    },
+    {
+      title: "Software Developer",
+      company: "İzmir Yazılım",
+      location: "İzmir / Konak",
+      category: "Yazılım",
+    },
+  ];
+  
 const Joblist = () => {
   return (
     <div className="joblist">
       <Navbar />
       <div className="joblist-container">
-        <div className="sidebar">
+        <motion.div
+          className="sidebar"
+          initial={{ opacity: 0, scale: 0.8 }} // Başlangıç durumu
+          animate={{ opacity: 1, scale: 1 }} // Animasyon sırasında
+          transition={{ duration: 0.3 }}
+        >
           <h1>Filtreleme</h1>
           <div className="filter-group">
             <h3>Lokasyon</h3>
@@ -132,66 +189,25 @@ const Joblist = () => {
             <FormControlLabel control={<Checkbox />} label="1-3 Yıl" />
             <FormControlLabel control={<Checkbox />} label="3+ Yıl" />
           </div>
-        </div>
-        <div className="job-cards">
-          <div className="job-card">
-            <h3>Software Developer</h3>
-            <p>Şirket: İzmir Yazılım</p>
-            <p>Lokasyon: İzmir / Konak</p>
-            <p>Kategori: Yazılım</p>
-            <button>Başvur</button>
-          </div>
-          <div className="job-card">
-            <h3>Software Developer</h3>
-            <p>Şirket: İzmir Yazılım</p>
-            <p>Lokasyon: İzmir / Konak</p>
-            <p>Kategori: Yazılım</p>
-            <button>Başvur</button>
-          </div>
-          <div className="job-card">
-            <h3>Software Developer</h3>
-            <p>Şirket: İzmir Yazılım</p>
-            <p>Lokasyon: İzmir / Konak</p>
-            <p>Kategori: Yazılım</p>
-            <button>Başvur</button>
-          </div>
-          <div className="job-card">
-            <h3>Software Developer</h3>
-            <p>Şirket: İzmir Yazılım</p>
-            <p>Lokasyon: İzmir / Konak</p>
-            <p>Kategori: Yazılım</p>
-            <button>Başvur</button>
-          </div>
-          <div className="job-card">
-            <h3>Software Developer</h3>
-            <p>Şirket: İzmir Yazılım</p>
-            <p>Lokasyon: İzmir / Konak</p>
-            <p>Kategori: Yazılım</p>
-            <button>Başvur</button>
-          </div>
-          <div className="job-card">
-            <h3>Software Developer</h3>
-            <p>Şirket: İzmir Yazılım</p>
-            <p>Lokasyon: İzmir / Konak</p>
-            <p>Kategori: Yazılım</p>
-            <button>Başvur</button>
-          </div>
-          <div className="job-card">
-            <h3>Software Developer</h3>
-            <p>Şirket: İzmir Yazılım</p>
-            <p>Lokasyon: İzmir / Konak</p>
-            <p>Kategori: Yazılım</p>
-            <button>Başvur</button>
-          </div>
-          <div className="job-card">
-            <h3>Software Developer</h3>
-            <p>Şirket: İzmir Yazılım</p>
-            <p>Lokasyon: İzmir / Konak</p>
-            <p>Kategori: Yazılım</p>
-            <button>Başvur</button>
-          </div>
-        </div>
+        </motion.div>
+        <motion.div
+          className="job-cards"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+           {jobCardsData.map((job, index) => (
+            <div className="job-card" key={index}>
+              <h3>{job.title}</h3>
+              <p>Şirket: {job.company}</p>
+              <p>Lokasyon: {job.location}</p>
+              <p>Kategori: {job.category}</p>
+              <button>Başvur</button>
+            </div>
+          ))}
+        </motion.div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -70,10 +70,64 @@ const eventsCardsData = [
     last_date: "11.01.2024",
     img: Image,
   },
+  {
+    title: "Veri Analitiği Konferansı",
+    company: "DataMinds Derneği",
+    location: "Antalya / Lara",
+    category: "Yazılım",
+    date: "10.04.2024 11.00-17.00",
+    last_date: "11.01.2024",
+    img: Image,
+  },
+  {
+    title: "Veri Analitiği Konferansı",
+    company: "DataMinds Derneği",
+    location: "Antalya / Lara",
+    category: "Yazılım",
+    date: "10.04.2024 11.00-17.00",
+    last_date: "11.01.2024",
+    img: Image,
+  },
+  {
+    title: "Veri Analitiği Konferansı",
+    company: "DataMinds Derneği",
+    location: "Antalya / Lara",
+    category: "Yazılım",
+    date: "10.04.2024",
+    last_date: "11.01.2024",
+    img: Image,
+  },
+  {
+    title: "Veri Analitiği Konferansı",
+    company: "DataMinds Derneği",
+    location: "Antalya / Lara",
+    category: "Yazılım",
+    date: "10.04.2024 11.00-17.00",
+    last_date: "11.01.2024",
+    img: Image,
+  },
+  {
+    title: "Veri Analitiği Konferansı",
+    company: "DataMinds Derneği",
+    location: "Antalya / Lara",
+    category: "Yazılım",
+    date: "10.04.2024 11.00-17.00",
+    last_date: "11.01.2024",
+    img: Image,
+  },
+  {
+    title: "Veri Analitiği Konferansı",
+    company: "DataMinds Derneği",
+    location: "Antalya / Lara",
+    category: "Yazılım",
+    date: "10.04.2024",
+    last_date: "11.01.2024",
+    img: Image,
+  },
 ];
 
 const Events = () => {
-  const [visibleEventsCards, setVisibleEventsCards] = useState(4);
+  const [visibleEventsCards, setVisibleEventsCards] = useState(6);
 
   return (
     <div className="events">
@@ -126,7 +180,6 @@ const Events = () => {
               ))}
           </div>
         </div>
-        <div className="right-side">sağ</div>
       </div>
       <motion.div
         className="more-button"

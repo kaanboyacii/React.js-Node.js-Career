@@ -1,0 +1,101 @@
+@import "../../style/color.scss";
+
+.event {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .event-container {
+    margin-top: 10vh;
+    display: flex;
+    width: 100%;
+
+    .left-side {
+      flex: 3;
+      margin-top: 2rem;
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      flex-direction: column;
+      justify-content: start;
+      align-items: flex-start;
+
+      h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 16px;
+        margin-bottom: 10px;
+        display: block;
+        text-align: left; /* Yazıları sola hizala */
+      }
+    }
+    .right-side {
+      flex: 2;
+      height: 100%;
+      margin-top: 2rem;
+      margin-left: 2rem;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      .apply-job-button {
+        .apply-job {
+          font-size: 20px;
+          margin-bottom: 20px;
+          background: $secondary-color;
+          color: #fff;
+          padding: 0.5rem 1rem;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background 0.3s;
+
+          &:hover {
+            background-color: $accent-color;
+          }
+        }
+      }
+
+      .logo-company {
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+
+      .features {
+        margin-top: 2rem;
+        font-size: 16px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 50px;
+        span {
+          font-size: small;
+          color: $secondary-color;
+        }
+        p {
+          margin: 0;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

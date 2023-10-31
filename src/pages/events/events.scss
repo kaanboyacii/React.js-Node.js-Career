@@ -51,13 +51,29 @@
             h3 {
               font-size: 1.2rem;
               margin-bottom: 0.5rem;
-              color: $primary-color;
+              color: $secondary-color;
             }
 
             p {
               font-size: 1rem;
-              color: #777;
               margin-bottom: 0.5rem;
+            }
+
+            span {
+              font-size: 1.2rem;
+              margin-bottom: 0.5rem;
+            }
+
+            hr {
+              border: none;
+              height: 2px;
+              background: linear-gradient(
+                to right,
+                transparent,
+                $secondary-color,
+                transparent
+              );
+              margin: 10px 0;
             }
           }
 
@@ -77,7 +93,6 @@
           }
         }
 
-        /* Add this if you want to center-align the image and details */
         .event-image,
         .event-details {
           display: flex;

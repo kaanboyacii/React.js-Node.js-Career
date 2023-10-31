@@ -12,7 +12,8 @@ const eventsCardsData = [
     company: "İzmir Yazılım",
     location: "İzmir / Konak",
     category: "Yazılım",
-    date: "11.01.2024",
+    date: "11.01.2024 11.00-17.00",
+    last_date: "11.01.2024",
     img: Image,
   },
   {
@@ -20,7 +21,8 @@ const eventsCardsData = [
     company: "WebMasters Akademi",
     location: "Ankara / Çankaya",
     category: "Yazılım",
-    date: "20.02.2024",
+    date: "20.02.2024 11.00-17.00",
+    last_date: "11.01.2024",
     img: Image,
   },
   {
@@ -28,7 +30,35 @@ const eventsCardsData = [
     company: "MobilTech Danışmanlık",
     location: "İstanbul / Beşiktaş",
     category: "Yazılım",
-    date: "15.03.2024",
+    date: "15.03.2024 11.00-17.00",
+    last_date: "11.01.2024",
+    img: Image,
+  },
+  {
+    title: "Veri Analitiği Konferansı",
+    company: "DataMinds Derneği",
+    location: "Antalya / Lara",
+    category: "Yazılım",
+    date: "10.04.2024 11.00-17.00",
+    last_date: "11.01.2024",
+    img: Image,
+  },
+  {
+    title: "Veri Analitiği Konferansı",
+    company: "DataMinds Derneği",
+    location: "Antalya / Lara",
+    category: "Yazılım",
+    date: "10.04.2024 11.00-17.00",
+    last_date: "11.01.2024",
+    img: Image,
+  },
+  {
+    title: "Veri Analitiği Konferansı",
+    company: "DataMinds Derneği",
+    location: "Antalya / Lara",
+    category: "Yazılım",
+    date: "10.04.2024 11.00-17.00",
+    last_date: "11.01.2024",
     img: Image,
   },
   {
@@ -37,30 +67,7 @@ const eventsCardsData = [
     location: "Antalya / Lara",
     category: "Yazılım",
     date: "10.04.2024",
-    img: Image,
-  },
-  {
-    title: "Veri Analitiği Konferansı",
-    company: "DataMinds Derneği",
-    location: "Antalya / Lara",
-    category: "Yazılım",
-    date: "10.04.2024",
-    img: Image,
-  },
-  {
-    title: "Veri Analitiği Konferansı",
-    company: "DataMinds Derneği",
-    location: "Antalya / Lara",
-    category: "Yazılım",
-    date: "10.04.2024",
-    img: Image,
-  },
-  {
-    title: "Veri Analitiği Konferansı",
-    company: "DataMinds Derneği",
-    location: "Antalya / Lara",
-    category: "Yazılım",
-    date: "10.04.2024",
+    last_date: "11.01.2024",
     img: Image,
   },
 ];
@@ -90,7 +97,9 @@ const Events = () => {
                     alt={event.title}
                   />
                   <div className="event-details">
-                    <h3>{event.title}</h3>
+                    <Link to="/event">
+                      <h3>{event.title}</h3>
+                    </Link>
                     <p>
                       <strong>Şirket:</strong> {event.company}
                     </p>
@@ -98,13 +107,19 @@ const Events = () => {
                       <strong>Lokasyon:</strong> {event.location}
                     </p>
                     <p>
-                      <strong>Tarih:</strong> {event.date}
+                      <strong>Tarih:</strong> {event.date}⏰
                     </p>
                     <p>
                       <strong>Kategori:</strong> {event.category}
                     </p>
+                    <span>
+                      <hr />
+                      Son Başvuru Tarihi: <strong>
+                        {event.last_date}
+                      </strong>
+                    </span>
                   </div>
-                  <Link to="/">
+                  <Link to="/event">
                     <button>Etkinlik Detaylarını Gör</button>
                   </Link>
                 </motion.div>

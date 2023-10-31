@@ -55,7 +55,7 @@
         padding: 16px;
         border-radius: 10px;
         transition: transform 0.3s;
-        max-height: 20vh; // Max yükseklik ayarı
+        max-height: 100vh; // Max yükseklik ayarı
 
         &:hover {
           transform: translateY(-5px);

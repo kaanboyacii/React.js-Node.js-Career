@@ -1,0 +1,121 @@
+@import "../../style/color.scss";
+
+.events {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .events-container {
+    margin-top: 10vh;
+    display: flex;
+    width: 100%;
+
+    .left-side {
+      flex: 3;
+      background-color: #fff;
+
+      .events-cards {
+        flex: 4;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1rem;
+        padding: 2rem 0 2rem 0;
+
+        .event-card {
+          display: flex;
+          flex-direction: column;
+          background: #fff;
+          border: 1px solid #e0e0e0;
+          box-shadow: 0 4px 6px rgba(129, 106, 106, 0.1);
+          margin-bottom: 16px;
+          padding: 16px;
+          border-radius: 10px;
+          transition: transform 0.3s;
+          max-height: 100vh;
+
+          &:hover {
+            transform: translateY(-5px);
+          }
+
+          .event-image {
+            max-height: 200px; /* Adjust the desired image height */
+            width: 100%;
+            object-fit: cover;
+          }
+
+          .event-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+
+            h3 {
+              font-size: 1.2rem;
+              margin-bottom: 0.5rem;
+              color: $primary-color;
+            }
+
+            p {
+              font-size: 1rem;
+              color: #777;
+              margin-bottom: 0.5rem;
+            }
+          }
+
+          button {
+            width: 100%;
+            background: $secondary-color;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+
+            &:hover {
+              background-color: $accent-color;
+            }
+          }
+        }
+
+        /* Add this if you want to center-align the image and details */
+        .event-image,
+        .event-details {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+    .right-side {
+      flex: 1;
+      height: 100%;
+      margin-top: 2rem;
+      margin-left: 2rem;
+      background-color: #fff;
+      border: 1px solid #e0e0e0;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+  }
+  .more-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+      width: 50vh;
+      padding: 10px 20px;
+      background-color: $primary-color; /* Özel renk seçimi yapabilirsiniz */
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: $secondary-color; /* Hover için arka plan rengi */
+    }
+  }
+}

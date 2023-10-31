@@ -4,6 +4,8 @@ import { useContext, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Logo from "../../img/logo.png";
 import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from "react-router-dom";
+
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
@@ -32,7 +34,10 @@ const Navbar = () => {
     <div className="navbar">
       <div className="container">
         <div className="logo">
+        <Link to="/">
+
           <img src={Logo} alt="Logo" />
+          </Link>
         </div>
         <div className="nav-links">
           <a href="/">Anasayfa</a>

@@ -110,48 +110,33 @@
       width: 100%;
     }
     .box {
+      border-radius: 30px;
       padding: 50px;
       border: 0.5px solid gray;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       margin-right: 2vh;
-      transition: transform 0.5s; 
-      
+      transition: transform 0.5s;
+      h2 {
+        margin-bottom: 1rem;
+      }
       @include mobile {
         border: none;
         align-items: center;
         gap: 20px;
         padding: 10px;
       }
-    
+
       p {
         @include mobile {
           display: none;
         }
       }
-    
-      button {
-        padding: 10px;
-        background-color: $accent-color;
-        border: none;
-        cursor: pointer;
-        margin-top: 15px;
-    
-        @include mobile {
-          background-color: transparent;
-          border: 1px solid $accent-color;
-          border-radius: 5px;
-          color: $accent-color;
-          width: 50%;
-          padding: 5px;
-        }
-      }
-    
+
       &:hover {
         transform: scale(1.05);
       }
     }
-    
   }
 }

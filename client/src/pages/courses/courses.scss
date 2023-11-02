@@ -10,92 +10,100 @@
     display: flex;
     width: 100%;
 
-    .left-side {
-      flex: 3;
+    .sidebar {
+      width: 20%;
+      flex: 1.5;
       margin-top: 2rem;
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      flex-direction: column;
-      justify-content: start;
-      align-items: flex-start;
-
+      background: #fff;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e0e0e0;
+      height: 100%;
       h1 {
-        font-size: 32px;
-        margin-bottom: 20px;
+        font-size: 1.5rem;
+        padding: 0.5rem;
       }
-
-      h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
-      }
-
-      h3 {
-        font-size: 20px;
-        margin-bottom: 10px;
-      }
-
-      p {
-        font-size: 16px;
-        margin-bottom: 10px;
-        display: block;
-        text-align: left;
+      .filter-group {
+        padding: 16px;
+        border-radius: 10px;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 16px;
+        h3 {
+          padding-bottom: 0.5rem;
+        }
+        .MuiAutocomplete-root {
+          width: 100%;
+        }
       }
     }
-    .right-side {
-      flex: 1;
-      height: 100%;
-      margin-top: 2rem;
-      margin-left: 2rem;
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
 
-      .apply-job-button {
-        .apply-job {
-          font-size: 20px;
-          margin-bottom: 20px;
+    .course-cards {
+      flex: 4;
+
+      gap: 1rem;
+      padding: 2rem 0 2rem 2rem;
+
+      .course-card {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 16px;
+        padding: 16px;
+        border-radius: 10px;
+        transition: transform 0.3s;
+        max-height: 100vh; // Max yükseklik ayarı
+
+        &:hover {
+          transform: translateY(-5px);
+        }
+
+        h3 {
+          font-size: 1.2rem;
+          margin-bottom: 0.5rem;
+        }
+
+        p {
+          font-size: 1rem;
+          color: #777;
+          margin-bottom: 0.5rem;
+        }
+
+        button {
+          margin-top: auto; // Düğmeyi en aşağıya taşır
           background: $secondary-color;
           color: #fff;
           padding: 0.5rem 1rem;
           border: none;
           border-radius: 5px;
           cursor: pointer;
-          transition: background 0.3s;
+          transition: background 0.2s;
 
           &:hover {
             background-color: $accent-color;
           }
         }
       }
-
-      .logo-company {
-        img {
-          height: 100%;
-          width: 100%;
-        }
-      }
-
-      .features {
-        margin-top: 2rem;
-        font-size: 16px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 50px;
-        span {
-          font-size: small;
-          color: $secondary-color;
-        }
-        p {
-          margin: 0;
-          font-weight: bold;
-        }
-      }
     }
   }
+  .more-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+      width: 50vh;
+      padding: 10px 20px;
+      background-color: $primary-color;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: $secondary-color;
+    }
+  }   
 }

@@ -10,6 +10,7 @@ import Job from "./pages/job/Job";
 import Aboutus from "./pages/aboutus/Aboutus";
 import Events from "./pages/events/Events";
 import Event from "./pages/event/Event";
+import Courses from "./pages/courses/Courses";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -27,6 +28,7 @@ function App() {
             <Route path="aboutus" element={<Aboutus />} />
             <Route path="event" element={<Event />} />
             <Route path="events" element={<Events />} />
+            <Route path="courses" element={<Courses />} />
           </Route>
         </Routes>
       </BrowserRouter>

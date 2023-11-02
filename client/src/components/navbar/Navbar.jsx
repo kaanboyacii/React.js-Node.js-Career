@@ -43,7 +43,7 @@ const Navbar = () => {
           <a href="/">Anasayfa</a>
           <a href="/job-list">İş İlanları</a>
           <a href="/events">Etkinlikler</a>
-          <a href="/">Kurslarım</a>
+          <a href="/courses">Kurslarım</a>
           <a href="/aboutus">Hakkımızda</a>
         </div>
         <div className="user-actions">

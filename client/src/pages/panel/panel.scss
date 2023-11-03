@@ -1,0 +1,13 @@
+@import "../../style/color.scss";
+
+.panel {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .panel-container {
+    margin-top: 10vh;
+    display: flex;
+    width: 100%;
+  }
+}

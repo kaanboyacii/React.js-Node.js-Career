@@ -11,6 +11,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import EmailIcon from "@mui/icons-material/Email";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { motion } from "framer-motion";
+import Profile from "../../components/panel/profile/Profile";
 
 const Panel = () => {
   return (
@@ -65,7 +66,7 @@ const Panel = () => {
           exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          content
+          <Profile/>
         </motion.div>
       </div>
       <Footer />

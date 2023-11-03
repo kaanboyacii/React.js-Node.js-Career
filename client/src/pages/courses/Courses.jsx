@@ -6,6 +6,8 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import Image from "../../img/back.jpg";
+import Image2 from "../../img/software.jpg";
 
 const courseCardsData = [
   {
@@ -13,57 +15,65 @@ const courseCardsData = [
     teacher: "Ahmet Ercan",
     level: "Beginner",
     category: "Yazılım",
+    img: Image,
   },
   {
     title: "Aranan Yazılımcı Olma Kamp Kursu",
     teacher: "Erhan Kocak",
     level: "Beginner",
     category: "Yazılım",
+    img: Image2,
   },
   {
     title: "A'dan Z'ye Finans Eğitimi",
     teacher: "Kerem Titsi",
     level: "Mid Level",
     category: "Finance",
+    img: Image,
   },
   {
     title: "C++ Course Step by Step",
     teacher: "Ahmet Ercan",
     level: "Beginner",
     category: "Yazılım",
+    img: Image,
   },
   {
     title: "Aranan Yazılımcı Olma Kamp Kursu",
     teacher: "Erhan Kocak",
     level: "Beginner",
     category: "Yazılım",
+    img: Image,
   },
   {
     title: "A'dan Z'ye Finans Eğitimi",
     teacher: "Kerem Titsi",
     level: "Mid Level",
     category: "Finance",
+    img: Image,
   },
   {
     title: "C++ Course Step by Step",
     teacher: "Ahmet Ercan",
     level: "Beginner",
     category: "Yazılım",
+    img: Image,
   },
   {
     title: "Aranan Yazılımcı Olma Kamp Kursu",
     teacher: "Erhan Kocak",
     level: "Beginner",
     category: "Yazılım",
+    img: Image,
   },
   {
     title: "A'dan Z'ye Finans Eğitimi",
     teacher: "Kerem Titsi",
     level: "Mid Level",
     category: "Finance",
+    img: Image,
   },
 ];
-
 
 const Courses = () => {
   const [visibleCourseCards, setVisibleCourseCards] = useState(8);
@@ -106,13 +116,18 @@ const Courses = () => {
         >
           {courseCardsData.slice(0, visibleCourseCards).map((course, index) => (
             <div className="course-card" key={index}>
-              <h3>{course.title}</h3>
-              <p>Eğitmen: {course.teacher}</p>
-              <p>Seviye: {course.level}</p>
-              <p>Kategori: {course.category}</p>
-              <Link to="/course">
-                <button>Daha Fazla Göster</button>
-              </Link>{" "}
+              <div className="course-card-img">
+                <img src={course.img} alt="Resim Açıklaması" />
+              </div>
+              <div className="course-card-content">
+                <h3>{course.title}</h3>
+                <p>Eğitmen: {course.teacher}</p>
+                <p>Seviye: {course.level}</p>
+                <p>Kategori: {course.category}</p>
+                <Link to="/course">
+                  <button>Detayları İncele</button>
+                </Link>
+              </div>
             </div>
           ))}
         </motion.div>

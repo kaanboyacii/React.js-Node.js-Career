@@ -46,7 +46,7 @@
 
       .course-card {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         background: #fff;
         border: 1px solid #e0e0e0;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -54,11 +54,26 @@
         padding: 16px;
         border-radius: 10px;
         transition: transform 0.3s;
-        max-height: 100vh; // Max yükseklik ayarı
+        max-height: 100vh; 
 
         &:hover {
           transform: translateY(-5px);
         }
+
+        .course-card-img {
+          flex: 0 0 200px; /* Resmin genişliği sabit, yükseklik ise içeriğe göre otomatik ayarlanacak */
+          margin-right: 1rem;
+          max-height: 300px; 
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        
+        .course-card-img img {
+          max-width: 100%;
+          max-height: 100%;
+        }
+        
 
         h3 {
           font-size: 1.2rem;
@@ -72,7 +87,7 @@
         }
 
         button {
-          margin-top: auto; // Düğmeyi en aşağıya taşır
+          margin-top: auto; /* Düğmeyi en aşağıya taşır */
           background: $secondary-color;
           color: #fff;
           padding: 0.5rem 1rem;
@@ -88,6 +103,7 @@
       }
     }
   }
+
   .more-button {
     display: flex;
     justify-content: center;
@@ -105,5 +121,5 @@
     button:hover {
       background-color: $secondary-color;
     }
-  }   
+  }
 }

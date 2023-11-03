@@ -235,7 +235,7 @@ const Joblist = () => {
               <p>Lokasyon: {job.location}</p>
               <p>Kategori: {job.category}</p>
               <Link to="/job">
-                <button>Daha Fazla Göster</button>
+                <button>Detayları İncele</button>
               </Link>{" "}
             </div>
           ))}

@@ -9,14 +9,21 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import WorkIcon from "@mui/icons-material/Work";
 import EmailIcon from "@mui/icons-material/Email";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
+import { motion } from "framer-motion";
 
 const Panel = () => {
   return (
     <div className="panel">
       <Navbar />
       <div className="panel-container">
-        <div className="sidebar">
+        <motion.div
+          className="sidebar"
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 100, opacity: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           <h1>Yönetim</h1>
           <div className="sidebar-item">
             <HomeIcon />
@@ -50,8 +57,16 @@ const Panel = () => {
             <LogoutIcon />
             <span>Çıkış Yap</span>
           </div>
-        </div>
-        <div className="content">content</div>
+        </motion.div>
+        <motion.div
+          className="content"
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 100, opacity: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          content
+        </motion.div>
       </div>
       <Footer />
     </div>

@@ -1,5 +1,5 @@
 import "./panel.scss";
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import HomeIcon from "@mui/icons-material/Home";
@@ -12,8 +12,22 @@ import EmailIcon from "@mui/icons-material/Email";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { motion } from "framer-motion";
 import Profile from "../../components/panel/profile/Profile";
+import Settings from "../../components/panel/settings/Settings";
 
 const Panel = () => {
+  const [selectedItem, setSelectedItem] = useState("Panel");
+
+  const selectItem = (itemName) => {
+    setSelectedItem(itemName);
+  };
+
+  let selectedContent;
+  if (selectedItem === "Profil") {
+    selectedContent = <Profile />;
+  } else if (selectedItem === "Ayarlar") {
+    selectedContent = <Settings />;
+  }
+
   return (
     <div className="panel">
       <Navbar />
@@ -26,31 +40,49 @@ const Panel = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <h1>Yönetim</h1>
-          <div className="sidebar-item">
+          <div className="sidebar-item" onClick={() => selectItem("Panel")}>
             <HomeIcon />
             <span>Panel</span>
           </div>
-          <div className="sidebar-item">
+          <div
+            className="sidebar-item"
+            onClick={() => selectItem("CV Oluştur")}
+          >
+            {" "}
             <DescriptionIcon />
             <span>CV Oluştur</span>
           </div>
-          <div className="sidebar-item">
+          <div
+            className="sidebar-item"
+            onClick={() => selectItem("Başvurularım")}
+          >
+            {" "}
             <WorkIcon />
             <span>Başvurularım</span>
           </div>
-          <div className="sidebar-item">
+          <div
+            className="sidebar-item"
+            onClick={() => selectItem("Kişisel Gelişim Planı")}
+          >
+            {" "}
             <RocketLaunchIcon />
             <span>Kişisel Gelişim Planı</span>
           </div>
-          <div className="sidebar-item">
+          <div
+            className="sidebar-item"
+            onClick={() => selectItem("Gelen Kutusu")}
+          >
+            {" "}
             <EmailIcon />
             <span>Gelen Kutusu</span>
           </div>
-          <div className="sidebar-item">
+          <div className="sidebar-item" onClick={() => selectItem("Profil")}>
+            {" "}
             <AccountCircleIcon />
             <span>Profil</span>
           </div>
-          <div className="sidebar-item">
+          <div className="sidebar-item" onClick={() => selectItem("Ayarlar")}>
+            {" "}
             <SettingsIcon />
             <span>Ayarlar</span>
           </div>
@@ -66,7 +98,7 @@ const Panel = () => {
           exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <Profile/>
+          {selectedContent}{" "}
         </motion.div>
       </div>
       <Footer />

@@ -2,7 +2,6 @@ import "./panel.scss";
 import React, { useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
-import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DescriptionIcon from "@mui/icons-material/Description";
@@ -15,7 +14,7 @@ import Profile from "../../components/panel/profile/Profile";
 import Settings from "../../components/panel/settings/Settings";
 
 const Panel = () => {
-  const [selectedItem, setSelectedItem] = useState("Panel");
+  const [selectedItem, setSelectedItem] = useState("Profil");
 
   const selectItem = (itemName) => {
     setSelectedItem(itemName);
@@ -40,9 +39,10 @@ const Panel = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <h1>Yönetim</h1>
-          <div className="sidebar-item" onClick={() => selectItem("Panel")}>
-            <HomeIcon />
-            <span>Panel</span>
+          <div className="sidebar-item" onClick={() => selectItem("Profil")}>
+            {" "}
+            <AccountCircleIcon />
+            <span>Profil</span>
           </div>
           <div
             className="sidebar-item"
@@ -76,11 +76,6 @@ const Panel = () => {
             <EmailIcon />
             <span>Gelen Kutusu</span>
           </div>
-          <div className="sidebar-item" onClick={() => selectItem("Profil")}>
-            {" "}
-            <AccountCircleIcon />
-            <span>Profil</span>
-          </div>
           <div className="sidebar-item" onClick={() => selectItem("Ayarlar")}>
             {" "}
             <SettingsIcon />
@@ -98,7 +93,7 @@ const Panel = () => {
           exit={{ y: 100, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          {selectedContent}{" "}
+          {selectedContent}
         </motion.div>
       </div>
       <Footer />

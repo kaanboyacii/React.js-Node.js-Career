@@ -55,10 +55,10 @@
 
     .content {
       flex: 4;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1rem;
-      padding: 2rem 0 2rem 2rem;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+
     }
   }
 }

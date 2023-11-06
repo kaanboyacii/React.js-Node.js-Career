@@ -11,30 +11,87 @@
   border-radius: 20px;
   transition: transform 0.3s;
   max-height: 100vh;
+  position: relative;
 
-  h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
+  .general {
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: $secondary-color;
+      margin-bottom: 20px;
+    }
 
-  p {
-    font-size: 1rem;
-    color: #777;
-    margin-bottom: 0.5rem;
-  }
+    .user-info {
+      display: flex;
+      flex-direction: column;
 
-  button {
-    margin-top: auto;
-    background: $secondary-color;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.2s;
+      .info {
+        display: flex;
+        align-items: center;
+        flex-direction: column; /* To stack title below name */
+      }
 
-    &:hover {
-      background-color: $accent-color;
+      h3 {
+        font-size: 24px;
+        font-weight: 600;
+      }
+      .title {
+        font-size: 18px;
+        color: #888;
+      }
+    }
+
+    .edit-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: $secondary-color;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: $accent-color;
+        color: $secondary-color;
+      }
+
+      svg {
+        margin-right: 5px;
+      }
+    }
+
+    .contact-info {
+      display: flex;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+      gap: 16px;
+
+      div {
+        flex-basis: calc(
+          33.33% - 16px
+        ); /* Maximum of 3 items per line (subtract margin) */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h5 {
+          font-size: 18px;
+          font-weight: 600;
+          margin: 0;
+        }
+
+        span {
+          font-size: 16px;
+          color: #888;
+          margin: 0;
+        }
+      }
     }
   }
 }

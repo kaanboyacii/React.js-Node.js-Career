@@ -4,6 +4,7 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
+import AddIcon from "@mui/icons-material/Add";
 import AvatarImage from "../../../img/avatar.jpg";
 
 const user = {
@@ -19,12 +20,47 @@ const user = {
   gender: "Erkek",
   country: "Turkey / İzmir",
   drivingLicense: "B2-A2",
+  educations: [
+    {
+      school: "Karabük Üniversitesi",
+      degree: "Bilgisayar Mühendisliği",
+      graduationYear: "2024",
+    },
+    {
+      school: "Karabük Üniversitesi",
+      degree: "Bilgisayar Mühendisliği Yüksek Lisans",
+      graduationYear: "2026",
+    },
+  ],
 };
 
 const Profile = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [updatedUser, setUpdatedUser] = useState({ ...user });
   const [isChangeAvatar, setIsChangeAvatar] = useState(false);
+  const [isAddingEducation, setIsAddingEducation] = useState(false);
+  const [education, setEducation] = useState({
+    school: "",
+    degree: "",
+    graduationYear: "",
+  });
+
+  const handleAddEducation = () => {
+    setIsAddingEducation(true);
+  };
+
+  const handleSaveEducation = () => {
+    // Eğitim bilgilerini kaydetme işlemi burada yapılabilir.
+    setIsAddingEducation(false);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEducation((prevEducation) => ({
+      ...prevEducation,
+      [name]: value,
+    }));
+  };
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -58,8 +94,8 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile-card">
-      <div className="general">
+    <div className="profile">
+      <div className="profile-card">
         <h1>Genel Bilgiler</h1>
         <div className="user-info">
           <Stack direction="row" spacing={2} alignItems="center">
@@ -222,6 +258,55 @@ const Profile = () => {
               <span>{updatedUser.careerLevel}</span>
             )}
           </div>
+        </div>
+      </div>
+      <div className="feature-card">
+        <h1>Eğitim</h1>
+        <div className="user-info">
+          {isAddingEducation ? (
+            <div className="education-form">
+              <input
+                type="text"
+                name="school"
+                placeholder="Okul Adı"
+                value={education.school}
+                onChange={handleInputChange}
+              />
+              <input
+                type="text"
+                name="degree"
+                placeholder="Derece"
+                value={education.degree}
+                onChange={handleInputChange}
+              />
+              <input
+                type="text"
+                name="graduationYear"
+                placeholder="Mezuniyet Yılı"
+                value={education.graduationYear}
+                onChange={handleInputChange}
+              />
+              <button className="edit-button" onClick={handleSaveEducation}>
+                <SaveIcon />
+                Kaydet
+              </button>
+            </div>
+          ) : (
+            <button className="edit-button" onClick={handleAddEducation}>
+              <AddIcon />
+              Ekle
+            </button>
+          )}
+        </div>
+        <div className="educations-list">
+          <h3>Eğitimler</h3>
+          <ul>
+            {user.educations.map((edu, index) => (
+              <li key={index}>
+                {edu.school}, {edu.degree}, Mezuniyet Yılı: {edu.graduationYear}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

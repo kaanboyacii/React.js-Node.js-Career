@@ -13,113 +13,195 @@
   max-height: 100vh;
   position: relative;
 
-  .general {
-    h1 {
-      font-size: 24px;
-      font-weight: 600;
-      color: $secondary-color;
-      margin-bottom: 20px;
-    }
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: $secondary-color;
+    margin-bottom: 20px;
+  }
 
-    .user-info {
-      display: flex;
-      flex-direction: column;
-      .MuiAvatar-root:hover {
-        cursor: pointer;
-      }
-
-      .MuiAvatar-root:hover {
-        filter: grayscale(50%);
-        cursor: pointer;
-      }
-
-      .MuiAvatar-root:hover::after {
-        content: "\f030";
-        font-family: "Font Awesome";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #6d4e4e;
-        font-size: 24px;
-      }
-
-      .MuiAvatar-root:hover::before {
-        content: "📷"; /* Fotoğraf değiştirme simgesi */
-        font-size: 24px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-
-      .info {
-        display: flex;
-        align-items: center;
-        flex-direction: column; /* To stack title below name */
-      }
-
-      h3 {
-        font-size: 24px;
-        font-weight: 600;
-      }
-      .title {
-        font-size: 18px;
-        color: #888;
-      }
-    }
-
-    .edit-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: $secondary-color;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    .MuiAvatar-root:hover {
       cursor: pointer;
-      transition: background 0.3s;
+    }
+
+    .MuiAvatar-root:hover {
+      filter: grayscale(50%);
+      cursor: pointer;
+    }
+
+    .MuiAvatar-root:hover::after {
+      content: "\f030";
+      font-family: "Font Awesome";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #6d4e4e;
+      font-size: 24px;
+    }
+
+    .MuiAvatar-root:hover::before {
+      content: "📷"; /* Fotoğraf değiştirme simgesi */
+      font-size: 24px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .info {
       display: flex;
       align-items: center;
-      justify-content: center;
-
-      &:hover {
-        background: $accent-color;
-        color: $secondary-color;
-      }
-
-      svg {
-        margin-right: 5px;
-      }
+      flex-direction: column; /* To stack title below name */
     }
 
-    .contact-info {
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .title {
+      font-size: 18px;
+      color: #888;
+    }
+  }
+
+  .edit-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: $secondary-color;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: $accent-color;
+      color: $secondary-color;
+    }
+
+    svg {
+      margin-right: 5px;
+    }
+  }
+
+  .contact-info {
+    display: flex;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    div {
+      flex-basis: calc(
+        33.33% - 16px
+      ); /* Maximum of 3 items per line (subtract margin) */
       display: flex;
-      margin-top: 1rem;
-      flex-wrap: wrap;
-      gap: 16px;
+      flex-direction: column;
+      gap: 10px;
 
-      div {
-        flex-basis: calc(
-          33.33% - 16px
-        ); /* Maximum of 3 items per line (subtract margin) */
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        h5 {
-          font-size: 18px;
-          font-weight: 600;
-          margin: 0;
-        }
-
-        span {
-          font-size: 16px;
-          color: #888;
-          margin: 0;
-        }
+      h5 {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
       }
+
+      span {
+        font-size: 16px;
+        color: #888;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 20px;
+  transition: transform 0.3s;
+  max-height: 100vh;
+  position: relative;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: $secondary-color; /* Renk değişkeninizi kullanabilirsiniz. */
+    margin-bottom: 20px;
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+
+    .info {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .title {
+      font-size: 18px;
+      color: #888;
+    }
+  }
+
+  .edit-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: $secondary-color; /* Renk değişkeninizi kullanabilirsiniz. */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: $accent-color;
+      color: $secondary-color;
+    }
+
+    svg {
+      margin-right: 5px;
+    }
+  }
+
+  .educations-list {
+    margin-top: 20px;
+    h3 {
+      font-size: 20px;
+      color: $secondary-color;
+      margin-bottom: 10px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #333;
     }
   }
 }

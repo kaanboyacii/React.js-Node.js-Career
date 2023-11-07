@@ -44,6 +44,16 @@ const user = {
       time: "1 ay",
     },
   ],
+  skills: [
+    {
+      skill: "Web Geliştirme",
+      level: "İleri Seviye",
+    },
+    {
+      skill: "API Geliştirme",
+      level: "Orta Seviye",
+    },
+  ],
 };
 
 const Profile = () => {
@@ -61,6 +71,12 @@ const Profile = () => {
     title: "",
     company: "",
     time: "",
+  });
+
+  const [isAddingSkill, setIsAddingSkill] = useState(false);
+  const [skill, setSkill] = useState({
+    skill: "",
+    level: "",
   });
 
   const handleAddEducation = () => {
@@ -82,6 +98,15 @@ const Profile = () => {
     setIsAddingExperience(false);
   };
 
+  const handleAddSkill = () => {
+    setIsAddingSkill(true);
+  };
+
+  const handleSaveSkill = () => {
+    user.skills.push(skill);
+    setIsAddingSkill(false);
+  };
+
   const handleInputChange = (e, section) => {
     const { name, value } = e.target;
     if (section === "education") {
@@ -94,6 +119,8 @@ const Profile = () => {
         ...prevExperience,
         [name]: value,
       }));
+    } else if (section === "skill") {
+      setSkill(value);
     }
   };
 
@@ -391,6 +418,48 @@ const Profile = () => {
               <li key={index}>
                 <span className="title">{exp.title}:</span> {exp.company},{" "}
                 {exp.time}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="feature-card">
+        <h1>Yetenekler</h1>
+        <div className="user-info">
+          {isAddingSkill ? (
+            <div className="education-form">
+              <input
+                type="text"
+                name="skill"
+                placeholder="Yetenek Adı"
+                value={skill.skill}
+                onChange={(e) => handleInputChange(e, "skill")}
+              />
+              <input
+                type="text"
+                name="level"
+                placeholder="Seviye"
+                value={skill.level}
+                onChange={(e) => handleInputChange(e, "skill")}
+              />
+              <button className="edit-button" onClick={handleSaveSkill}>
+                <SaveIcon />
+                Kaydet
+              </button>
+            </div>
+          ) : (
+            <button className="edit-button" onClick={handleAddSkill}>
+              <AddIcon />
+              Ekle
+            </button>
+          )}
+        </div>
+        <div className="list">
+          <h3>Yetenekler</h3>
+          <ul>
+            {user.skills.map((sk, index) => (
+              <li key={index}>
+                <span className="title">{sk.skill}:</span> {sk.level}
               </li>
             ))}
           </ul>

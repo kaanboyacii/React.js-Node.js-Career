@@ -32,6 +32,18 @@ const user = {
       graduationYear: "2026",
     },
   ],
+  experiences: [
+    {
+      title: "Jotform Yazılım A.Ş",
+      company: "Backend Developer",
+      time: "2 ay",
+    },
+    {
+      title: "Softtech A.Ş",
+      company: "Software Developer",
+      time: "1 ay",
+    },
+  ],
 };
 
 const Profile = () => {
@@ -44,6 +56,12 @@ const Profile = () => {
     degree: "",
     graduationYear: "",
   });
+  const [isAddingExperience, setIsAddingExperience] = useState(false);
+  const [experience, setExperience] = useState({
+    title: "",
+    company: "",
+    time: "",
+  });
 
   const handleAddEducation = () => {
     setIsAddingEducation(true);
@@ -54,12 +72,29 @@ const Profile = () => {
     setIsAddingEducation(false);
   };
 
-  const handleInputChange = (e) => {
+  const handleAddExperience = () => {
+    setIsAddingExperience(true);
+  };
+
+  const handleSaveExperience = () => {
+    // Deneyim bilgisini kaydetme işlemi
+    user.experiences.push(experience);
+    setIsAddingExperience(false);
+  };
+
+  const handleInputChange = (e, section) => {
     const { name, value } = e.target;
-    setEducation((prevEducation) => ({
-      ...prevEducation,
-      [name]: value,
-    }));
+    if (section === "education") {
+      setEducation((prevEducation) => ({
+        ...prevEducation,
+        [name]: value,
+      }));
+    } else if (section === "experience") {
+      setExperience((prevExperience) => ({
+        ...prevExperience,
+        [name]: value,
+      }));
+    }
   };
 
   const handleEditClick = () => {
@@ -298,12 +333,64 @@ const Profile = () => {
             </button>
           )}
         </div>
-        <div className="educations-list">
+        <div className="list">
           <h3>Eğitimler</h3>
           <ul>
             {user.educations.map((edu, index) => (
               <li key={index}>
-                {edu.school}, {edu.degree}, Mezuniyet Yılı: {edu.graduationYear}
+                <span className="school">{edu.school}:</span>
+                <span className="degree">{edu.degree},</span> Mezuniyet Yılı:{" "}
+                {edu.graduationYear}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="feature-card">
+        <h1>Deneyim</h1>
+        <div className="user-info">
+          {isAddingExperience ? (
+            <div className="education-form">
+              <input
+                type="text"
+                name="position"
+                placeholder="Pozisyon (Ünvan)"
+                value={experience.title}
+                onChange={(e) => handleInputChange(e, "experience")}
+              />
+              <input
+                type="text"
+                name="company"
+                placeholder="Şirket Adı"
+                value={experience.company}
+                onChange={(e) => handleInputChange(e, "experience")}
+              />
+              <input
+                type="text"
+                name="time"
+                placeholder="Çalışma Süresi"
+                value={experience.time}
+                onChange={(e) => handleInputChange(e, "experience")}
+              />
+              <button className="edit-button" onClick={handleSaveExperience}>
+                <SaveIcon />
+                Kaydet
+              </button>
+            </div>
+          ) : (
+            <button className="edit-button" onClick={handleAddExperience}>
+              <AddIcon />
+              Ekle
+            </button>
+          )}
+        </div>
+        <div className="list">
+          <h3>Deneyimler</h3>
+          <ul>
+            {user.experiences.map((exp, index) => (
+              <li key={index}>
+                <span className="title">{exp.title}:</span> {exp.company},{" "}
+                {exp.time}
               </li>
             ))}
           </ul>

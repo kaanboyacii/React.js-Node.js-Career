@@ -66,7 +66,7 @@ const Profile = () => {
     degree: "",
     graduationYear: "",
   });
-  const [isAddingExperience, setIsAddingExperience] = useState(false);
+    const [isAddingExperience, setIsAddingExperience] = useState(false);
   const [experience, setExperience] = useState({
     title: "",
     company: "",
@@ -84,8 +84,8 @@ const Profile = () => {
   };
 
   const handleSaveEducation = () => {
-    // Eğitim bilgilerini kaydetme işlemi burada yapılabilir.
     setIsAddingEducation(false);
+    user.educations.push(education);
   };
 
   const handleAddExperience = () => {
@@ -93,7 +93,6 @@ const Profile = () => {
   };
 
   const handleSaveExperience = () => {
-    // Deneyim bilgisini kaydetme işlemi
     user.experiences.push(experience);
     setIsAddingExperience(false);
   };
@@ -120,9 +119,13 @@ const Profile = () => {
         [name]: value,
       }));
     } else if (section === "skill") {
-      setSkill(value);
+      setSkill((prevSkill) => ({
+        ...prevSkill,
+        [name]: value,
+      }));
     }
   };
+  
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -366,7 +369,7 @@ const Profile = () => {
             {user.educations.map((edu, index) => (
               <li key={index}>
                 <span className="school">{edu.school}:</span>
-                <span className="degree">{edu.degree},</span> Mezuniyet Yılı:{" "}
+                <span className="degree">{edu.degree},</span> Mezuniyet Yılı:
                 {edu.graduationYear}
               </li>
             ))}
@@ -380,7 +383,7 @@ const Profile = () => {
             <div className="education-form">
               <input
                 type="text"
-                name="position"
+                name="title"
                 placeholder="Pozisyon (Ünvan)"
                 value={experience.title}
                 onChange={(e) => handleInputChange(e, "experience")}
@@ -455,7 +458,7 @@ const Profile = () => {
           )}
         </div>
         <div className="list">
-          <h3>Yetenekler</h3>
+          <h3>Yetenek</h3>
           <ul>
             {user.skills.map((sk, index) => (
               <li key={index}>

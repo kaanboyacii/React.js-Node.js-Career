@@ -5,6 +5,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -114,10 +117,35 @@ const Settings = () => {
           </div>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          Item Two
+          <FormGroup>
+            <h3>E-posta Ayarları</h3>
+            <FormControlLabel
+              control={<Switch defaultChecked />}
+              label="Yeni iş fırsatları hakkında e-posta almak istiyorum. "
+            />
+            <hr />
+            <h3>SMS Ayarları</h3>
+            <FormControlLabel
+              control={<Switch defaultChecked />}
+              label="
+              Yeni iş fırsatları hakkında sms almak istiyorum.  "
+            />
+            <hr />
+            <h3>Bildirim Ayarları</h3>
+            <FormControlLabel
+              control={<Switch defaultChecked />}
+              label="
+              Yeni iş fırsatları hakkında bildirim almak istiyorum  "
+            />
+          </FormGroup>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          Item Three
+          <h3>Renk Ayarları</h3>
+          <FormControlLabel
+            control={<Switch defaultChecked />}
+            label="
+            Karanlık Mod  "
+          />
         </CustomTabPanel>
       </Box>
     </div>

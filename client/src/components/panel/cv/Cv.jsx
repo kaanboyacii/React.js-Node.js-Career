@@ -61,6 +61,7 @@ const Cv = () => {
 
   return (
     <div className="cv-card">
+      <h1>CV Oluştur</h1>
       <div className="template-selector">
         <div
           className={`template-button ${

@@ -12,6 +12,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { motion } from "framer-motion";
 import Profile from "../../components/panel/profile/Profile";
 import Settings from "../../components/panel/settings/Settings";
+import Inbox from "../../components/panel/inbox/Inbox";
 
 const Panel = () => {
   const [selectedItem, setSelectedItem] = useState("Profil");
@@ -25,6 +26,8 @@ const Panel = () => {
     selectedContent = <Profile />;
   } else if (selectedItem === "Ayarlar") {
     selectedContent = <Settings />;
+  } else if (selectedItem === "GelenKutusu") {
+    selectedContent = <Inbox />;
   }
 
   return (
@@ -70,7 +73,7 @@ const Panel = () => {
           </div>
           <div
             className="sidebar-item"
-            onClick={() => selectItem("Gelen Kutusu")}
+            onClick={() => selectItem("GelenKutusu")}
           >
             {" "}
             <EmailIcon />

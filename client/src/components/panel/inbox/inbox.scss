@@ -1,0 +1,26 @@
+@import "../../../style/color.scss";
+
+.inbox-card {
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 20px;
+  transition: transform 0.3s;
+  max-height: 100vh;
+  position: relative;
+
+  .inbox-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .inbox-details {
+    flex-grow: 1;
+    margin-left: 16px;
+  }
+}

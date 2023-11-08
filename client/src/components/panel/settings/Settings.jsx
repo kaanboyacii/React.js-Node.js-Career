@@ -41,10 +41,28 @@ function a11yProps(index) {
 
 const Settings = () => {
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const [oldPassword, setOldPassword] = React.useState("");
+  const [newPassword, setNewPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+
+  const handlePasswordChange = () => {
+    if (oldPassword && newPassword && newPassword === confirmPassword) {
+      // Şifre değiştirme işlemi başarılı
+      alert("Şifre değiştirme başarılı!");
+      setOldPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    } else {
+      // Şifre değiştirme işlemi başarısız
+      alert(
+        "Şifre değiştirme işlemi başarısız. Lütfen girdiğiniz bilgileri kontrol edin."
+      );
+    }
+  };
+
   return (
     <div className="settings-card">
       <h1>Ayarlar</h1>
@@ -61,7 +79,39 @@ const Settings = () => {
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          Item One
+          <div>
+            <h2>Şifre Değiştir</h2>
+            <input
+              type="password"
+              placeholder="Eski Şifre"
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Yeni Şifre"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Yeni Şifre Onayı"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <button className="save-button" onClick={handlePasswordChange}>
+              Şifre Değiştir
+            </button>
+          </div>
+          <div>
+            <h2>E-posta Değiştir</h2>
+            <input type="email" placeholder="Mevcut E-posta" />
+            <button className="save-button">Gönder</button>
+          </div>
+          <div className="div">
+            <h2>Üyeliğimi Sil</h2>
+            <button className="delete-button">Üyeliği Sil</button>
+          </div>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           Item Two

@@ -18,5 +18,36 @@
     color: $secondary-color;
     margin-bottom: 20px;
   }
-}
 
+  .save-button {
+    background: $secondary-color;
+    color: #fff;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background: $accent-color;
+      color: $secondary-color;
+    }
+  }
+  .delete-button {
+    background: red;
+    color: #fff;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background: #b63535;
+    }
+  }
+}

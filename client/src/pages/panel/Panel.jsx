@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import Profile from "../../components/panel/profile/Profile";
 import Settings from "../../components/panel/settings/Settings";
 import Inbox from "../../components/panel/inbox/Inbox";
+import Cv from "../../components/panel/cv/Cv";
 
 const Panel = () => {
   const [selectedItem, setSelectedItem] = useState("Profil");
@@ -28,6 +29,8 @@ const Panel = () => {
     selectedContent = <Settings />;
   } else if (selectedItem === "GelenKutusu") {
     selectedContent = <Inbox />;
+  } else if (selectedItem === "cvOluştur") {
+    selectedContent = <Cv />;
   }
 
   return (
@@ -47,10 +50,7 @@ const Panel = () => {
             <AccountCircleIcon />
             <span>Profil</span>
           </div>
-          <div
-            className="sidebar-item"
-            onClick={() => selectItem("CV Oluştur")}
-          >
+          <div className="sidebar-item" onClick={() => selectItem("cvOluştur")}>
             {" "}
             <DescriptionIcon />
             <span>CV Oluştur</span>

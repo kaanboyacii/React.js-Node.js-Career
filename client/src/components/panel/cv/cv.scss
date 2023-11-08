@@ -1,0 +1,70 @@
+@import "../../../style/color.scss";
+
+.cv-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 20px;
+  transition: transform 0.3s;
+  max-height: 100vh;
+  position: relative;
+
+  .template-selector {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+
+    .template-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-basis: calc(33.33% - 10px);
+
+      img {
+        width: 200px;
+        height: 300px;
+        border: 3px solid $secondary-color;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: border-color 0.3s;
+      }
+
+      button {
+        margin-top: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: $secondary-color;
+        font-weight: bold;
+        flex-grow: 1;
+      }
+
+      &.selected-template img {
+        border-color: $accent-color;
+      }
+      &.selected-template button {
+        color: $accent-color;
+      }
+    }
+  }
+
+  .download-button {
+    margin-top: 20px;
+    background: $secondary-color;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+    &:hover {
+      background: $accent-color;
+      color: $secondary-color;
+    }
+  }
+}

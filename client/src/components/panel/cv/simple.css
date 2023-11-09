@@ -1,0 +1,47 @@
+/* simple.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.cv {
+    width: 21cm;
+    height: 29.7cm;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    text-align: center;
+}
+
+.personal-info {
+    margin-bottom: 20px;
+}
+
+.avatar {
+    text-align: center;
+}
+
+.avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.education,
+.experience,
+.skills {
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}

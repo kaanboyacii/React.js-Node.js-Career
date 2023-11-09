@@ -1,12 +1,173 @@
 import React, { useState } from "react";
 import "./cv.scss";
 import Image from "../../../img/cv.png";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-import SimpleTemplate from "./templates/SimpleTemplate";
-import ItTemplate from "./templates/ItTemplate";
-import HrTemplate from "./templates/HrTemplate";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import jsPDF from "jspdf";
+import { renderToStaticMarkup } from "react-dom/server";
+
+const SimpleTemplate = ({ cvData }) => {
+  return (
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CV</title>
+        <link rel="stylesheet" type="text/css" href="simple.css" />
+      </head>
+      <body>
+        <div className="cv">
+          <h1>{cvData.ad}</h1>
+          <div className="personal-info">
+            <div className="avatar">
+              <img
+                src="https://images.squarespace-cdn.com/content/v1/5cf0d08d5fc69d000172462a/1599805610146-J0G5GMGFBXVWND4Z71UK/Aleem+Business+Headshot+for+LinkedIn+Profile.jpg"
+                alt="Profil Resmi"
+              />
+            </div>
+          </div>
+          <div className="education">
+            <h2>Eğitim</h2>
+            <ul>
+              {cvData.eğitim.map((item, index) => (
+                <li key={index}>
+                  {item.okul} - {item.bölüm} ({item.mezuniyetYılı})
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="experience">
+            <h2>Deneyim</h2>
+            <ul>
+              {cvData.deneyim.map((item, index) => (
+                <li key={index}>
+                  {item.şirket} - {item.pozisyon} ({item.başlangıçTarihi} -{" "}
+                  {item.bitişTarihi})
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="skills">
+            <h2>Beceriler</h2>
+            <ul>
+              {cvData.beceriler.map((skill, index) => (
+                <li key={index}>{skill}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </body>
+    </html>
+  );
+};
+
+const HRTemplate = ({ cvData }) => {
+  return (
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CV</title>
+        <link rel="stylesheet" type="text/css" href="simple.css" />
+      </head>
+      <body>
+        <div className="cv">
+          <h1>{cvData.ad}</h1>
+          <div className="personal-info">
+            <div className="avatar">
+              <img
+                src="https://images.squarespace-cdn.com/content/v1/5cf0d08d5fc69d000172462a/1599805610146-J0G5GMGFBXVWND4Z71UK/Aleem+Business+Headshot+for+LinkedIn+Profile.jpg"
+                alt="Profil Resmi"
+              />
+            </div>
+          </div>
+          <div className="education">
+            <h2>Eğitim</h2>
+            <ul>
+              {cvData.eğitim.map((item, index) => (
+                <li key={index}>
+                  {item.okul} - {item.bölüm} ({item.mezuniyetYılı})
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="experience">
+            <h2>Deneyim</h2>
+            <ul>
+              {cvData.deneyim.map((item, index) => (
+                <li key={index}>
+                  {item.şirket} - {item.pozisyon} ({item.başlangıçTarihi} -{" "}
+                  {item.bitişTarihi})
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="skills">
+            <h2>Beceriler</h2>
+            <ul>
+              {cvData.beceriler.map((skill, index) => (
+                <li key={index}>{skill}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </body>
+    </html>
+  );
+};
+
+const ITTemplate = ({ cvData }) => {
+  return (
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CV</title>
+        <link rel="stylesheet" type="text/css" href="simple.css" />
+      </head>
+      <body>
+        <div className="cv">
+          <h1>{cvData.ad}</h1>
+          <div className="personal-info">
+            <div className="avatar">
+              <img
+                src="https://images.squarespace-cdn.com/content/v1/5cf0d08d5fc69d000172462a/1599805610146-J0G5GMGFBXVWND4Z71UK/Aleem+Business+Headshot+for+LinkedIn+Profile.jpg"
+                alt="Profil Resmi"
+              />
+            </div>
+          </div>
+          <div className="education">
+            <h2>Eğitim</h2>
+            <ul>
+              {cvData.eğitim.map((item, index) => (
+                <li key={index}>
+                  {item.okul} - {item.bölüm} ({item.mezuniyetYılı})
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="experience">
+            <h2>Deneyim</h2>
+            <ul>
+              {cvData.deneyim.map((item, index) => (
+                <li key={index}>
+                  {item.şirket} - {item.pozisyon} ({item.başlangıçTarihi} -{" "}
+                  {item.bitişTarihi})
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="skills">
+            <h2>Beceriler</h2>
+            <ul>
+              {cvData.beceriler.map((skill, index) => (
+                <li key={index}>{skill}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </body>
+    </html>
+  );
+};
 
 const Cv = () => {
   const [selectedTemplate, setSelectedTemplate] = useState(null);
@@ -46,16 +207,37 @@ const Cv = () => {
     setSelectedTemplate(templateName);
   };
 
-  const generatePDF = () => {
+  const generatePDF = async () => {
     if (selectedTemplate === "simple") {
-      const docDefinition = SimpleTemplate({ cvData });
-      pdfMake.createPdf(docDefinition).download("Simple_CV.pdf");
+      const pdf = new jsPDF();
+      const htmlContent = renderToStaticMarkup(
+        <SimpleTemplate cvData={cvData} />
+      );
+      pdf.html(htmlContent, {
+        callback: function (pdf) {
+          pdf.save("Simple_CV.pdf");
+        },
+      });
     } else if (selectedTemplate === "it") {
-      const docDefinition = ItTemplate({ cvData });
-      pdfMake.createPdf(docDefinition).download("It_CV.pdf");
+      const pdf = new jsPDF();
+      const htmlContent = renderToStaticMarkup(
+        <ITTemplate cvData={cvData} />
+      );
+      pdf.html(htmlContent, {
+        callback: function (pdf) {
+          pdf.save("Simple_CV.pdf");
+        },
+      });
     } else if (selectedTemplate === "hr") {
-      const docDefinition = HrTemplate({ cvData });
-      pdfMake.createPdf(docDefinition).download("HR_CV.pdf");
+      const pdf = new jsPDF();
+      const htmlContent = renderToStaticMarkup(
+        <HRTemplate cvData={cvData} />
+      );
+      pdf.html(htmlContent, {
+        callback: function (pdf) {
+          pdf.save("Simple_CV.pdf");
+        },
+      });
     }
   };
 

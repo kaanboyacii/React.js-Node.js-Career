@@ -3,6 +3,8 @@ import "./cv.scss";
 import Image from "../../../img/cv.png";
 import jsPDF from "jspdf";
 import { renderToStaticMarkup } from "react-dom/server";
+import html2pdf from "html2pdf.js";
+import "./simple.css";
 
 const SimpleTemplate = ({ cvData }) => {
   return (
@@ -208,37 +210,29 @@ const Cv = () => {
   };
 
   const generatePDF = async () => {
-    if (selectedTemplate === "simple") {
-      const pdf = new jsPDF();
-      const htmlContent = renderToStaticMarkup(
+    if (!selectedTemplate) {
+      return;
+    }
+
+    const pdf = new jsPDF();
+    const templateComponent =
+      selectedTemplate === "simple" ? (
         <SimpleTemplate cvData={cvData} />
-      );
-      pdf.html(htmlContent, {
-        callback: function (pdf) {
-          pdf.save("Simple_CV.pdf");
-        },
-      });
-    } else if (selectedTemplate === "it") {
-      const pdf = new jsPDF();
-      const htmlContent = renderToStaticMarkup(
+      ) : selectedTemplate === "it" ? (
         <ITTemplate cvData={cvData} />
-      );
-      pdf.html(htmlContent, {
-        callback: function (pdf) {
-          pdf.save("Simple_CV.pdf");
-        },
-      });
-    } else if (selectedTemplate === "hr") {
-      const pdf = new jsPDF();
-      const htmlContent = renderToStaticMarkup(
+      ) : (
         <HRTemplate cvData={cvData} />
       );
-      pdf.html(htmlContent, {
-        callback: function (pdf) {
-          pdf.save("Simple_CV.pdf");
-        },
-      });
-    }
+
+    const htmlContent = renderToStaticMarkup(templateComponent);
+
+    html2pdf(htmlContent, {
+      margin: 10,
+      filename: `${selectedTemplate.toUpperCase()}_CV.pdf`,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    });
   };
 
   return (

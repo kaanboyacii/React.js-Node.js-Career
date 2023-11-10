@@ -70,16 +70,47 @@
 
     .contact-info {
       flex: 1;
-      max-width: 400px;
-      color: white;
+      display: flex;
+      flex-direction: column;
+      color: #fff;
+      margin-right: 2rem;
+      position: relative;
 
-      h2 {
-        font-size: 2rem;
+      h1 {
+        font-size: 2.5rem;
         margin-bottom: 1rem;
       }
 
-      p {
-        margin-bottom: 0.5rem;
+      img {
+        height: 250px;
+        width: 300px;
+        margin-bottom: 1rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      span {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        svg {
+          margin-right: 10px; 
+        }
+      }
+
+      .email-icon,
+      .phone-icon,
+      .address-icon {
+        color: $primary-color;
+        font-size: 1.5rem;
+        margin-right: 10px;
+      }
+
+      .email-icon,
+      .phone-icon,
+      .address-icon {
+        color: $accent-color;
       }
     }
   }

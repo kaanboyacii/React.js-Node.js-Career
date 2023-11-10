@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import "./contact.scss"; // SCSS dosyasını ekledik
+import "./contact.scss";
+import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
+import EmailIcon from "@mui/icons-material/Email";
+import BusinessIcon from "@mui/icons-material/Business";
+import contactImage from "../../img/contact.png";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -25,12 +29,21 @@ const Contact = () => {
   return (
     <div className="contact-form-container">
       <div className="contact-info">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
-          alias, quia minima nulla nam animi quidem saepe numquam incidunt. Rem
-          sapiente aspernatur omnis, perspiciatis ratione impedit provident
-          magni asperiores commodi.
-        </p>
+        <h1>Bizimle İletişime Geçin</h1>
+        <img src={contactImage} alt="" />
+        <span>
+          <EmailIcon className="email-icon" />
+          E-posta: info@ineedcareer.com
+        </span>
+        <span>
+          <PhoneAndroidIcon className="phone-icon" />
+          Telefon: 0232 555 11 22
+        </span>
+        <span>
+          <BusinessIcon className="address-icon" />
+          Adres: Mimar Sinan cd. Ahmet Bey mh. Tekno Park no :76/1 İzmir /
+          Turkey
+        </span>
       </div>
       <div className="contact-form">
         <form onSubmit={handleSubmit} className="contact-form">
@@ -69,7 +82,7 @@ const Contact = () => {
           <br />
           <label>
             Mesaj:
-            <br style={{ marginBottom: '5px' }} />
+            <br style={{ marginBottom: "5px" }} />
             <textarea
               name="message"
               value={formData.message}

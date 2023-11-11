@@ -4,6 +4,7 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import EmailIcon from "@mui/icons-material/Email";
 import BusinessIcon from "@mui/icons-material/Business";
 import contactImage from "../../img/contact.png";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +28,12 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact-form-container">
+    <motion.div
+      className="contact-form-container"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3 }}
+    >
       <div className="contact-info">
         <h1>Bizimle İletişime Geçin</h1>
         <img src={contactImage} alt="" />
@@ -94,7 +100,7 @@ const Contact = () => {
           <button type="submit">Gönder</button>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

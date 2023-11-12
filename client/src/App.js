@@ -12,6 +12,7 @@ import Events from "./pages/events/Events";
 import Event from "./pages/event/Event";
 import Courses from "./pages/courses/Courses";
 import Panel from "./pages/panel/Panel";
+import ContactPage from "./pages/contactPage/ContactPage";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -31,6 +32,7 @@ function App() {
             <Route path="event" element={<Event />} />
             <Route path="events" element={<Events />} />
             <Route path="courses" element={<Courses />} />
+            <Route path="contact" element={<ContactPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

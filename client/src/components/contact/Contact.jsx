@@ -104,8 +104,7 @@ const Contact = () => {
             </form>
           </div>
         </motion.div>
-      </div>
-      <References />
+      </div>{" "}
     </div>
   );
 };

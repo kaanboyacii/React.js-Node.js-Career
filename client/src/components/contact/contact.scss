@@ -1,6 +1,6 @@
 @import "../../style/color.scss";
-
-.contact {
+.contact{
+.contact-container {
   height: calc(100vh - 30vh);
   overflow: hidden;
   background: linear-gradient(90deg, $primary-color, $secondary-color);
@@ -114,4 +114,5 @@
       }
     }
   }
+}
 }

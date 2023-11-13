@@ -7,6 +7,7 @@ import Services from "../../components/services/Services";
 import EventSlider from "../../components/eventslider/EventSlider";
 import Footer from "../../components/footer/Footer";
 import Contact from "../../components/contact/Contact";
+import References from "../../components/references/References";
 
 const Home = () => {
   return (
@@ -20,6 +21,9 @@ const Home = () => {
       </div>
       <div className="eventSlider">
         <EventSlider />
+      </div>
+      <div className="references">
+        <References />
       </div>
       <div className="about">
         <About />

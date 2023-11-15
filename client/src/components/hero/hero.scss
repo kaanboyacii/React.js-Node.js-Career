@@ -19,16 +19,19 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      
       h2 {
         font-size: 24px;
         color: $secondary-color;
         letter-spacing: 10px;
       }
+      
       h1 {
         font-size: 72px;
         color: $accent-color;
       }
     }
+    
     .searchContainer {
       position: absolute;
       display: flex;
@@ -38,6 +41,7 @@
       padding: 8px;
     }
   }
+  
   .imageContainer {
     height: 100%;
     position: absolute;
@@ -50,6 +54,7 @@
       object-fit: cover;
     }
   }
+  
   .slidingTextContainer {
     position: absolute;
     font-size: 25vh;
@@ -60,108 +65,48 @@
     font-weight: bold;
     user-select: none;
   }
-  
-}
-@media (max-width: 768px) {
-  .hero {
+
+  @media (max-width: 768px) {
     height: 80vh;
-    overflow: hidden;
     background: linear-gradient(180deg, $primary-color, $secondary-color);
+
     .wrapper {
-      max-width: 1366px;
-      height: 100%;
-      margin: auto;
+      max-width: 100%;
+      padding-left: 0;
+
       .textContainer {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 10px;
-        
+        height: auto;
+        margin: 1rem;
         h2 {
           font-size: 30px;
-          color: $secondary-color;
           letter-spacing: 5px;
         }
-  
+
         h1 {
-          font-size: 88px;
-          color: $accent-color;
-          margin-bottom: 11rem;
-        }
-  
-        img {
-          width: 50px;
+          font-size: 48px; 
+          margin-bottom: 2rem;
         }
       }
     }
-    position: relative;
+
     .imageContainer {
       height: 50vh;
-      position: absolute;
       top: 40vh;
       left: 0;
       right: 0;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
     }
+
     .searchContainer {
-      position: absolute;
+      margin-top: 2rem;
       top: 50%;
-      left: 50%; /* Ek olarak bu düzenlemeyi ekledik */
+      left: 50%;
       transform: translate(-50%, -50%);
-      background: #fff;
-      border-radius: 10px;
-      padding: 8px;
     }
-  }
 
-  @media (max-width: 768px) {
-    .textContainer {
-      width: 50%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-      gap: 0px;
-
-      h2 {
-        font-size: 30px;
-        color: $secondary-color;
-        letter-spacing: 10px;
-        text-align: center;
-      }
-
-      h1 {
-        font-size: 88px;
-        text-align: center;
-        color: $accent-color;
-      }
-    }
-    .hero {
-      height: 80vh;
-      overflow: hidden;
-      background: linear-gradient(180deg, $primary-color, $secondary-color);
-      position: relative;
-      .imageContainer {
-        height: 50vh;
-        position: absolute;
-        top: 40vh;
-        left: 0;
-        right: 0;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
+    .slidingTextContainer {
+      font-size: 15vh;
+      width: 100%;
+      bottom: 2vh; 
     }
   }
 }

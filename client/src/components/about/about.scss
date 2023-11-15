@@ -1,7 +1,6 @@
-@import "../../style/app.scss";
 @import "../../style/color.scss";
+
 .events {
-  //   background: linear-gradient(180deg, #fff, $accent-color);
   background-color: #fff;
   height: 100%;
   display: flex;
@@ -15,7 +14,7 @@
     align-items: center;
     gap: 20px;
 
-    @include mobile {
+    @media (max-width: 480px) {
       align-self: center;
       text-align: center;
       flex-direction: column;
@@ -33,18 +32,20 @@
       border: none;
       border-top: 0.5px solid gray;
 
-      @include mobile {
+      @media (max-width: 480px) {
         width: 300px;
+        margin: 10px;
       }
     }
   }
+
   .titleContainer {
     flex: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    @include mobile {
+    @media (max-width: 480px) {
       width: 100%;
     }
 
@@ -53,7 +54,7 @@
       align-items: center;
       gap: 50px;
 
-      @include mobile {
+      @media (max-width: 480px) {
         flex-direction: column;
         text-align: center;
         gap: 20px;
@@ -65,9 +66,9 @@
         border-radius: 50px;
         object-fit: cover;
 
-        @include mobile {
-          width: 200px;
-          height: 50px;
+        @media (max-width: 480px) {
+          width: 300px;
+          height: 100px;
         }
       }
 
@@ -75,7 +76,7 @@
         font-size: 96px;
         font-weight: 100;
 
-        @include mobile {
+        @media (max-width: 480px) {
           font-size: 36px;
         }
       }
@@ -89,7 +90,7 @@
         font-size: 24px;
         cursor: pointer;
 
-        @include mobile {
+        @media (max-width: 480px) {
           font-size: 16px;
           width: 150px;
           height: 50px;
@@ -97,6 +98,7 @@
       }
     }
   }
+
   .listContainer {
     flex: 2;
     display: flex;
@@ -105,10 +107,11 @@
     margin-top: 20px;
     margin-bottom: 20px;
 
-    @include mobile {
+    @media (max-width: 480px) {
       flex-direction: column;
       width: 100%;
     }
+
     .box {
       border-radius: 30px;
       padding: 50px;
@@ -118,10 +121,12 @@
       justify-content: space-between;
       margin-right: 2vh;
       transition: transform 0.5s;
+
       h2 {
         margin-bottom: 1rem;
       }
-      @include mobile {
+
+      @media (max-width: 480px) {
         border: none;
         align-items: center;
         gap: 20px;
@@ -129,7 +134,7 @@
       }
 
       p {
-        @include mobile {
+        @media (max-width: 480px) {
           display: none;
         }
       }

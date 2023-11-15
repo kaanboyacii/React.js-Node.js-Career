@@ -6,6 +6,9 @@ import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import AddIcon from "@mui/icons-material/Add";
 import AvatarImage from "../../../img/avatar.jpg";
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 const user = {
   name: "KAAN BOYACI",
@@ -55,6 +58,13 @@ const user = {
     },
   ],
 };
+const interest = [
+  { title: "JavaScript" },
+  { title: "React" },
+  { title: "Node.js" },
+  { title: "HTML" },
+  // Diğer ilgi alanlarını buraya ekleyebilirsin
+];
 
 const Profile = () => {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -66,7 +76,7 @@ const Profile = () => {
     degree: "",
     graduationYear: "",
   });
-    const [isAddingExperience, setIsAddingExperience] = useState(false);
+  const [isAddingExperience, setIsAddingExperience] = useState(false);
   const [experience, setExperience] = useState({
     title: "",
     company: "",
@@ -125,7 +135,6 @@ const Profile = () => {
       }));
     }
   };
-  
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -466,6 +475,29 @@ const Profile = () => {
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+      <div className="feature-card">
+        <h1>İlgi Alanları</h1>
+        <div className="user-info">
+          <Stack spacing={2} sx={{ width: 800 }}>
+            <Autocomplete
+              multiple
+              id="size-small-standard-multi"
+              size="small"
+              options={interest}
+              getOptionLabel={(option) => option.title}
+              defaultValue={[interest[0]]}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="standard"
+                  label="Size small"
+                  placeholder="Favorites"
+                />
+              )}
+            />
+          </Stack>
         </div>
       </div>
     </div>

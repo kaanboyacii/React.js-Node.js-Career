@@ -56,8 +56,7 @@
       flex-direction: column;
       justify-content: flex-start;
 
-      .apply-job-button{
-
+      .apply-job-button {
         .apply-job {
           font-size: 20px;
           margin-bottom: 20px;
@@ -68,7 +67,7 @@
           border-radius: 5px;
           cursor: pointer;
           transition: background 0.3s;
-  
+
           &:hover {
             background-color: $accent-color;
           }
@@ -88,7 +87,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 50px;
-        span{
+        span {
           font-size: small;
           color: $secondary-color;
         }
@@ -99,4 +98,31 @@
       }
     }
   }
+  @media (max-width: 768px) {
+    .jobcontainer {
+      flex-direction: column;
+      align-items: center;
+  
+      .left-side,
+      .right-side {
+        width: 100%;
+        margin-top: 1rem;
+        margin-left: 1rem; 
+      }
+
+    }
+  
+    .apply-job-button {
+      .apply-job {
+        width: 100%;
+      }
+    }
+  
+    .features {
+      grid-template-columns: 1fr;
+      grid-gap: 1rem;
+      text-align: center;
+    }
+  }
+  
 }

@@ -55,7 +55,7 @@
         padding: 16px;
         border-radius: 10px;
         transition: transform 0.3s;
-        max-height: 100vh; // Max yükseklik ayarı
+        max-height: 100vh;
 
         &:hover {
           transform: translateY(-5px);
@@ -73,7 +73,7 @@
         }
 
         button {
-          margin-top: auto; // Düğmeyi en aşağıya taşır
+          margin-top: auto;
           background: $secondary-color;
           color: #fff;
           padding: 0.5rem 1rem;
@@ -88,7 +88,6 @@
         }
       }
     }
-
   }
   .more-button {
     display: flex;
@@ -97,7 +96,7 @@
     button {
       width: 50vh;
       padding: 10px 20px;
-      background-color: $primary-color; /* Özel renk seçimi yapabilirsiniz */
+      background-color: $primary-color;
       color: #fff;
       border: none;
       border-radius: 10px;
@@ -105,7 +104,41 @@
       transition: background-color 0.3s;
     }
     button:hover {
-      background-color: $secondary-color; /* Hover için arka plan rengi */
+      background-color: $secondary-color;
     }
-  }   
+  }
+  @media (max-width: 768px) {
+    .joblist-container {
+      flex-direction: column;
+
+      .sidebar {
+        width: 90%;
+        margin: 2rem auto;
+        height: 100%;
+        .filter-group {
+          padding: 16px;
+          border-radius: 10px;
+          border: 1px solid #e0e0e0;
+          margin-bottom: 16px;
+          h3 {
+            padding-bottom: 0.5rem;
+          }
+          .MuiAutocomplete-root {
+            width: 100%;
+          }
+        }
+      }
+
+      .job-cards {
+        flex: 1;
+        padding: 1rem;
+      }
+    }
+
+    .more-button {
+      button {
+        width: 100%;
+      }
+    }
+  }
 }

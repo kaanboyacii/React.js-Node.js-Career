@@ -111,7 +111,6 @@
       flex-direction: column;
       width: 100%;
     }
-
     .box {
       border-radius: 30px;
       padding: 50px;
@@ -119,29 +118,29 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      margin-right: 2vh;
+      margin: 2vh;
       transition: transform 0.5s;
-
+    
       h2 {
         margin-bottom: 1rem;
       }
-
+    
       @media (max-width: 480px) {
-        border: none;
+        flex-direction: column; /* Set flex direction to column for small screens */
         align-items: center;
-        gap: 20px;
         padding: 10px;
       }
-
+    
       p {
         @media (max-width: 480px) {
-          display: none;
+          display: block; /* Display the p elements on small screens */
         }
       }
-
+    
       &:hover {
         transform: scale(1.05);
       }
     }
+    
   }
 }

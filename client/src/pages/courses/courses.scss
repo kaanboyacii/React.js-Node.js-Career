@@ -54,7 +54,7 @@
         padding: 16px;
         border-radius: 10px;
         transition: transform 0.3s;
-        max-height: 100vh; 
+        max-height: 100vh;
 
         &:hover {
           transform: translateY(-5px);
@@ -63,17 +63,16 @@
         .course-card-img {
           flex: 0 0 200px; /* Resmin genişliği sabit, yükseklik ise içeriğe göre otomatik ayarlanacak */
           margin-right: 1rem;
-          max-height: 300px; 
+          max-height: 300px;
           display: flex;
           justify-content: center;
           align-items: center;
         }
-        
+
         .course-card-img img {
           max-width: 100%;
           max-height: 100%;
         }
-        
 
         h3 {
           font-size: 1.2rem;
@@ -120,6 +119,40 @@
     }
     button:hover {
       background-color: $secondary-color;
+    }
+  }
+  @media (max-width: 768px) {
+    .courses-container {
+      flex-direction: column;
+
+      .sidebar {
+        width: 90%;
+        margin: 2rem auto;
+        height: 100%;
+        .filter-group {
+          padding: 16px;
+          border-radius: 10px;
+          border: 1px solid #e0e0e0;
+          margin-bottom: 16px;
+          h3 {
+            padding-bottom: 0.5rem;
+          }
+          .MuiAutocomplete-root {
+            width: 100%;
+          }
+        }
+      }
+
+      .course-cards {
+        flex: 1;
+        padding: 1rem;
+      }
+    }
+
+    .more-button {
+      button {
+        width: 100%;
+      }
     }
   }
 }

@@ -100,7 +100,6 @@
         }
       }
     }
-
   }
   .more-button {
     display: flex;
@@ -118,6 +117,41 @@
     }
     button:hover {
       background-color: $secondary-color;
+    }
+  }
+  @media (max-width: 768px) {
+    .events-container {
+      flex-direction: column;
+      align-items: center;
+
+      .left-side {
+        width: 100%;
+      }
+
+      .events-cards {
+        padding: 1rem;
+        margin: 1rem;
+      }
+
+      .event-card {
+        padding: 1rem;
+
+        .event-image,
+        .event-details {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+
+    .more-button {
+      button {
+        width: 100%;
+      }
     }
   }
 }

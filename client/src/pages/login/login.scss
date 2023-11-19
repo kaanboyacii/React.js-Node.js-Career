@@ -6,7 +6,7 @@
   align-items: center;
   height: 100vh;
 
-  &.left-side {
+  left-side {
     flex: 2;
     display: flex;
     justify-content: center;
@@ -19,7 +19,7 @@
     }
   }
 
-  &.right-side {
+  right-side {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -104,18 +104,19 @@
       }
     }
   }
-
   @media (max-width: 768px) {
     flex-direction: column;
-
-
+    .left-side{
+      display: none;
+    }
+  
     .right-side {
       .form-container{
-        margin-bottom: 30px;
         .form-group{
-          margin: 5px;
+          margin:10px;
         }
       }
     }
   }
+
 }

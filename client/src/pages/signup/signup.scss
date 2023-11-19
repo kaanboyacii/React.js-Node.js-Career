@@ -5,6 +5,20 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    .left-side{
+      display: none;
+    }
+  
+    .right-side {
+      .form-container{
+        .form-group{
+          margin:10px;
+        }
+      }
+    }
+  }
 }
 
 .left-side {
@@ -97,3 +111,4 @@ input {
     }
   }
 }
+

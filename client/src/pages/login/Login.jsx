@@ -1,5 +1,5 @@
-import React from "react";
 import "./login.scss";
+import React from "react";
 import PeopleImage from "../../img/people.webp";
 import Logo from "../../img/logo.png";
 import { motion } from "framer-motion"; 

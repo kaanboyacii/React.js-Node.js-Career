@@ -1,5 +1,4 @@
 @import "../../../style/color.scss";
-
 .settings-card {
   display: flex;
   flex-direction: column;
@@ -12,13 +11,19 @@
   transition: transform 0.3s;
   max-height: 100vh;
   position: relative;
+
   hr {
     border: 0;
     height: 1px;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.75),
+      rgba(0, 0, 0, 0)
+    );
     margin: 30px;
   }
-  
+
   h1 {
     font-size: 24px;
     font-weight: 600;
@@ -26,7 +31,12 @@
     margin-bottom: 20px;
   }
 
-  .save-button {
+  .MuiTabs-root {
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .save-button,
+  .delete-button {
     background: $secondary-color;
     color: #fff;
     margin-top: 1rem;
@@ -42,19 +52,24 @@
       color: $secondary-color;
     }
   }
+
   .delete-button {
     background: red;
-    color: #fff;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s;
 
     &:hover {
       background: #b63535;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .MuiTabs-root {
+      flex-wrap: wrap;
+    }
+
+    .MuiTab-root {
+      flex: 1;
+      max-width: 100%;
+      text-align: center;
     }
   }
 }

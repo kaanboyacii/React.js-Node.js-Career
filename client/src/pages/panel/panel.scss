@@ -1,5 +1,4 @@
 @import "../../style/color.scss";
-
 .panel {
   position: relative;
   max-width: 1200px;
@@ -58,7 +57,30 @@
       padding: 2rem 0 2rem 2rem;
       display: flex;
       flex-direction: column;
+    }
+  }
 
+  @media (max-width: 768px) {
+    .panel-container {
+      flex-direction: column;
+
+      .sidebar {
+        flex: initial;
+        width: auto;
+        padding: 1rem;
+        margin-top: 0;
+        border-radius: 10px;
+        height: auto;
+
+        h1 {
+          font-size: 1.2rem;
+        }
+      }
+
+      .content {
+        flex: initial;
+        padding: 1rem;
+      }
     }
   }
 }

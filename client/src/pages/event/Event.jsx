@@ -1,6 +1,5 @@
 import React from "react";
 import "./event.scss";
-import Image from "../../img/software.jpg";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import { Link } from "react-router-dom";

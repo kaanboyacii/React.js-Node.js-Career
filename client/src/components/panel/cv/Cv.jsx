@@ -1,77 +1,77 @@
 import React, { useState } from "react";
 import "./cv.scss";
 import Image from "../../../img/cv.png";
-import jsPDF from "jspdf";
-import { renderToStaticMarkup } from "react-dom/server";
-import html2pdf from "html2pdf.js";
-import SimpleTemplate from "./templates/SimpleTemplate";
-import ITTemplate from "./templates/ITTemplate";
-import HRTemplate from "./templates/HRTemplate";
+// import jsPDF from "jspdf";
+// import { renderToStaticMarkup } from "react-dom/server";
+// import html2pdf from "html2pdf.js";
+// import SimpleTemplate from "./templates/SimpleTemplate";
+// import ITTemplate from "./templates/ITTemplate";
+// import HRTemplate from "./templates/HRTemplate";
 
 
 const Cv = () => {
   const [selectedTemplate, setSelectedTemplate] = useState(null);
-  const cvData = {
-    ad: "John Doe",
-    doğumTarihi: "01 Ocak 1990",
-    eğitim: [
-      {
-        okul: "Örnek Üniversitesi",
-        bölüm: "Bilgisayar Mühendisliği",
-        mezuniyetYılı: "2012",
-      },
-      {
-        okul: "Başka Bir Üniversite",
-        bölüm: "İşletme",
-        mezuniyetYılı: "2015",
-      },
-    ],
-    deneyim: [
-      {
-        şirket: "ABC Teknoloji",
-        pozisyon: "Yazılım Geliştirici",
-        başlangıçTarihi: "2015",
-        bitişTarihi: "2018",
-      },
-      {
-        şirket: "XYZ Şirketi",
-        pozisyon: "Proje Yöneticisi",
-        başlangıçTarihi: "2018",
-        bitişTarihi: "2020",
-      },
-    ],
-    beceriler: ["JavaScript", "React", "Node.js", "Proje Yönetimi"],
-  };
+  // const cvData = {
+  //   ad: "John Doe",
+  //   doğumTarihi: "01 Ocak 1990",
+  //   eğitim: [
+  //     {
+  //       okul: "Örnek Üniversitesi",
+  //       bölüm: "Bilgisayar Mühendisliği",
+  //       mezuniyetYılı: "2012",
+  //     },
+  //     {
+  //       okul: "Başka Bir Üniversite",
+  //       bölüm: "İşletme",
+  //       mezuniyetYılı: "2015",
+  //     },
+  //   ],
+  //   deneyim: [
+  //     {
+  //       şirket: "ABC Teknoloji",
+  //       pozisyon: "Yazılım Geliştirici",
+  //       başlangıçTarihi: "2015",
+  //       bitişTarihi: "2018",
+  //     },
+  //     {
+  //       şirket: "XYZ Şirketi",
+  //       pozisyon: "Proje Yöneticisi",
+  //       başlangıçTarihi: "2018",
+  //       bitişTarihi: "2020",
+  //     },
+  //   ],
+  //   beceriler: ["JavaScript", "React", "Node.js", "Proje Yönetimi"],
+  // };
 
   const handleTemplateSelect = (templateName) => {
     setSelectedTemplate(templateName);
   };
 
-  const generatePDF = async () => {
-    if (!selectedTemplate) {
-      return;
-    }
+  // const generatePDF = async () => {
+  //   if (!selectedTemplate) {
+  //     return;
+  //   }
 
-    const pdf = new jsPDF();
-    const templateComponent =
-      selectedTemplate === "simple" ? (
-        <SimpleTemplate cvData={cvData} />
-      ) : selectedTemplate === "it" ? (
-        <ITTemplate cvData={cvData} />
-      ) : (
-        <HRTemplate cvData={cvData} />
-      );
+  //   const pdf = new jsPDF();
+  //   const templateComponent =
+  //     selectedTemplate === "simple" ? (
+  //       <SimpleTemplate cvData={cvData} />
+  //     ) : selectedTemplate === "it" ? (
+  //       <ITTemplate cvData={cvData} />
+  //     ) : (
+  //       <HRTemplate cvData={cvData} />
+  //     );
 
-    const htmlContent = renderToStaticMarkup(templateComponent);
+  //   const htmlContent = renderToStaticMarkup(templateComponent);
 
-    html2pdf(htmlContent, {
-      margin: 10,
-      filename: `${selectedTemplate.toUpperCase()}_CV.pdf`,
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    });
-  };
+  //   html2pdf(htmlContent, {
+  //     margin: 10,
+  //     filename: `${selectedTemplate.toUpperCase()}_CV.pdf`,
+  //     image: { type: "jpeg", quality: 0.98 },
+  //     html2canvas: { scale: 2 },
+  //     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+  //   });
+  // };
 
   return (
     <div className="cv-card">
@@ -105,7 +105,7 @@ const Cv = () => {
           <button>HR Şablon</button>
         </div>
       </div>
-      <button className="download-button" onClick={generatePDF}>
+      <button className="download-button" >
         CV Oluştur ve İndir
       </button>
     </div>

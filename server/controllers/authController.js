@@ -23,24 +23,30 @@ export const signup = async (req, res, next) => {
   }
 }
 
-
 export const signin = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    if (!user) return next(createError(404, "User not found !"));
+    if (!user) return next(createError(404, "User not found!"));
 
     const isCorrect = await bcrypt.compare(req.body.password, user.password);
-    if (!isCorrect) return next(createError(400, "Wrong credentials !"));
+    if (!isCorrect) return next(createError(400, "Wrong credentials!"));
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
     const { password, ...others } = user._doc;
 
+    // Token'i httpOnly cookie olarak gönder
     res.cookie("access_token", token, {
-      httpOnly: true
-    }).status(200).json(others)
+      httpOnly: true,
+      // secure: true, // Eğer HTTPS kullanıyorsanız, bu satırı ekle
+    }).status(200).json({
+      success: true,
+      message: "User login successful!",
+      token,
+      user: others
+    });
 
   } catch (err) {
-    next(err)
+    next(err);
   }
 }
 

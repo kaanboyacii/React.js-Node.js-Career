@@ -64,8 +64,13 @@ const UserSchema = new mongoose.Schema(
             required: false,
         },
         skills: {
-            type: [String],
-            required: false,
+            type: [
+                {
+                    title: String,
+                    description: String,
+                },
+            ],
+            default: [],
         },
         experience: {
             type: [
@@ -116,6 +121,13 @@ const UserSchema = new mongoose.Schema(
         applications: {
             type: [String],
             required: false,
+        },
+        subscribers: {
+            type: Number,
+            default: 0
+        },
+        subscribedUsers: {
+            type: [String],
         },
     },
     { timestamps: true }

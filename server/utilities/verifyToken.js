@@ -1,20 +1,19 @@
 import jwt from "jsonwebtoken";
-import { createError } from "../error/error.js";
+
+const config = process.env;
 
 export const verifyToken = (req, res, next) => {
-    const token = req.cookies.access_token;
-    if (!token) {
-        return next(createError(401, "Access token is missing!"));
-    }
+  const token =
+    req.body.token || req.query.token || req.headers["x-access-token"];
 
-
-    jwt.verify(token, process.env.JWT, (err, user) => {
-        if (!process.env.JWT) {
-            return next(createError(500, "JWT secret key is missing!"));
-        }
-
-        if (err) return next(createError(403, "Token is not valid!"));
-        req.user = user;
-        next()
-    });
+  if (!token) {
+    return res.status(403).send("A token is required for authentication");
+  }
+  try {
+    const decoded = jwt.verify(token, config.TOKEN_KEY);
+    req.user = decoded;
+  } catch (err) {
+    return res.status(401).send("Invalid Token");
+  }
+  return next();
 };

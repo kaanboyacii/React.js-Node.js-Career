@@ -1,7 +1,8 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import connectDB from "./db/connect.js";
-import UserRoutes from "./routers/userRoute.js"
+import UserRoutes from "./routers/userRoutes.js"
+import AuthRoutes from "./routers/authRoutes.js"
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use((err, req, res, next) => {
     });
 });
 
+app.use("/api/auth",AuthRoutes);
 app.use("/api/users",UserRoutes);
 
 const PORT = 8800;

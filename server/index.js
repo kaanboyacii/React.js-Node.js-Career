@@ -1,6 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import connectDB from "./db/connect.js";
+import UserRoutes from "./routers/userRoute.js"
 
 const app = express();
 
@@ -17,9 +18,9 @@ app.use((err, req, res, next) => {
     });
 });
 
-const PORT = 8800;
+app.use("/api/users",UserRoutes);
 
-// Call connectDB from connect.js
+const PORT = 8800;
 connectDB();
 
 app.listen(PORT, () => {

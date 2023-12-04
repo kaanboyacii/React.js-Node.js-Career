@@ -52,24 +52,22 @@ export const signin = async (req, res, next) => {
 
 export const logout = async (req, res, next) => {
   try {
-    if (!req.headers || !req.headers.authorization) {
-      return res.status(401).json({ message: 'Authorization header missing' });
+    const token = req.cookies.access_token;
+
+    if (!token) {
+      return res.status(401).json({ message: 'Access token missing' });
     }
 
-    const token = req.headers.authorization.split(' ')[1];
+    // Clear the token from the client-side by setting an expired cookie
+    res.cookie("access_token", "", { expires: new Date(0), httpOnly: true });
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      if (err) {
-        return res.status(401).json({ message: 'Invalid token' });
-      }
-
-      return res.status(200).json({ message: 'Successfully logged out' });
-    });
+    return res.status(200).json({ message: 'Successfully logged out' });
 
   } catch (err) {
     next(err);
   }
 };
+
 
 
 export const googleAuth = async (req, res, next) => {

@@ -58,21 +58,27 @@ export const updateImg = async (req, res, next) => {
 
 export const deleteUser = async (req, res, next) => {
     if (req.params.id === req.user.id) {
-        try {
-            const deletedUser = await User.findByIdAndDelete(req.params.id);
-
-            if (!deletedUser) {
-                return next(createError(404, "User not found"));
-            }
-            res.status(200).json(deletedUser);
-            res.status(200).json("User has been deleted");
-        } catch (err) {
-            next(err);
+      try {
+        const deletedUser = await User.findByIdAndDelete(req.params.id);
+  
+        if (!deletedUser) {
+          return next(createError(404, "User not found"));
         }
+  
+        res.status(200).json({
+          message: "User has been deleted",
+          deletedUser: deletedUser
+        });
+  
+        res.clearCookie("access_token");
+      } catch (err) {
+        next(err);
+      }
     } else {
-        return next(createError(403, "You can delete only your account!"));
+      return next(createError(403, "You can delete only your account!"));
     }
-};
+  };
+  
 
 
 export const getUser = async (req, res, next) => {

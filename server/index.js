@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import connectDB from "./db/connect.js";
 import UserRoutes from "./routers/userRoutes.js";
 import AuthRoutes from "./routers/authRoutes.js";
+import JobRoutes  from "./routers/jobRoutes.js";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", AuthRoutes);
 app.use("/api/users", UserRoutes);
+app.use("/api/jobs", JobRoutes);
 
 app.use((err, req, res, next) => {
     const status = err.status || 500;

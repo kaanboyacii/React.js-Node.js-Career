@@ -1,5 +1,6 @@
 import { createError } from "../error/error.js";
 import User from "../models/UserModel.js"
+import Job from "../models/JobModel.js"
 import bcrypt from "bcrypt";
 
 export const update = async (req, res, next) => {
@@ -122,3 +123,40 @@ export const unsubscribe = async (req, res, next) => {
         next(err);
     }
 };
+
+
+export const applyForJob = async (userId, jobId) => {
+    try {
+        // Kullanıcıyı bul
+        const user = await User.findById(userId);
+
+        // İşi bul
+        const job = await Job.findById(jobId);
+
+        // Kullanıcının başvurduğu işleri kontrol et (aynı işe birden fazla başvuruyu önlemek için)
+        if (user.applications.includes(jobId)) {
+            return { success: false, message: 'Zaten bu işe başvurdunuz.' };
+        }
+
+        // Kullanıcının başvurduğu işi ekle
+        user.applications.push(jobId);
+
+        // İşe başvuran kullanıcıları kontrol et (aynı kullanıcıyı birden fazla işe başvuruyu önlemek için)
+        if (job.applicants.includes(userId)) {
+            return { success: false, message: 'Bu işe zaten başvuran bir kullanıcı.' };
+        }
+
+        // İşe başvuran kullanıcıyı ekle
+        job.applicants.push(userId);
+
+        // Veritabanında değişiklikleri kaydet
+        await user.save();
+        await job.save();
+
+        return { success: true, message: 'İş başvurunuz başarıyla alındı.' };
+    } catch (error) {
+        console.error('İş başvurusu sırasında bir hata oluştu:', error);
+        return { success: false, message: 'İş başvurunuz gerçekleştirilemedi.' };
+    }
+};
+

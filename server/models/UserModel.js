@@ -117,10 +117,10 @@ const UserSchema = new mongoose.Schema(
             ],
             default: [],
         },
-        applications: {
-            type: [String],
-            required: false,
-        },
+        applications: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Job' 
+        }],
         subscribers: {
             type: Number,
             default: 0

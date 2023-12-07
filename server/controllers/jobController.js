@@ -1,30 +1,26 @@
 import { createError } from "../error/error.js";
 import Job from "../models/JobModel.js";
 
-export const createJob = async (req, res) => {
+export const createJob = async (req, res, next) => {
     try {
         const jobData = req.body;
         const newJob = await Job.create(jobData);
         res.status(201).json(newJob);
-    } catch (error) {
-        console.error('İş oluşturma sırasında bir hata oluştu:', error);
-        const customError = createError(500, 'İş oluşturulamadı.');
-        res.status(customError.status).json({ error: customError.message });
+    } catch (err) {
+        next(err);
     }
 };
 
-export const getJobs = async (req, res) => {
+export const getJobs = async (req, res, next) => {
     try {
         const jobs = await Job.find();
         res.status(200).json(jobs);
-    } catch (error) {
-        console.error('İşleri getirme sırasında bir hata oluştu:', error);
-        const customError = createError(500, 'İşler getirilemedi.');
-        res.status(customError.status).json({ error: customError.message });
+    } catch (err) {
+        next(err);
     }
 };
 
-export const getJobById = async (req, res) => {
+export const getJobById = async (req, res, next) => {
     const jobId = req.params.id;
     try {
         const job = await Job.findById(jobId);
@@ -34,14 +30,12 @@ export const getJobById = async (req, res) => {
             const customError = createError(404, 'İş bulunamadı.');
             res.status(customError.status).json({ error: customError.message });
         }
-    } catch (error) {
-        console.error('İşi getirme sırasında bir hata oluştu:', error);
-        const customError = createError(500, 'İş getirilemedi.');
-        res.status(customError.status).json({ error: customError.message });
+    } catch (err) {
+        next(err);
     }
 };
 
-export const updateJob = async (req, res) => {
+export const updateJob = async (req, res, next) => {
     const jobId = req.params.id;
     const updatedJobData = req.body;
     try {
@@ -52,14 +46,12 @@ export const updateJob = async (req, res) => {
             const customError = createError(404, 'Güncellenen iş bulunamadı.');
             res.status(customError.status).json({ error: customError.message });
         }
-    } catch (error) {
-        console.error('İşi güncelleme sırasında bir hata oluştu:', error);
-        const customError = createError(500, 'İş güncellenemedi.');
-        res.status(customError.status).json({ error: customError.message });
+    } catch (err) {
+        next(err);
     }
 };
 
-export const deleteJob = async (req, res) => {
+export const deleteJob = async (req, res, next) => {
     const jobId = req.params.id;
     try {
         const deletedJob = await Job.findByIdAndDelete(jobId);
@@ -69,9 +61,7 @@ export const deleteJob = async (req, res) => {
             const customError = createError(404, 'Silinen iş bulunamadı.');
             res.status(customError.status).json({ error: customError.message });
         }
-    } catch (error) {
-        console.error('İşi silme sırasında bir hata oluştu:', error);
-        const customError = createError(500, 'İş silinemedi.');
-        res.status(customError.status).json({ error: customError.message });
+    } catch (err) {
+        next(err);
     }
 };

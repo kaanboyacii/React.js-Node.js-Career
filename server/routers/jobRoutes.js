@@ -6,7 +6,7 @@ import {
     getJobs,
     updateJob
 } from "../controllers/jobController.js";
-import { verifyToken } from "../utilities/verifyToken.js";
+import { verifyToken } from "../utility/verifyToken.js";
 
 const router = express.Router();
 

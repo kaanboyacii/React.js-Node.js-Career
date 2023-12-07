@@ -8,7 +8,7 @@ import {
     updateImg,
     applyForJob
 } from "../controllers/userController.js";
-import { verifyToken } from "../utilities/verifyToken.js";
+import { verifyToken } from "../utility/verifyToken.js";
 
 const router = express.Router();
 

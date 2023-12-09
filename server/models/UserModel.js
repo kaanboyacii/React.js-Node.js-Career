@@ -14,6 +14,12 @@ const UserSchema = new mongoose.Schema(
         password: {
             type: String,
         },
+        role: {
+            type: String,
+            enum: ['normal', 'company'],
+            default: 'normal',
+            required: true,
+        },
         img: {
             type: String,
             required: false,
@@ -119,7 +125,7 @@ const UserSchema = new mongoose.Schema(
         },
         applications: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Job' 
+            ref: 'Job'
         }],
         subscribers: {
             type: Number,

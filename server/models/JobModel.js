@@ -6,10 +6,17 @@ const jobSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    company: {
-        type: String,
-        required: true,
-        trim: true,
+    createdBy: {
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
+        company: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Company',
+            required: true,
+        },
     },
     description: {
         type: String,
@@ -48,9 +55,17 @@ const jobSchema = new mongoose.Schema({
         default: Date.now,
     },
     applicants: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }]
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
+        status: {
+            type: String,
+            enum: ['pending', 'approved', 'rejected'],
+            default: 'pending',
+        },
+    }],
 });
 
 export default mongoose.model("Job", jobSchema);

@@ -15,6 +15,10 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    requirements: {
+        type: [String],
+        required: true,
+    },
     date: {
         type: Date,
         required: true,
@@ -28,37 +32,26 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    capacity: {
-        type: Number,
-        required: true,
-    },
-    registrationDeadline: {
-        type: Date,
-    },
-    registrationLink: {
-        type: String,
-    },
     attendees: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],
-    // İş ilanı özellikleri
-    job: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Job',
-    },
-    // Diğer özel özellikler eklenebilir
-    customFields: {
-        type: mongoose.Schema.Types.Mixed,
-    },
+    applicants: [{
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
+        status: {
+            type: String,
+            enum: ['pending', 'approved', 'rejected'],
+            default: 'pending',
+        },
+    }],
     datePosted: {
         type: Date,
         default: Date.now,
-    },
-    applicants: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }]
+    }
 });
 
 export default mongoose.model("Event", eventSchema);

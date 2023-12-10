@@ -6,7 +6,7 @@ import {
     subscribe,
     unsubscribe,
     updateImg,
-    applyForJob
+    applyJob
 } from "../controllers/userController.js";
 import { verifyToken } from "../utility/verifyToken.js";
 
@@ -31,7 +31,7 @@ router.put("/sub/:id", verifyToken, subscribe);
 router.put("/unsub/:id", verifyToken, unsubscribe);
 
 //apply job
-router.put("/apply-job/:id", verifyToken, applyForJob);
+router.post("/apply-job/:jobId", verifyToken, applyJob);
 
 
 export default router;

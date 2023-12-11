@@ -59,28 +59,26 @@ export const updateImg = async (req, res, next) => {
 
 export const deleteUser = async (req, res, next) => {
     if (req.params.id === req.user.id) {
-      try {
-        const deletedUser = await User.findByIdAndDelete(req.params.id);
-  
-        if (!deletedUser) {
-          return next(createError(404, "User not found"));
-        }
-  
-        res.status(200).json({
-          message: "User has been deleted",
-          deletedUser: deletedUser
-        });
-  
-        res.clearCookie("access_token");
-      } catch (err) {
-        next(err);
-      }
-    } else {
-      return next(createError(403, "You can delete only your account!"));
-    }
-  };
-  
+        try {
+            const deletedUser = await User.findByIdAndDelete(req.params.id);
 
+            if (!deletedUser) {
+                return next(createError(404, "User not found"));
+            }
+
+            res.status(200).json({
+                message: "User has been deleted",
+                deletedUser: deletedUser
+            });
+
+            res.clearCookie("access_token");
+        } catch (err) {
+            next(err);
+        }
+    } else {
+        return next(createError(403, "You can delete only your account!"));
+    }
+};
 
 export const getUser = async (req, res, next) => {
     try {
@@ -105,7 +103,6 @@ export const subscribe = async (req, res, next) => {
     }
 };
 
-
 export const unsubscribe = async (req, res, next) => {
     try {
         try {
@@ -124,39 +121,42 @@ export const unsubscribe = async (req, res, next) => {
     }
 };
 
+export const applyJob = async (req, res, next) => {
+    const userId = req.user.id; // Veya kullanıcı kimliğini başka bir şekilde alabilirsiniz
+    const jobId = req.params.jobId; // Veya iş ilanı kimliğini başka bir şekilde alabilirsiniz
 
-export const applyForJob = async (userId, jobId) => {
     try {
-        // Kullanıcıyı bul
+        // Kullanıcıyı ve iş ilanını kontrol et
         const user = await User.findById(userId);
-
-        // İşi bul
         const job = await Job.findById(jobId);
 
-        // Kullanıcının başvurduğu işleri kontrol et (aynı işe birden fazla başvuruyu önlemek için)
+        if (!user || !job) {
+            const customError = createError(404, 'Kullanıcı veya iş ilanı bulunamadı.');
+            return res.status(customError.status).json({ error: customError.message });
+        }
+
+        // Kullanıcının başvurduğu iş ilanlarını kontrol et
         if (user.applications.includes(jobId)) {
-            return { success: false, message: 'Zaten bu işe başvurdunuz.' };
+            const customError = createError(400, 'Bu iş ilanına zaten başvurulmuş.');
+            return res.status(customError.status).json({ error: customError.message });
         }
 
-        // Kullanıcının başvurduğu işi ekle
+        // Kullanıcının başvurduğu iş ilanlarını güncelle
         user.applications.push(jobId);
+        await user.save();
 
-        // İşe başvuran kullanıcıları kontrol et (aynı kullanıcıyı birden fazla işe başvuruyu önlemek için)
-        if (job.applicants.includes(userId)) {
-            return { success: false, message: 'Bu işe zaten başvuran bir kullanıcı.' };
+        // İş ilanına başvuran kullanıcıları kontrol et
+        if (!job.applicants.find(applicant => applicant.user.toString() === userId)) {
+            // İş ilanına daha önce başvurulmamışsa, kullanıcıyı ekleyin
+            job.applicants.push({
+                user: userId,
+                status: 'pending',
+            });
+            await job.save();
         }
 
-        // İşe başvuran kullanıcıyı ekle
-        job.applicants.push(userId);
-
-        // Veritabanında değişiklikleri kaydet
-        await user.save();
-        await job.save();
-
-        return { success: true, message: 'İş başvurunuz başarıyla alındı.' };
-    } catch (error) {
-        console.error('İş başvurusu sırasında bir hata oluştu:', error);
-        return { success: false, message: 'İş başvurunuz gerçekleştirilemedi.' };
+        res.status(200).json({ message: 'İş ilanına başvuru başarılı.' });
+    } catch (err) {
+        next(err);
     }
 };
-

@@ -53,22 +53,15 @@ export const signin = async (req, res, next) => {
 export const logout = async (req, res, next) => {
   try {
     const token = req.cookies.access_token;
-
     if (!token) {
       return res.status(401).json({ message: 'Access token missing' });
     }
-
-    // Clear the token from the client-side by setting an expired cookie
     res.cookie("access_token", "", { expires: new Date(0), httpOnly: true });
-
     return res.status(200).json({ message: 'Successfully logged out' });
-
   } catch (err) {
     next(err);
   }
 };
-
-
 
 export const googleAuth = async (req, res, next) => {
   try {

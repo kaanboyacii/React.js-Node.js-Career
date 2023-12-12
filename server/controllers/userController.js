@@ -121,41 +121,31 @@ export const unsubscribe = async (req, res, next) => {
     }
 };
 
+
 export const applyJob = async (req, res, next) => {
-    const userId = req.user.id; // Veya kullanıcı kimliğini başka bir şekilde alabilirsiniz
-    const jobId = req.params.jobId; // Veya iş ilanı kimliğini başka bir şekilde alabilirsiniz
-
     try {
-        // Kullanıcıyı ve iş ilanını kontrol et
+        const userId = req.user.id;
+        const jobId = req.params.jobId;
         const user = await User.findById(userId);
+        if (!user) {
+            return next(createError(404, "User not found!"));
+        }
         const job = await Job.findById(jobId);
-
-        if (!user || !job) {
-            const customError = createError(404, 'Kullanıcı veya iş ilanı bulunamadı.');
-            return res.status(customError.status).json({ error: customError.message });
+        if (!job) {
+            return next(createError(404, "Job not found!"));
         }
-
-        // Kullanıcının başvurduğu iş ilanlarını kontrol et
-        if (user.applications.includes(jobId)) {
-            const customError = createError(400, 'Bu iş ilanına zaten başvurulmuş.');
-            return res.status(customError.status).json({ error: customError.message });
+        // Kullanıcının daha önce bu işe başvurup başvurmadığını kontrol eder
+        const isApplied = user.applications.some((application) => application.equals(jobId));
+        if (isApplied) {
+            return res.status(400).json({ success: false, message: "You have already applied for this job." });
         }
-
-        // Kullanıcının başvurduğu iş ilanlarını güncelle
+        // Kullanıcının başvurularına iş ilanını eklenir
         user.applications.push(jobId);
         await user.save();
-
-        // İş ilanına başvuran kullanıcıları kontrol et
-        if (!job.applicants.find(applicant => applicant.user.toString() === userId)) {
-            // İş ilanına daha önce başvurulmamışsa, kullanıcıyı ekleyin
-            job.applicants.push({
-                user: userId,
-                status: 'pending',
-            });
-            await job.save();
-        }
-
-        res.status(200).json({ message: 'İş ilanına başvuru başarılı.' });
+        // İş ilanına başvurulara kullanıcıyı eklenir
+        job.applicants.push({ user: userId, status: "pending" });
+        await job.save();
+        res.status(200).json({ success: true, message: "Job application successful!" });
     } catch (err) {
         next(err);
     }

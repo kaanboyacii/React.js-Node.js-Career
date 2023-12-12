@@ -1,10 +1,19 @@
 import { createError } from "../error/error.js";
 import Job from "../models/JobModel.js";
+import Company from "../models/CompanyModel.js";
 
 export const createJob = async (req, res, next) => {
     try {
         const jobData = req.body;
         const newJob = await Job.create(jobData);
+
+        const companyId = req.user.id;
+        const company = await Company.findById(companyId);
+        if (!company) {
+            return res.status(404).json({ success: false, message: "Company not found!" });
+        }
+        company.jobs.push(newJob._id);
+        await company.save();
         res.status(201).json(newJob);
     } catch (err) {
         next(err);

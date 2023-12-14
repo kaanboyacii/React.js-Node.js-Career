@@ -48,6 +48,10 @@ const CompanySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Job',
     }],
+    events: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Event',
+    }],
 },
     { timestamps: true }
 );

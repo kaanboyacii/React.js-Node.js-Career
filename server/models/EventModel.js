@@ -6,10 +6,10 @@ const eventSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    organizer: {
-        type: String,
+    company: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Company',
         required: true,
-        trim: true,
     },
     description: {
         type: String,

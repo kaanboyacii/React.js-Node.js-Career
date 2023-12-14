@@ -1,12 +1,19 @@
 import { createError } from "../error/error.js";
 import Event from "../models/EventModel.js";
+import Company from "../models/CompanyModel.js";
 
 export const createEvent = async (req, res, next) => {
     try {
-        const organizerId = req.user.id;
         const eventData = req.body;
-        eventData.organizer = organizerId;
         const newEvent = await Event.create(eventData);
+        
+        const companyId = req.user.id;
+        const company = await Company.findById(companyId);
+        if (!company) {
+            return res.status(404).json({ success: false, message: "Company not found!" });
+        }
+        company.events.push(newEvent._id);
+        await company.save();
         res.status(201).json(newEvent);
     } catch (err) {
         next(err);

@@ -1,6 +1,7 @@
 import { createError } from "../error/error.js";
 import User from "../models/UserModel.js"
 import Job from "../models/JobModel.js"
+import Event from "../models/EventModel.js";
 import bcrypt from "bcrypt";
 
 export const update = async (req, res, next) => {
@@ -135,17 +136,50 @@ export const applyJob = async (req, res, next) => {
             return next(createError(404, "Job not found!"));
         }
         // Kullanıcının daha önce bu işe başvurup başvurmadığını kontrol eder
-        const isApplied = user.applications.some((application) => application.equals(jobId));
+        const isApplied = user.jobApplications.some((application) => application.equals(jobId));
         if (isApplied) {
             return res.status(400).json({ success: false, message: "You have already applied for this job." });
         }
         // Kullanıcının başvurularına iş ilanını eklenir
-        user.applications.push(jobId);
+        user.jobApplications.push(jobId);
         await user.save();
         // İş ilanına başvurulara kullanıcıyı eklenir
         job.applicants.push({ user: userId, status: "pending" });
         await job.save();
         res.status(200).json({ success: true, message: "Job application successful!" });
+    } catch (err) {
+        next(err);
+    }
+};
+
+
+export const applyEvent = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const eventId = req.params.eventId;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return next(createError(404, "User not found!"));
+        }
+
+        const event = await Event.findById(eventId);
+        if (!event) {
+            return next(createError(404, "Event not found!"));
+        }
+
+        const isApplied = user.eventApplications.some((application) => application.equals(eventId));
+        if (isApplied) {
+            return res.status(400).json({ success: false, message: "You have already applied for this event." });
+        }
+
+        user.eventApplications.push(eventId);
+        await user.save();
+
+        event.applicants.push({ user: userId, status: "pending" });
+        await event.save();
+
+        res.status(200).json({ success: true, message: "Event application successful!" });
     } catch (err) {
         next(err);
     }

@@ -3,8 +3,15 @@ import React from "react";
 import Logo from "../../img/logo-back.png";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { TextField, Checkbox, FormControlLabel } from "@mui/material";
 
 const Login = () => {
+  const [checked, setChecked] = React.useState(true);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 1 } },
@@ -19,30 +26,43 @@ const Login = () => {
     >
       <div className="form-container">
         <form>
-          <a href="/">
-            <img src={Logo} alt="Logo" />
-          </a>
-          <h1>
-            ineedcareer'e <br /> Giriş Yap
-          </h1>
+          <div className="logo">
+            <Link to="/">
+              <img src={Logo} alt="Logo" />
+            </Link>
+          </div>
+          <h1>Giriş Yap</h1>
           <hr />
           <div className="form-group">
-            <input type="email" name="email" placeholder="E-posta" required />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              name="password"
-              placeholder="Şifre"
+            <TextField
+              type="email"
+              name="email"
+              label="E-posta"
+              variant="outlined"
+              fullWidth
               required
             />
           </div>
           <div className="form-group">
-            <div className="remember-me">
-              <label htmlFor="rememberMe">Beni Hatırla</label>
-              <input type="checkbox" id="rememberMe" name="rememberMe" />
-            </div>
-            <a href="/sifremi-unuttum">Şifremi Unuttum</a>
+            <TextField
+              type="password"
+              name="password"
+              label="Şifre"
+              variant="outlined"
+              fullWidth
+              required
+            />
+          </div>
+          <div className="form-group">
+            <FormControlLabel
+              value="end"
+              control={<Checkbox />}
+              label="Beni Hatırla"
+              labelPlacement="end"
+            />
+            <Link to="/sifremi-unuttum" className="forgot-password-link">
+              Şifremi Unuttum
+            </Link>
           </div>
           <button className="login-button">Giriş Yap</button>
           <div className="signup-link">

@@ -34,34 +34,23 @@
         display: flex;
         margin: 10px 0;
 
-        .remember-me {
-          display: flex;
-          align-items: center;
-
-          label {
-            font-size: 0.8rem;
-          }
-        }
-
-        a {
+        .forgot-password-link {
           font-size: 0.9rem;
-          margin: 5px;
-          color: $secondary-color;
+          margin-left: auto;
+          color: #000;
+          margin-top: 10px;
+          text-decoration: none;
           transition: color 0.3s ease;
 
           &:hover {
             color: $accent-color;
           }
         }
-
-        input {
-          width: 100%;
-          padding: 10px;
-          margin: 5px 0;
-          border: 1px solid #ccc;
-          border-radius: 10px;
-          font-size: 16px;
-        }
+      }
+    }
+    .logo {
+      img {
+        max-width: 300px;
       }
     }
   }

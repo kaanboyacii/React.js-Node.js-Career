@@ -4,7 +4,7 @@ import Job from "../models/JobModel.js"
 import Event from "../models/EventModel.js";
 import bcrypt from "bcrypt";
 
-export const update = async (req, res, next) => {
+export const updateUser = async (req, res, next) => {
     if (req.params.id === req.user.id) {
         try {
             if (req.body.password) {

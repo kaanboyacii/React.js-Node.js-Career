@@ -1,6 +1,6 @@
 import express from "express";
 import {
-    update,
+    updateUser,
     deleteUser,
     getUser,
     subscribe,
@@ -14,7 +14,7 @@ import { verifyToken } from "../utility/verifyToken.js";
 const router = express.Router();
 
 //update user
-router.put("/:id", verifyToken, update);
+router.put("/:id", verifyToken, updateUser);
 
 //update user's image
 router.put("/updateImg/:id", verifyToken, updateImg);

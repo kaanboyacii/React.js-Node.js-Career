@@ -1,11 +1,11 @@
-import "./signup.scss";
+import "./login.scss";
 import React from "react";
-import Logo from "../../img/logo-back.png";
+import Logo from "../../../img/logo-back.png";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { TextField, Checkbox, FormControlLabel } from "@mui/material";
 
-const Signup = () => {
+const Login = () => {
   const [checked, setChecked] = React.useState(true);
 
   const handleChange = (event) => {
@@ -16,9 +16,10 @@ const Signup = () => {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 1 } },
   };
+
   return (
     <motion.div
-      className="signup"
+      className="login"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -30,7 +31,7 @@ const Signup = () => {
               <img src={Logo} alt="Logo" />
             </Link>
           </div>
-          <h1>Üye ol</h1>
+          <h1>Giriş Yap</h1>
           <hr />
           <div className="form-group">
             <TextField
@@ -56,25 +57,20 @@ const Signup = () => {
             <FormControlLabel
               value="end"
               control={<Checkbox />}
-              label="Hizmet Sözleşmesini onaylıyorum. "
+              label="Beni Hatırla"
               labelPlacement="end"
-              required
             />
-            <FormControlLabel
-              value="end"
-              control={<Checkbox />}
-              label="İletişim bilgilerime e-ileti gönderilmesine izin veriyorum. "
-              labelPlacement="end"
-              required
-            />
+            <Link to="/sifremi-unuttum" className="forgot-password-link">
+              Şifremi Unuttum
+            </Link>
           </div>
-          <button className="signup-button">Üye Ol</button>
+          <button className="login-button">Giriş Yap</button>
           <div className="signup-link">
-            <span>Zaten bir hesabınız var mı ?</span>
-            <a href="/login">Giriş Yap</a>
+            <span>Hesabınız yok mu ?</span>
+            <a href="/signup">Üye Ol</a>
             <br />
-            <Link to="/company-signup">
-              <button className="company-signup-button">Şirket Olarak Katıl</button>
+            <Link to="/company-login">
+              <button className="company-login-button">Şirket Giriş</button>
             </Link>
           </div>
         </form>
@@ -82,5 +78,4 @@ const Signup = () => {
     </motion.div>
   );
 };
-
-export default Signup;
+export default Login;

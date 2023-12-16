@@ -1,10 +1,10 @@
-@import "../../style/color.scss";
-.login {
+@import "../../../style/color.scss";
+.signup {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url("../../img/people.jpg");
+  background-image: url("../../../img/people.jpg");
   background-size: cover;
   background-position: center;
 
@@ -32,20 +32,8 @@
 
       .form-group {
         display: flex;
+        flex-direction: column;
         margin: 10px 0;
-
-        .forgot-password-link {
-          font-size: 0.9rem;
-          margin-left: auto;
-          color: #000;
-          margin-top: 10px;
-          text-decoration: none;
-          transition: color 0.3s ease;
-
-          &:hover {
-            color: $accent-color;
-          }
-        }
       }
     }
     .logo {
@@ -55,7 +43,7 @@
     }
   }
 
-  .login-button {
+  .signup-button {
     width: 100%;
     padding: 0.7rem;
     background-color: $secondary-color;
@@ -70,7 +58,7 @@
     }
   }
 
-  .company-login-button {
+  .company-signup-button {
     width: 50%;
     padding: 0.3rem;
     margin: 10px;

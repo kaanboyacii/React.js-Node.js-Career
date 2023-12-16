@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import connectDB from "./db/connect.js";
 import UserRoutes from "./routers/userRoutes.js";
+import CompanyRoutes from "./routers/companyRoutes.js";
 import AuthRoutes from "./routers/authRoutes.js";
 import JobRoutes  from "./routers/jobRoutes.js";
 import EventRoutes  from "./routers/eventRoutes.js";
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 app.use("/api/auth", AuthRoutes);
 app.use("/api/users", UserRoutes);
+app.use("/api/company", CompanyRoutes);
 app.use("/api/jobs", JobRoutes);
 app.use("/api/events", EventRoutes);
 

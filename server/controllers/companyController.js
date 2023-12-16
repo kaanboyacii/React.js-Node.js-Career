@@ -3,7 +3,8 @@ import Company from "../models/CompanyModel.js"
 import bcrypt from "bcrypt";
 
 export const updateCompany = async (req, res, next) => {
-    if (req.params.id === req.company.id) {
+
+    if (req.params.id === req.user.id) {
         try {
             if (req.body.password) {
                 const salt = bcrypt.genSaltSync(10);
@@ -57,7 +58,7 @@ export const updateImg = async (req, res, next) => {
 };
 
 export const deleteCompany = async (req, res, next) => {
-    if (req.params.id === req.company.id) {
+    if (req.params.id === req.user.id) {
         try {
             const deletedCompany = await Company.findByIdAndDelete(req.params.id);
 

@@ -4,6 +4,8 @@ import { DarkModeContext } from "./context/darkModeContext";
 import "./style/dark.scss";
 import Home from "./pages/home/Home";
 import Login from "./pages/userAuth/login/Login";
+import CompanyLogin from "./pages/companyAuth/login/Login";
+import CompanySignup from "./pages/companyAuth/signup/Signup";
 import Signup from "./pages/userAuth/signup/Signup";
 import Joblist from "./pages/joblist/Joblist";
 import Job from "./pages/job/Job";
@@ -26,6 +28,8 @@ function App() {
             <Route path="panel" element={<Panel />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
+            <Route path="company-login" element={<CompanyLogin />} />
+            <Route path="company-signup" element={<CompanySignup />} />
             <Route path="job-list" element={<Joblist />} />
             <Route path="job" element={<Job />} />
             <Route path="aboutus" element={<Aboutus />} />

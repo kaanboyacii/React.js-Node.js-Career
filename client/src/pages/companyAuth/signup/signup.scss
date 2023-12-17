@@ -1,0 +1,100 @@
+@import "../../../style/color.scss";
+.company-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../../../img/company.jpg");
+  background-size: cover;
+  background-position: center;
+
+  .form-container {
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    padding: 30px;
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.5);
+
+    hr {
+      margin-top: 10px;
+      color: $primary-color;
+    }
+
+    form {
+      width: 100%;
+
+      h1 {
+        font-size: 2.5rem;
+        color: $primary-color;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+      }
+    }
+    .logo {
+      img {
+        max-width: 300px;
+      }
+    }
+  }
+
+  .signup-button {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: $secondary-color;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: darken($secondary-color, 20%);
+    }
+  }
+
+  .company-signup-button {
+    width: 50%;
+    padding: 0.3rem;
+    margin: 10px;
+    background-color: $accent-color;
+    color: #000000;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken($accent-color, 20%);
+    }
+  }
+
+  .signup-link {
+    margin-top: 10px;
+
+    a {
+      font-size: 0.9rem;
+      margin: 5px;
+      color: $secondary-color;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $accent-color;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .form-container {
+      .form-group {
+        margin: 10px;
+      }
+    }
+  }
+}

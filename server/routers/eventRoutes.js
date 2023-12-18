@@ -13,18 +13,17 @@ const router = express.Router();
 //create event
 router.post("/create", verifyToken, createEvent);
 
-//get all events
-router.get("/getAllEvents", verifyToken, getEvents);
-
-//get event by id
-router.get("/:id", verifyToken, getEventById);
-
 //update event
 router.put("/:id", verifyToken, updateEvent);
 
 //delete event
 router.delete("/:id", verifyToken, deleteEvent);
 
+//get all events
+router.get("/getAllEvents", getEvents);
+
+//get event by id
+router.get("/:id", getEventById);
 
 
 export default router;

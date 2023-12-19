@@ -19,37 +19,38 @@
       flex: 1;
       align-items: center;
       justify-content: space-between;
-
       .contact-form {
         flex: 1;
-        max-width: 500px;
+        max-width: 500px; // You can adjust this value based on your design
         margin-right: 2rem;
-
+    
         form {
           display: flex;
           flex-direction: column;
-
+    
           label {
             margin-bottom: 0.5rem;
             font-weight: bold;
             color: white;
           }
-
+    
           input,
           textarea {
+            width: 100%; 
             padding: 0.5rem;
-            margin-bottom: rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
             border: none;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, 0.1);
             color: white;
-
+    
             &:focus {
               outline: none;
               background-color: rgba(255, 255, 255, 0.2);
             }
           }
-
+    
           button {
             font-size: large;
             font-weight: bold;

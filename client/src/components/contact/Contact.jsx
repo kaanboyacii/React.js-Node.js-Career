@@ -5,7 +5,6 @@ import EmailIcon from "@mui/icons-material/Email";
 import BusinessIcon from "@mui/icons-material/Business";
 import contactImage from "../../img/contact.png";
 import { motion } from "framer-motion";
-import References from "../references/References";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -91,7 +90,6 @@ const Contact = () => {
               <br />
               <label>
                 Mesaj:
-                <br style={{ marginBottom: "5px" }} />
                 <textarea
                   name="message"
                   value={formData.message}
@@ -104,7 +102,7 @@ const Contact = () => {
             </form>
           </div>
         </motion.div>
-      </div>{" "}
+      </div>
     </div>
   );
 };

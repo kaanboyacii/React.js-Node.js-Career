@@ -1,6 +1,6 @@
 import "./login.scss";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../../img/logo-back.png";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,6 +17,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [checked, setChecked] = React.useState(true);
   const [errorMessage1, setErrorMessage1] = useState("");
 
   const handleLogin = async (e) => {
@@ -25,14 +26,31 @@ const Login = () => {
     try {
       const res = await axios.post("/auth/login", { email, password });
       dispatch(loginSuccess(res.data));
+  
+      if (checked) {
+        // If "Beni Hatırla" is checked, store user credentials securely
+        localStorage.setItem("rememberMe", JSON.stringify({ email, password }));
+      } else {
+        // If not checked, clear the stored credentials
+        localStorage.removeItem("rememberMe");
+      }
+  
       navigate("/");
     } catch (err) {
       dispatch(loginFailure());
       setErrorMessage1("Invalid user information");
     }
   };
+  useEffect(() => {
+    const rememberMeData = localStorage.getItem("rememberMe");
+    if (rememberMeData) {
+      const { email, password } = JSON.parse(rememberMeData);
+      setEmail(email);
+      setPassword(password);
+    }
+  }, []);
+  
 
-  const [checked, setChecked] = React.useState(true);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -85,7 +103,7 @@ const Login = () => {
           <div className="form-group">
             <FormControlLabel
               value="end"
-              control={<Checkbox />}
+              control={<Checkbox checked={checked} onChange={handleChange} />}
               label="Beni Hatırla"
               labelPlacement="end"
             />

@@ -1,11 +1,37 @@
 import "./login.scss";
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import Logo from "../../../img/logo-back.png";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TextField, Checkbox, FormControlLabel } from "@mui/material";
+import {
+  loginFailure,
+  loginStart,
+  loginSuccess,
+} from "../../../redux/userSlice.js";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [errorMessage1, setErrorMessage1] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    dispatch(loginStart());
+    try {
+      const res = await axios.post("/auth/login", { email, password });
+      dispatch(loginSuccess(res.data));
+      navigate("/");
+    } catch (err) {
+      dispatch(loginFailure());
+      setErrorMessage1("Invalid user information");
+    }
+  };
+
   const [checked, setChecked] = React.useState(true);
 
   const handleChange = (event) => {
@@ -41,6 +67,7 @@ const Login = () => {
               variant="outlined"
               fullWidth
               required
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-group">
@@ -51,8 +78,10 @@ const Login = () => {
               variant="outlined"
               fullWidth
               required
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          {errorMessage1 && <div>{errorMessage1}</div>}
           <div className="form-group">
             <FormControlLabel
               value="end"
@@ -64,7 +93,9 @@ const Login = () => {
               Şifremi Unuttum
             </Link>
           </div>
-          <button className="login-button">Giriş Yap</button>
+          <button onClick={handleLogin} className="login-button">
+            Giriş Yap
+          </button>
           <div className="signup-link">
             <span>Hesabınız yok mu ?</span>
             <a href="/signup">Üye Ol</a>

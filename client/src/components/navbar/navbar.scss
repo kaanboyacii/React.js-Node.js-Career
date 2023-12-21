@@ -76,11 +76,23 @@
         }
       }
     }
-
-
   }
 
   .user-actions {
+
+    .MuiAvatar-root {
+      cursor: pointer;
+      box-shadow: 0 2px 5px $primary-color;
+      transition: box-shadow 0.3s ease; 
+
+      &:hover {
+        box-shadow: 0 4px 10px $accent-color;
+      }
+    }
+
+    .user-actions:hover .avatar-menu {
+      display: block;
+    } 
     a {
       font-size: 1rem;
       display: inline-block;

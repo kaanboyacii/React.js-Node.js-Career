@@ -34,16 +34,9 @@ export const signin = async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
     const { password, ...others } = user._doc;
 
-    // Token'i httpOnly cookie olarak gönder
     res.cookie("access_token", token, {
-      httpOnly: true,
-      // secure: true, // Eğer HTTPS kullanıyorsanız, bu satırı ekle
-    }).status(200).json({
-      success: true,
-      message: "User login successful!",
-      token,
-      user: others
-    });
+      httpOnly: true
+    }).status(200).json(others)
 
   } catch (err) {
     next(err);

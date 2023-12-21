@@ -9,7 +9,7 @@
   padding: 16px;
   border-radius: 20px;
   transition: transform 0.3s;
-  max-height: 100vh;
+  max-height: 100%;
   position: relative;
 
   hr {
@@ -34,6 +34,9 @@
   .MuiTabs-root {
     border-bottom: 1px solid #e0e0e0;
   }
+  .MuiFormControl-root {
+    margin: 16px 16px 16px 0; // Add margin bottom to all MUI FormControl elements
+  }
 
   .save-button,
   .delete-button {
@@ -49,7 +52,6 @@
 
     &:hover {
       background: $accent-color;
-      color: $secondary-color;
     }
   }
 

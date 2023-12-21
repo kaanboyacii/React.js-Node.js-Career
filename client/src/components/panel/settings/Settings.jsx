@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
+import TextField from "@mui/material/TextField";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -84,21 +85,27 @@ const Settings = () => {
         <CustomTabPanel value={value} index={0}>
           <div>
             <h2>Şifre Değiştir</h2>
-            <input
+            <TextField
               type="password"
-              placeholder="Eski Şifre"
+              label="Eski Şifre"
+              variant="outlined"
+              fullWidth
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
             />
-            <input
+            <TextField
               type="password"
-              placeholder="Yeni Şifre"
+              label="Yeni Şifre"
+              variant="outlined"
+              fullWidth
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
-            <input
+            <TextField
               type="password"
-              placeholder="Yeni Şifre Onayı"
+              label="Yeni Şifre Onayı"
+              variant="outlined"
+              fullWidth
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
@@ -108,7 +115,12 @@ const Settings = () => {
           </div>
           <div>
             <h2>E-posta Değiştir</h2>
-            <input type="email" placeholder="Mevcut E-posta" />
+            <TextField
+              type="email"
+              label="Mevcut E-posta"
+              variant="outlined"
+              fullWidth
+            />
             <button className="save-button">Gönder</button>
           </div>
           <div className="div">

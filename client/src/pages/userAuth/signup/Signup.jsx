@@ -13,17 +13,14 @@ import {
 import { useDispatch } from "react-redux";
 
 const Signup = () => {
-  const [checked, setChecked] = React.useState(true);
+  const [termsChecked, setTermsChecked] = useState(false);
+  const [newsletterChecked, setNewsletterChecked] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [errorMessage1, setErrorMessage1] = useState("");
-
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,6 +29,12 @@ const Signup = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+  
+    if (!termsChecked || !newsletterChecked) {
+      setErrorMessage1("Lütfen hizmet sözleşmesini ve iletişim iznini onaylayın.");
+      return;
+    }
+  
     dispatch(register());
     try {
       const res = await axios.post("/auth/signup", { name, email, password });
@@ -39,9 +42,11 @@ const Signup = () => {
       navigate("/");
     } catch (err) {
       dispatch(registerFailure());
-      setErrorMessage1("Invalid user registration");
+      setErrorMessage1("Geçersiz kullanıcı kaydı");
     }
   };
+  
+
 
   return (
     <motion.div
@@ -96,20 +101,32 @@ const Signup = () => {
           <div className="form-group">
             <FormControlLabel
               value="end"
-              control={<Checkbox />}
-              label="Hizmet Sözleşmesini onaylıyorum. "
+              control={
+                <Checkbox
+                  checked={termsChecked}
+                  onChange={() => setTermsChecked(!termsChecked)}
+                />
+              }
+              label="Hizmet Sözleşmesini onaylıyorum."
               labelPlacement="end"
               required
             />
             <FormControlLabel
               value="end"
-              control={<Checkbox />}
-              label="İletişim bilgilerime e-ileti gönderilmesine izin veriyorum. "
+              control={
+                <Checkbox
+                  checked={newsletterChecked}
+                  onChange={() => setNewsletterChecked(!newsletterChecked)}
+                />
+              }
+              label="İletişim bilgilerime e-ileti gönderilmesine izin veriyorum."
               labelPlacement="end"
               required
             />
           </div>
-          <button onClick={handleRegister} className="signup-button">Üye Ol</button>
+          <button onClick={handleRegister} className="signup-button">
+            Üye Ol
+          </button>
           <div className="signup-link">
             <span>Zaten bir hesabınız var mı ?</span>
             <a href="/login">Giriş Yap</a>

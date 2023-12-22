@@ -9,130 +9,59 @@ import AvatarImage from "../../../img/avatar.jpg";
 import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-
-const user = {
-  name: "KAAN BOYACI",
-  title: "Software Developer",
-  image: AvatarImage,
-  email: "kaanboyacibn@gmail.com",
-  phone: "+90 534 523 2689",
-  dateOfBirth: "12.11.2001",
-  workStatus: "Öğrenci",
-  careerLevel: "0-1 yıl deneyimli",
-  workWant: "yazılım, web, ön yüz geliştirme",
-  gender: "Erkek",
-  country: "Turkey / İzmir",
-  drivingLicense: "B2-A2",
-  educations: [
-    {
-      school: "Karabük Üniversitesi",
-      degree: "Bilgisayar Mühendisliği",
-      graduationYear: "2024",
-    },
-    {
-      school: "Karabük Üniversitesi",
-      degree: "Bilgisayar Mühendisliği Yüksek Lisans",
-      graduationYear: "2026",
-    },
-  ],
-  experiences: [
-    {
-      title: "Jotform Yazılım A.Ş",
-      company: "Backend Developer",
-      time: "2 ay",
-    },
-    {
-      title: "Softtech A.Ş",
-      company: "Software Developer",
-      time: "1 ay",
-    },
-  ],
-  skills: [
-    {
-      skill: "Web Geliştirme",
-      level: "İleri Seviye",
-    },
-    {
-      skill: "API Geliştirme",
-      level: "Orta Seviye",
-    },
-  ],
-};
-const interest = [
-  { title: "JavaScript" },
-  { title: "React" },
-  { title: "Node.js" },
-  { title: "HTML" },
-  // Diğer ilgi alanlarını buraya ekleyebilirsin
-];
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { updateProfile } from "../../../redux/userSlice";
+import { useNavigate } from "react-router-dom";
+import { Input } from "@mui/material";
 
 const Profile = () => {
+  const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(false);
-  const [updatedUser, setUpdatedUser] = useState({ ...user });
-  const [isChangeAvatar, setIsChangeAvatar] = useState(false);
+  const [inputs, setInputs] = useState({});
   const [isAddingEducation, setIsAddingEducation] = useState(false);
-  const [education, setEducation] = useState({
-    school: "",
-    degree: "",
-    graduationYear: "",
-  });
-  const [isAddingExperience, setIsAddingExperience] = useState(false);
-  const [experience, setExperience] = useState({
-    title: "",
-    company: "",
-    time: "",
-  });
+  const [isChangeAvatar, setIsChangeAvatar] = useState(false);
 
-  const [isAddingSkill, setIsAddingSkill] = useState(false);
-  const [skill, setSkill] = useState({
-    skill: "",
-    level: "",
-  });
-
+  const handleChange = (name, value) => {
+    setInputs((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
   const handleAddEducation = () => {
     setIsAddingEducation(true);
   };
-
-  const handleSaveEducation = () => {
+  const handleCancelEducation = () => {
     setIsAddingEducation(false);
-    user.educations.push(education);
+    setInputs({});
   };
-
-  const handleAddExperience = () => {
-    setIsAddingExperience(true);
-  };
-
-  const handleSaveExperience = () => {
-    user.experiences.push(experience);
-    setIsAddingExperience(false);
-  };
-
-  const handleAddSkill = () => {
-    setIsAddingSkill(true);
-  };
-
-  const handleSaveSkill = () => {
-    user.skills.push(skill);
-    setIsAddingSkill(false);
-  };
-
-  const handleInputChange = (e, section) => {
-    const { name, value } = e.target;
-    if (section === "education") {
-      setEducation((prevEducation) => ({
-        ...prevEducation,
-        [name]: value,
-      }));
-    } else if (section === "experience") {
-      setExperience((prevExperience) => ({
-        ...prevExperience,
-        [name]: value,
-      }));
-    } else if (section === "skill") {
-      setSkill((prevSkill) => ({
-        ...prevSkill,
-        [name]: value,
-      }));
+  const handleSaveEducation = async (e) => {
+    e.preventDefault();
+    if (!inputs.institution || !inputs.degree || !inputs.startDate || !inputs.endDate) {
+      alert("Alanların doldurulması zorunludur !");
+      return;
+    }
+    
+    try {
+      const res = await axios.put(`/users/${currentUser._id}`, {
+        education: [...currentUser.education, inputs],
+      });
+      if (res.status === 200) {
+        setIsAddingEducation(false);
+        dispatch(
+          updateProfile({
+            ...currentUser,
+            education: [...currentUser.education, inputs],
+          })
+        );
+        navigate("/panel");
+        window.location.reload();
+      } else {
+        console.error("Failed to update user profile");
+      }
+    } catch (error) {
+      console.error("Error updating user profile:", error);
     }
   };
 
@@ -140,10 +69,21 @@ const Profile = () => {
     setIsEditMode(true);
   };
 
-  const handleSaveClick = () => {
-    setIsEditMode(false);
-    // Güncellenmiş kullanıcı bilgilerini işle, API'ye gönder
-    // Örneğin, setUpdatedUser ile state'i güncelleyebilirsin.
+  const handleSaveClick = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.put(`/users/${currentUser._id}`, { ...inputs });
+      if (res.status === 200) {
+        setIsEditMode(false);
+        dispatch(updateProfile({ ...currentUser, ...inputs }));
+        navigate("/panel");
+        window.location.reload();
+      } else {
+        console.error("Failed to update user profile");
+      }
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+    }
   };
 
   const handleAvatarClick = () => {
@@ -156,15 +96,11 @@ const Profile = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const newImage = e.target.result;
-        setUpdatedUser({ ...updatedUser, image: newImage });
+        // setUpdatedUser({ ...updatedUser, image: newImage });
         setIsChangeAvatar(false);
       };
       reader.readAsDataURL(file);
     }
-  };
-
-  const handleChange = (field, value) => {
-    setUpdatedUser({ ...updatedUser, [field]: value });
   };
 
   return (
@@ -175,30 +111,36 @@ const Profile = () => {
           <Stack direction="row" spacing={2} alignItems="center">
             <label htmlFor="avatar-input">
               <Avatar
-                alt={updatedUser.name}
-                src={updatedUser.image}
+                alt={currentUser.name}
+                src={currentUser.img}
                 sx={{ width: 200, height: 200 }}
                 onClick={handleAvatarClick}
               />
             </label>
             <div className="info">
               {isEditMode ? (
-                <input
+                <Input
                   type="text"
-                  value={updatedUser.name}
+                  value={
+                    inputs.name !== undefined ? inputs.name : currentUser.name
+                  }
                   onChange={(e) => handleChange("name", e.target.value)}
                 />
               ) : (
-                <h3>{updatedUser.name}</h3>
+                <h3>{currentUser.name}</h3>
               )}
               {isEditMode ? (
-                <input
+                <Input
                   type="text"
-                  value={updatedUser.title}
+                  value={
+                    inputs.title !== undefined
+                      ? inputs.title
+                      : currentUser.title
+                  }
                   onChange={(e) => handleChange("title", e.target.value)}
                 />
               ) : (
-                <span className="title">{updatedUser.title}</span>
+                <span className="title">{currentUser.title}</span>
               )}
             </div>
           </Stack>
@@ -227,109 +169,146 @@ const Profile = () => {
           <div>
             <h5>E-posta Adresi</h5>
             {isEditMode ? (
-              <input
+              <Input
                 type="text"
-                value={updatedUser.email}
+                name="email"
+                value={
+                  inputs.email !== undefined ? inputs.email : currentUser.email
+                }
                 onChange={(e) => handleChange("email", e.target.value)}
               />
             ) : (
-              <span>{updatedUser.email}</span>
+              <span>{currentUser.email}</span>
             )}
           </div>
           <div>
             <h5>Telefon</h5>
             {isEditMode ? (
-              <input
+              <Input
                 type="text"
-                value={updatedUser.phone}
+                name="phone"
+                value={
+                  inputs.phone !== undefined ? inputs.phone : currentUser.phone
+                }
                 onChange={(e) => handleChange("phone", e.target.value)}
               />
             ) : (
-              <span>{updatedUser.phone}</span>
+              <span>{currentUser.phone}</span>
             )}
           </div>
           <div>
             <h5>Doğum Tarihi</h5>
             {isEditMode ? (
-              <input
+              <Input
                 type="text"
-                value={updatedUser.dateOfBirth}
-                onChange={(e) => handleChange("dateOfBirth", e.target.value)}
+                name="birth"
+                value={
+                  inputs.birth !== undefined ? inputs.birth : currentUser.birth
+                }
+                onChange={(e) => handleChange("birth", e.target.value)}
               />
             ) : (
-              <span>{updatedUser.dateOfBirth}</span>
+              <span>{currentUser.birth}</span>
             )}
           </div>
           <div>
             <h5>Cinsiyet</h5>
             {isEditMode ? (
-              <input
+              <Input
                 type="text"
-                value={updatedUser.gender}
+                name="gender"
+                value={
+                  inputs.gender !== undefined
+                    ? inputs.gender
+                    : currentUser.gender
+                }
                 onChange={(e) => handleChange("gender", e.target.value)}
               />
             ) : (
-              <span>{updatedUser.gender}</span>
+              <span>{currentUser.gender}</span>
             )}
           </div>
           <div>
             <h5>Ülke / Şehir</h5>
             {isEditMode ? (
-              <input
+              <Input
                 type="text"
-                value={updatedUser.country}
-                onChange={(e) => handleChange("country", e.target.value)}
+                name="city"
+                value={
+                  inputs.city !== undefined ? inputs.city : currentUser.city
+                }
+                onChange={(e) => handleChange("city", e.target.value)}
               />
             ) : (
-              <span>{updatedUser.country}</span>
+              <span>{currentUser.city}</span>
             )}
           </div>
           <div>
             <h5>Sürücü Belgesi</h5>
             {isEditMode ? (
-              <input
+              <Input
                 type="text"
-                value={updatedUser.drivingLicense}
+                name="drivingLicense"
+                value={
+                  inputs.drivingLicense !== undefined
+                    ? inputs.drivingLicense
+                    : currentUser.drivingLicense
+                }
                 onChange={(e) => handleChange("drivingLicense", e.target.value)}
               />
             ) : (
-              <span>{updatedUser.drivingLicense}</span>
+              <span>{currentUser.drivingLicense}</span>
             )}
           </div>
           <div>
             <h5>Çalışma Durumu</h5>
             {isEditMode ? (
-              <input
+              <Input
                 type="text"
-                value={updatedUser.workStatus}
-                onChange={(e) => handleChange("workStatus", e.target.value)}
+                name="workingStatus"
+                value={
+                  inputs.workingStatus !== undefined
+                    ? inputs.workingStatus
+                    : currentUser.workingStatus
+                }
+                onChange={(e) => handleChange("workingStatus", e.target.value)}
               />
             ) : (
-              <span>{updatedUser.workStatus}</span>
+              <span>{currentUser.workingStatus}</span>
             )}
           </div>
           <div>
             <h5>Çalışmak İstediği Alanlar</h5>
             {isEditMode ? (
-              <input
+              <Input
                 type="text"
-                value={updatedUser.workWant}
-                onChange={(e) => handleChange("workWant", e.target.value)}
+                name="workingWant"
+                value={
+                  inputs.workingWant !== undefined
+                    ? inputs.workingWant
+                    : currentUser.workingWant
+                }
+                onChange={(e) => handleChange("workingWant", e.target.value)}
               />
             ) : (
-              <span>{updatedUser.workWant}</span>
+              <span>{currentUser.workingWant}</span>
             )}
           </div>
           <div>
             <h5>Kariyer Seviyesi</h5>
             {isEditMode ? (
-              <input
+              <Input
                 type="text"
-                value={updatedUser.careerLevel}
+                name="careerLevel"
+                value={
+                  inputs.careerLevel !== undefined
+                    ? inputs.careerLevel
+                    : currentUser.careerLevel
+                }
                 onChange={(e) => handleChange("careerLevel", e.target.value)}
               />
             ) : (
-              <span>{updatedUser.careerLevel}</span>
+              <span>{currentUser.careerLevel}</span>
             )}
           </div>
         </div>
@@ -339,31 +318,70 @@ const Profile = () => {
         <div className="user-info">
           {isAddingEducation ? (
             <div className="education-form">
-              <input
+              <Input
                 type="text"
-                name="school"
+                name="institution"
                 placeholder="Okul Adı"
-                value={education.school}
-                onChange={handleInputChange}
+                value={
+                  inputs.institution !== undefined
+                    ? inputs.institution
+                    : currentUser.education.institution
+                }
+                onChange={(e) => handleChange("institution", e.target.value)}
               />
-              <input
+              <Input
                 type="text"
                 name="degree"
                 placeholder="Derece"
-                value={education.degree}
-                onChange={handleInputChange}
+                value={
+                  inputs.degree !== undefined
+                    ? inputs.degree
+                    : currentUser.education.degree
+                }
+                onChange={(e) => handleChange("degree", e.target.value)}
               />
-              <input
-                type="text"
-                name="graduationYear"
-                placeholder="Mezuniyet Yılı"
-                value={education.graduationYear}
-                onChange={handleInputChange}
+              <Input
+                type="date"
+                name="startDate"
+                placeholder="Başlama Tarihi"
+                value={
+                  inputs.startDate !== undefined
+                    ? inputs.startDate
+                    : currentUser.education.startDate
+                    ? new Date(currentUser.education.startDate)
+                        .toISOString()
+                        .split("T")[0]
+                    : ""
+                }
+                onChange={(e) => handleChange("startDate", e.target.value)}
               />
-              <button className="edit-button" onClick={handleSaveEducation}>
-                <SaveIcon />
-                Kaydet
-              </button>
+              <Input
+                type="date"
+                name="endDate"
+                placeholder="Bitirme Tarihi"
+                value={
+                  inputs.endDate !== undefined
+                    ? inputs.endDate
+                    : currentUser.education.endDate
+                    ? new Date(currentUser.education.endDate)
+                        .toISOString()
+                        .split("T")[0]
+                    : ""
+                }
+                onChange={(e) => handleChange("endDate", e.target.value)}
+              />
+              <div className="buttons">
+                <button className="edit-button" onClick={handleSaveEducation}>
+                  <SaveIcon />
+                  Kaydet
+                </button>
+                <button
+                  className="cancel-button"
+                  onClick={handleCancelEducation}
+                >
+                  Vazgeç
+                </button>
+              </div>
             </div>
           ) : (
             <button className="edit-button" onClick={handleAddEducation}>
@@ -375,17 +393,23 @@ const Profile = () => {
         <div className="list">
           <h3>Eğitimler</h3>
           <ul>
-            {user.educations.map((edu, index) => (
+            {currentUser.education.map((edu, index) => (
               <li key={index}>
-                <span className="school">{edu.school}:</span>
-                <span className="degree">{edu.degree},</span> Mezuniyet Yılı:
-                {edu.graduationYear}
+                <span className="title">{edu.institution}:</span>
+                <span>Derece: {edu.degree} </span>
+                <span>
+                  Başlama Tarihi: {new Date(edu.startDate).toLocaleDateString()}
+                </span>
+                <span>
+                  Bitirme Tarihi: {new Date(edu.endDate).toLocaleDateString()}
+                </span>
               </li>
             ))}
           </ul>
         </div>
       </div>
-      <div className="feature-card">
+
+      {/* <div className="feature-card">
         <h1>Deneyim</h1>
         <div className="user-info">
           {isAddingExperience ? (
@@ -394,30 +418,27 @@ const Profile = () => {
                 type="text"
                 name="title"
                 placeholder="Pozisyon (Ünvan)"
-                value={experience.title}
-                onChange={(e) => handleInputChange(e, "experience")}
+                value={currentUser.experience.title}
               />
               <input
                 type="text"
                 name="company"
                 placeholder="Şirket Adı"
-                value={experience.company}
-                onChange={(e) => handleInputChange(e, "experience")}
+                value={currentUser.experience.company}
               />
               <input
                 type="text"
                 name="time"
                 placeholder="Çalışma Süresi"
-                value={experience.time}
-                onChange={(e) => handleInputChange(e, "experience")}
+                value={currentUser.experience.description}
               />
-              <button className="edit-button" onClick={handleSaveExperience}>
+              <button className="edit-button">
                 <SaveIcon />
                 Kaydet
               </button>
             </div>
           ) : (
-            <button className="edit-button" onClick={handleAddExperience}>
+            <button className="edit-button" >
               <AddIcon />
               Ekle
             </button>
@@ -426,10 +447,10 @@ const Profile = () => {
         <div className="list">
           <h3>Deneyimler</h3>
           <ul>
-            {user.experiences.map((exp, index) => (
+            {currentUser.experience.map((exp, index) => (
               <li key={index}>
                 <span className="title">{exp.title}:</span> {exp.company},{" "}
-                {exp.time}
+                {exp.description}
               </li>
             ))}
           </ul>
@@ -444,23 +465,21 @@ const Profile = () => {
                 type="text"
                 name="skill"
                 placeholder="Yetenek Adı"
-                value={skill.skill}
-                onChange={(e) => handleInputChange(e, "skill")}
+                value={currentUser.skill.title}
               />
               <input
                 type="text"
                 name="level"
                 placeholder="Seviye"
-                value={skill.level}
-                onChange={(e) => handleInputChange(e, "skill")}
+                value={currentUser.skill.description}
               />
-              <button className="edit-button" onClick={handleSaveSkill}>
+              <button className="edit-button">
                 <SaveIcon />
                 Kaydet
               </button>
             </div>
           ) : (
-            <button className="edit-button" onClick={handleAddSkill}>
+            <button className="edit-button">
               <AddIcon />
               Ekle
             </button>
@@ -469,18 +488,18 @@ const Profile = () => {
         <div className="list">
           <h3>Yetenek</h3>
           <ul>
-            {user.skills.map((sk, index) => (
+            {currentUser.skills.map((sk, index) => (
               <li key={index}>
-                <span className="title">{sk.skill}:</span> {sk.level}
+                <span className="title">{sk.title}:</span> {sk.description}
               </li>
             ))}
           </ul>
         </div>
-      </div>
+      </div> * */}
       <div className="feature-card">
         <h1>İlgi Alanları</h1>
         <div className="user-info">
-          <Stack spacing={2} sx={{ width: 800 }}>
+          {/* <Stack spacing={2} sx={{ width: 800 }}>
             <Autocomplete
               multiple
               id="size-small-standard-multi"
@@ -497,7 +516,7 @@ const Profile = () => {
                 />
               )}
             />
-          </Stack>
+          </Stack> */}
         </div>
       </div>
     </div>

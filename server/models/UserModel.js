@@ -88,7 +88,6 @@ const UserSchema = new mongoose.Schema(
                 {
                     institution: String,
                     degree: String,
-                    fieldOfStudy: String,
                     startDate: Date,
                     endDate: Date,
                 },

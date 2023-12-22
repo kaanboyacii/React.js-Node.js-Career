@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { DarkModeContext } from "./context/darkModeContext";
 import "./style/dark.scss";
@@ -15,31 +15,50 @@ import Event from "./pages/event/Event";
 import Courses from "./pages/courses/Courses";
 import Panel from "./pages/panel/Panel";
 import ContactPage from "./pages/contactPage/ContactPage";
+import LoadingScreen from "./components/loading/LoadingScreen";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Sayfa tamamen yüklendikten sonra yükleme ekranını kaldır
+    window.onload = () => {
+      setIsLoading(false);
+    };
+
+    // Temizlik: Komponent unmount edildiğinde event listener'ı kaldır
+    return () => {
+      window.onload = null;
+    };
+  }, []);
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="panel" element={<Panel />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="company-login" element={<CompanyLogin />} />
-            <Route path="company-signup" element={<CompanySignup />} />
-            <Route path="job-list" element={<Joblist />} />
-            <Route path="job" element={<Job />} />
-            <Route path="aboutus" element={<Aboutus />} />
-            <Route path="event" element={<Event />} />
-            <Route path="events" element={<Events />} />
-            <Route path="courses" element={<Courses />} />
-            <Route path="contact" element={<ContactPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      {isLoading && (
+        <LoadingScreen/>
+      )}
+      {!isLoading && (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="panel" element={<Panel />} />
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
+              <Route path="company-login" element={<CompanyLogin />} />
+              <Route path="company-signup" element={<CompanySignup />} />
+              <Route path="job-list" element={<Joblist />} />
+              <Route path="job" element={<Job />} />
+              <Route path="aboutus" element={<Aboutus />} />
+              <Route path="event" element={<Event />} />
+              <Route path="events" element={<Events />} />
+              <Route path="courses" element={<Courses />} />
+              <Route path="contact" element={<ContactPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      )}
     </div>
   );
 }

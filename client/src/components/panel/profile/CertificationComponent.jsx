@@ -65,7 +65,7 @@ const CertificationComponent = () => {
 
   const handleSaveCertification = async (e) => {
     e.preventDefault();
-    if (!inputs.certificationName || !inputs.institution) {
+    if (!inputs.title || !inputs.institution || !inputs.date) {
       alert("Alanların doldurulması zorunludur !");
       return;
     }

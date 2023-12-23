@@ -15,7 +15,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
 const ProjectComponent = () => {
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -205,13 +204,13 @@ const ProjectComponent = () => {
                 <TableRow key={index}>
                   <TableCell>{project.title}</TableCell>
                   <TableCell>{project.description}</TableCell>
+                  <TableCell>{Array.isArray(project.skills) ? project.skills.join(", ") : ""}</TableCell>
                   <TableCell>
                     {new Date(project.startDate).toLocaleDateString()}
                   </TableCell>
                   <TableCell>
                     {new Date(project.endDate).toLocaleDateString()}
                   </TableCell>
-                  <TableCell>{project.skills.join(", ")}</TableCell>
                   <TableCell>
                     <Button onClick={() => handleDeleteProject(index)}>
                       KALDIR

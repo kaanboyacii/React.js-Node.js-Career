@@ -63,7 +63,12 @@ const EducationComponent = () => {
 
   const handleSaveEducation = async (e) => {
     e.preventDefault();
-    if (!inputs.institution || !inputs.degree) {
+    if (
+      !inputs.institution ||
+      !inputs.degree ||
+      !inputs.startDate ||
+      !inputs.endDate
+    ) {
       alert("Alanların doldurulması zorunludur !");
       return;
     }

@@ -63,7 +63,7 @@ const ExperienceComponent = () => {
 
   const handleSaveExperience = async (e) => {
     e.preventDefault();
-    if (!inputs.title || !inputs.company || !inputs.description) {
+    if (!inputs.title || !inputs.company || !inputs.description || !inputs.startDate || !inputs.endDate) {
       alert("Alanların doldurulması zorunludur !");
       return;
     }

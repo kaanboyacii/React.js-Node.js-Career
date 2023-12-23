@@ -61,7 +61,7 @@ const SkillComponent = () => {
 
   const handleSaveSkill = async (e) => {
     e.preventDefault();
-    if (!inputs.skillName || !inputs.skillLevel) {
+    if (!inputs.title || !inputs.description) {
       alert("Alanların doldurulması zorunludur !");
       return;
     }

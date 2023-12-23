@@ -37,6 +37,29 @@ export const updateUser = async (req, res, next) => {
     }
 };
 
+export const checkPassword = async (req, res, next) => {
+    try {
+        const userId = req.params.id; 
+
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+
+        const isPasswordCorrect = await bcrypt.compare(req.body.oldPassword, user.password);
+        if (isPasswordCorrect) {
+            return res.status(200).json({ success: true, message: "Password is correct" });
+        } else {
+            return res.status(403).json({ success: false, message: "Incorrect password" });
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+
+
 export const updateImg = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id);

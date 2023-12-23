@@ -7,7 +7,8 @@ import {
     unsubscribe,
     updateImg,
     applyJob,
-    applyEvent
+    applyEvent,
+    checkPassword
 } from "../controllers/userController.js";
 import { verifyToken } from "../utility/verifyToken.js";
 
@@ -15,6 +16,9 @@ const router = express.Router();
 
 //update user
 router.put("/:id", verifyToken, updateUser);
+
+//check password user
+router.post("/check-password/:id", verifyToken, checkPassword);
 
 //update user's image
 router.put("/updateImg/:id", verifyToken, updateImg);

@@ -4,16 +4,16 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
-import AddIcon from "@mui/icons-material/Add";
-import AvatarImage from "../../../img/avatar.jpg";
-import Chip from "@mui/material/Chip";
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { updateProfile } from "../../../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@mui/material";
+import EducationComponent from "./EducationComponent ";
+import ExperienceComponent from "./ExperienceComponent";
+import SkillComponent from "./SkillComponent";
+import ProjectComponent from "./ProjectComponent";
+import CertificationComponent from "./CertificationComponent";
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -21,7 +21,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(false);
   const [inputs, setInputs] = useState({});
-  const [isAddingEducation, setIsAddingEducation] = useState(false);
+  const [isAddingSkill, setIsAddingSkill] = useState(false);
   const [isChangeAvatar, setIsChangeAvatar] = useState(false);
 
   const handleChange = (name, value) => {
@@ -29,46 +29,11 @@ const Profile = () => {
       return { ...prev, [name]: value };
     });
   };
-  const handleAddEducation = () => {
-    setIsAddingEducation(true);
-  };
-  const handleCancelEducation = () => {
-    setIsAddingEducation(false);
-    setInputs({});
-  };
-  const handleSaveEducation = async (e) => {
-    e.preventDefault();
-    if (!inputs.institution || !inputs.degree || !inputs.startDate || !inputs.endDate) {
-      alert("Alanların doldurulması zorunludur !");
-      return;
-    }
-    
-    try {
-      const res = await axios.put(`/users/${currentUser._id}`, {
-        education: [...currentUser.education, inputs],
-      });
-      if (res.status === 200) {
-        setIsAddingEducation(false);
-        dispatch(
-          updateProfile({
-            ...currentUser,
-            education: [...currentUser.education, inputs],
-          })
-        );
-        navigate("/panel");
-        window.location.reload();
-      } else {
-        console.error("Failed to update user profile");
-      }
-    } catch (error) {
-      console.error("Error updating user profile:", error);
-    }
-  };
 
+  //UPDATE USER INFO
   const handleEditClick = () => {
     setIsEditMode(true);
   };
-
   const handleSaveClick = async (e) => {
     e.preventDefault();
     try {
@@ -85,7 +50,6 @@ const Profile = () => {
       console.error("Error updating user profile:", error);
     }
   };
-
   const handleAvatarClick = () => {
     setIsChangeAvatar(true);
   };
@@ -200,7 +164,7 @@ const Profile = () => {
             <h5>Doğum Tarihi</h5>
             {isEditMode ? (
               <Input
-                type="text"
+                type="date"
                 name="birth"
                 value={
                   inputs.birth !== undefined ? inputs.birth : currentUser.birth
@@ -208,9 +172,10 @@ const Profile = () => {
                 onChange={(e) => handleChange("birth", e.target.value)}
               />
             ) : (
-              <span>{currentUser.birth}</span>
+              <span>{new Date(currentUser.birth).toLocaleDateString()}</span>
             )}
           </div>
+
           <div>
             <h5>Cinsiyet</h5>
             {isEditMode ? (
@@ -313,212 +278,11 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className="feature-card">
-        <h1>Eğitim</h1>
-        <div className="user-info">
-          {isAddingEducation ? (
-            <div className="education-form">
-              <Input
-                type="text"
-                name="institution"
-                placeholder="Okul Adı"
-                value={
-                  inputs.institution !== undefined
-                    ? inputs.institution
-                    : currentUser.education.institution
-                }
-                onChange={(e) => handleChange("institution", e.target.value)}
-              />
-              <Input
-                type="text"
-                name="degree"
-                placeholder="Derece"
-                value={
-                  inputs.degree !== undefined
-                    ? inputs.degree
-                    : currentUser.education.degree
-                }
-                onChange={(e) => handleChange("degree", e.target.value)}
-              />
-              <Input
-                type="date"
-                name="startDate"
-                placeholder="Başlama Tarihi"
-                value={
-                  inputs.startDate !== undefined
-                    ? inputs.startDate
-                    : currentUser.education.startDate
-                    ? new Date(currentUser.education.startDate)
-                        .toISOString()
-                        .split("T")[0]
-                    : ""
-                }
-                onChange={(e) => handleChange("startDate", e.target.value)}
-              />
-              <Input
-                type="date"
-                name="endDate"
-                placeholder="Bitirme Tarihi"
-                value={
-                  inputs.endDate !== undefined
-                    ? inputs.endDate
-                    : currentUser.education.endDate
-                    ? new Date(currentUser.education.endDate)
-                        .toISOString()
-                        .split("T")[0]
-                    : ""
-                }
-                onChange={(e) => handleChange("endDate", e.target.value)}
-              />
-              <div className="buttons">
-                <button className="edit-button" onClick={handleSaveEducation}>
-                  <SaveIcon />
-                  Kaydet
-                </button>
-                <button
-                  className="cancel-button"
-                  onClick={handleCancelEducation}
-                >
-                  Vazgeç
-                </button>
-              </div>
-            </div>
-          ) : (
-            <button className="edit-button" onClick={handleAddEducation}>
-              <AddIcon />
-              Ekle
-            </button>
-          )}
-        </div>
-        <div className="list">
-          <h3>Eğitimler</h3>
-          <ul>
-            {currentUser.education.map((edu, index) => (
-              <li key={index}>
-                <span className="title">{edu.institution}:</span>
-                <span>Derece: {edu.degree} </span>
-                <span>
-                  Başlama Tarihi: {new Date(edu.startDate).toLocaleDateString()}
-                </span>
-                <span>
-                  Bitirme Tarihi: {new Date(edu.endDate).toLocaleDateString()}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      {/* <div className="feature-card">
-        <h1>Deneyim</h1>
-        <div className="user-info">
-          {isAddingExperience ? (
-            <div className="education-form">
-              <input
-                type="text"
-                name="title"
-                placeholder="Pozisyon (Ünvan)"
-                value={currentUser.experience.title}
-              />
-              <input
-                type="text"
-                name="company"
-                placeholder="Şirket Adı"
-                value={currentUser.experience.company}
-              />
-              <input
-                type="text"
-                name="time"
-                placeholder="Çalışma Süresi"
-                value={currentUser.experience.description}
-              />
-              <button className="edit-button">
-                <SaveIcon />
-                Kaydet
-              </button>
-            </div>
-          ) : (
-            <button className="edit-button" >
-              <AddIcon />
-              Ekle
-            </button>
-          )}
-        </div>
-        <div className="list">
-          <h3>Deneyimler</h3>
-          <ul>
-            {currentUser.experience.map((exp, index) => (
-              <li key={index}>
-                <span className="title">{exp.title}:</span> {exp.company},{" "}
-                {exp.description}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className="feature-card">
-        <h1>Yetenekler</h1>
-        <div className="user-info">
-          {isAddingSkill ? (
-            <div className="education-form">
-              <input
-                type="text"
-                name="skill"
-                placeholder="Yetenek Adı"
-                value={currentUser.skill.title}
-              />
-              <input
-                type="text"
-                name="level"
-                placeholder="Seviye"
-                value={currentUser.skill.description}
-              />
-              <button className="edit-button">
-                <SaveIcon />
-                Kaydet
-              </button>
-            </div>
-          ) : (
-            <button className="edit-button">
-              <AddIcon />
-              Ekle
-            </button>
-          )}
-        </div>
-        <div className="list">
-          <h3>Yetenek</h3>
-          <ul>
-            {currentUser.skills.map((sk, index) => (
-              <li key={index}>
-                <span className="title">{sk.title}:</span> {sk.description}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div> * */}
-      <div className="feature-card">
-        <h1>İlgi Alanları</h1>
-        <div className="user-info">
-          {/* <Stack spacing={2} sx={{ width: 800 }}>
-            <Autocomplete
-              multiple
-              id="size-small-standard-multi"
-              size="small"
-              options={interest}
-              getOptionLabel={(option) => option.title}
-              defaultValue={[interest[0]]}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  variant="standard"
-                  label="Size small"
-                  placeholder="Favorites"
-                />
-              )}
-            />
-          </Stack> */}
-        </div>
-      </div>
+      <EducationComponent />
+      <ExperienceComponent />
+      <SkillComponent />
+      <CertificationComponent />
+      <ProjectComponent />
     </div>
   );
 };

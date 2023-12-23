@@ -134,10 +134,12 @@
   transition: transform 0.3s;
   max-height: 100vh;
   position: relative;
-  .education-form {
+  .form {
     display: flex;
     flex-wrap: wrap;
-
+    .date-inputs {
+      margin-top: 2vh;
+    }
     .MuiInput-root {
       margin-right: 10px;
     }
@@ -148,18 +150,17 @@
     gap: 10px;
   }
 
-
   h1 {
     font-size: 24px;
     font-weight: 600;
-    color: $secondary-color; 
+    color: $secondary-color;
     margin-bottom: 20px;
   }
 
   .user-info {
     display: flex;
     flex-direction: column;
-
+    margin-bottom: 5vh;
     .info {
       display: flex;
       align-items: center;
@@ -180,7 +181,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background: $secondary-color; 
+    background: $secondary-color;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -202,8 +203,8 @@
   }
   .cancel-button {
     position: absolute;
-    top: 60px;
-    right: 10px;
+    top: 10px;
+    right: 130px;
     background: #ff0000;
     color: #fff;
     padding: 10px 20px;
@@ -224,37 +225,15 @@
       margin-right: 5px;
     }
   }
-
   .list {
-    margin-top: 20px;
-    input {
-      margin-bottom: 10px;
-      padding: 8px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    h3 {
-      font-size: 24px; 
-      color: $secondary-color;
-      margin-bottom: 10px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 20px; 
-      font-size: 16px;
-      color: #333;
-      display: flex;
-      align-items: center;
-      .school , .title , .skill {
-        font-size: 18px;
-        font-weight: bold;
-        margin-right: 10px;
+    .MuiButton-root {
+      font-size: 12px;
+      background-color: #ff0000;
+      color: #fff;
+      &:hover {
+        background: #fff;
+        color: #ff0000;
       }
     }
   }
-  
 }

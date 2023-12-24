@@ -11,7 +11,11 @@
   transition: transform 0.3s;
   max-height: 100%;
   position: relative;
-
+  .error-message {
+    color: red;
+    margin-top: 5px;
+  }
+  
   hr {
     border: 0;
     height: 1px;

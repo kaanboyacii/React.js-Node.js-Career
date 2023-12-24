@@ -26,15 +26,12 @@ const Login = () => {
     try {
       const res = await axios.post("/auth/login", { email, password });
       dispatch(loginSuccess(res.data));
-  
       if (checked) {
-        // If "Beni Hatırla" is checked, store user credentials securely
         localStorage.setItem("rememberMe", JSON.stringify({ email, password }));
       } else {
-        // If not checked, clear the stored credentials
         localStorage.removeItem("rememberMe");
       }
-  
+
       navigate("/");
     } catch (err) {
       dispatch(loginFailure());
@@ -49,8 +46,6 @@ const Login = () => {
       setPassword(password);
     }
   }, []);
-  
-
 
   const handleChange = (event) => {
     setChecked(event.target.checked);

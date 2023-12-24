@@ -172,10 +172,13 @@ const Profile = () => {
                 onChange={(e) => handleChange("birth", e.target.value)}
               />
             ) : (
-              <span>{new Date(currentUser.birth).toLocaleDateString()}</span>
+              <span>
+                {currentUser.birth
+                  ? new Date(currentUser.birth).toLocaleDateString()
+                  : ""}
+              </span>
             )}
           </div>
-
           <div>
             <h5>Cinsiyet</h5>
             {isEditMode ? (

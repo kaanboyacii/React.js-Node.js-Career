@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { createError } from "../error/error.js";
 import jwt from "jsonwebtoken";
 
+
 export const signup = async (req, res, next) => {
   try {
     const existingUser = await User.findOne({ email: req.body.email });
@@ -14,15 +15,17 @@ export const signup = async (req, res, next) => {
     const newUser = new User({ ...req.body, password: hash });
     await newUser.save();
 
-    res.status(200).json({
-      userId: newUser._id,
-      email: newUser.email,
-    });
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+    const { password, ...userDetails } = newUser._doc;
+
+    res.cookie("access_token", token, {
+      httpOnly: true
+    }).status(200).json(userDetails);
+
   } catch (err) {
     next(err);
   }
 }
-
 export const signin = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });

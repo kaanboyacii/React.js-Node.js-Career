@@ -131,6 +131,22 @@ const UserSchema = new mongoose.Schema(
         subscribedUsers: {
             type: [String],
         },
+        emailSet: {
+            type: Boolean,
+            default: false
+        },
+        smsSet: {
+            type: Boolean,
+            default: false
+        },
+        notificationSet: {
+            type: Boolean,
+            default: false
+        },
+        colorSet: {
+            type: Boolean,
+            default: false
+        },
     },
     { timestamps: true }
 );

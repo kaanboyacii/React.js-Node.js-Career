@@ -224,6 +224,25 @@ const Settings = () => {
     }
   };
 
+  const handleAccountDeletion = async () => {
+    const isConfirmed = window.confirm(
+      "Üyeliğinizi silmek istediğinize emin misiniz?"
+    );
+
+    if (isConfirmed) {
+      try {
+        const response = await axios.delete(`/users/${currentUser._id}`);
+        if (response.status === 200) {
+          navigate("/login");
+        } else {
+          console.error("Failed to delete account");
+        }
+      } catch (error) {
+        console.error("Failed to delete account", error);
+      }
+    }
+  };
+
   return (
     <div className="settings-card">
       <h1>Ayarlar</h1>
@@ -287,7 +306,9 @@ const Settings = () => {
           </div>
           <div className="div">
             <h2>Üyeliğimi Sil</h2>
-            <button className="delete-button">Üyeliği Sil</button>
+            <button className="delete-button" onClick={handleAccountDeletion}>
+              Üyeliği Sil
+            </button>
           </div>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>

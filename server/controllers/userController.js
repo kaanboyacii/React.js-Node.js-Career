@@ -39,7 +39,7 @@ export const updateUser = async (req, res, next) => {
 
 export const checkPassword = async (req, res, next) => {
     try {
-        const userId = req.params.id; 
+        const userId = req.params.id;
 
         const user = await User.findById(userId);
 
@@ -85,17 +85,14 @@ export const deleteUser = async (req, res, next) => {
     if (req.params.id === req.user.id) {
         try {
             const deletedUser = await User.findByIdAndDelete(req.params.id);
-
             if (!deletedUser) {
                 return next(createError(404, "User not found"));
             }
-
+            res.clearCookie("access_token");
             res.status(200).json({
                 message: "User has been deleted",
                 deletedUser: deletedUser
             });
-
-            res.clearCookie("access_token");
         } catch (err) {
             next(err);
         }
@@ -103,6 +100,7 @@ export const deleteUser = async (req, res, next) => {
         return next(createError(403, "You can delete only your account!"));
     }
 };
+
 
 export const getUser = async (req, res, next) => {
     try {

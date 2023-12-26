@@ -1,5 +1,5 @@
 import "./signup.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Logo from "../../../img/logo-back.png";
 import { motion } from "framer-motion";
@@ -10,7 +10,10 @@ import {
   registerFailure,
   registerSuccess,
 } from "../../../redux/userSlice.js";
-import { useDispatch } from "react-redux";
+import {
+  companyLogout,
+} from "../../../redux/companySlice.js";
+import { useDispatch, useSelector } from "react-redux";
 
 const Signup = () => {
   const [termsChecked, setTermsChecked] = useState(false);
@@ -18,6 +21,7 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const currentCompany = useSelector((state) => state.company.currentCompany);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [errorMessage1, setErrorMessage1] = useState("");
@@ -46,6 +50,11 @@ const Signup = () => {
     }
   };
   
+  useEffect(() => {
+    if (currentCompany) {
+      dispatch(companyLogout());
+    }
+  }, [currentCompany, dispatch]);
 
 
   return (

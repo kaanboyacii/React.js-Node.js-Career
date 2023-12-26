@@ -10,11 +10,15 @@ import {
   loginStart,
   loginSuccess,
 } from "../../../redux/userSlice.js";
-import { useDispatch } from "react-redux";
+import {
+  companyLogout,
+} from "../../../redux/companySlice.js";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const currentCompany = useSelector((state) => state.company.currentCompany);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [checked, setChecked] = React.useState(true);
@@ -38,6 +42,13 @@ const Login = () => {
       setErrorMessage1("Invalid user information");
     }
   };
+
+  useEffect(() => {
+    if (currentCompany) {
+      dispatch(companyLogout());
+    }
+  }, [currentCompany, dispatch]);
+
   useEffect(() => {
     const rememberMeData = localStorage.getItem("rememberMe");
     if (rememberMeData) {

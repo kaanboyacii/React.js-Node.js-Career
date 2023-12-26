@@ -9,15 +9,18 @@ export const companySignup = async (req, res, next) => {
         if (existingCompany) {
             return res.status(400).send("Bu e-posta adresi zaten kullanılıyor.");
         }
+
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
+
         const newCompany = new Company({ ...req.body, password: hash });
         await newCompany.save();
 
-        res.status(200).json({
-            CompanyId: newCompany._id,
-            email: newCompany.email,
-        });
+        // Tüm company bilgilerini geri gönder
+        const { password, ...companyDetails } = newCompany._doc;
+
+        res.status(200).json(companyDetails);
+
     } catch (err) {
         next(err);
     }
@@ -35,14 +38,9 @@ export const companySignin = async (req, res, next) => {
         const { password, ...others } = company._doc;
 
         res.cookie("access_token", token, {
-            httpOnly: true,
-            ecure: true,
-        }).status(200).json({
-            success: true,
-            message: "Company login successful!",
-            token,
-            company: others
-        });
+            httpOnly: true
+        }).status(200).json(others)
+
 
     } catch (err) {
         next(err);

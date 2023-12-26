@@ -15,12 +15,10 @@ const CompanySchema = new mongoose.Schema({
     },
     industry: {
         type: String,
-        required: true,
         trim: true,
     },
     location: {
         type: String,
-        required: true,
         trim: true,
     },
     website: {
@@ -29,7 +27,6 @@ const CompanySchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true,
     },
     contactPerson: {
         type: String,

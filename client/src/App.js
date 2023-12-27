@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { DarkModeContext } from "./context/darkModeContext";
 import "./style/dark.scss";
 import Home from "./pages/home/Home";
@@ -15,24 +15,38 @@ import Event from "./pages/event/Event";
 import Courses from "./pages/courses/Courses";
 import Panel from "./pages/panel/Panel";
 import ContactPage from "./pages/contactPage/ContactPage";
+import CompanyPanel from "./pages/companyPages/panel/AdminPanel";
 import LoadingScreen from "./components/loading/LoadingScreen";
+import { useSelector } from "react-redux";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const [isLoading, setIsLoading] = useState(true);
+  const currentCompany = useSelector((state) => state.company.currentCompany);
 
   useEffect(() => {
-    // Sayfa tamamen yüklendikten sonra yükleme ekranını kaldır
     window.onload = () => {
       setIsLoading(false);
     };
-
-    // Temizlik: Komponent unmount edildiğinde event listener'ı kaldır
     return () => {
       window.onload = null;
     };
   }, []);
 
+
+  if (currentCompany) {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<Navigate to="/company-panel" replace />}
+          />
+          <Route path="/company-panel" element={<CompanyPanel />} />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
   return (
     <div className={darkMode ? "app dark" : "app"}>
       {isLoading && (

@@ -1,5 +1,16 @@
 @import "../../../style/color.scss";
 
-.MuiAppBar-root{
-    background-color: $primary-color;
-}
+.MuiAppBar-root {
+    background-color: $primary-color !important;
+  }
+  
+  .MuiDrawer-root {
+    .MuiList-root {
+      color: $primary-color !important;
+  
+      .MuiListItemIcon-root {
+        color: $primary-color !important;
+      }
+    }
+  }
+  

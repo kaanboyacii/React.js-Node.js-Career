@@ -19,11 +19,11 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AppsIcon from "@mui/icons-material/Apps";
 import LogoutIcon from "@mui/icons-material/Logout";
-import "./adminPanel.scss";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { companyLogout } from "../../../redux/companySlice";
-
+import "./adminPanel.scss";
+import Logo from "../../../img/logo-back.png";
 
 const CustomAppBar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -57,7 +57,6 @@ const CustomAppBar = () => {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -139,6 +138,12 @@ const CustomAppBar = () => {
   const { currentCompany } = useSelector((state) => state.company);
   const sidebarContent = (
     <List>
+      {/* Logo */}
+      <ListItem>
+        <img src={Logo} alt="Logo" style={{ width: '200px', height: 'auto' }} />
+      </ListItem>
+  
+      {/* Other sidebar items */}
       <ListItem button>
         <ListItemIcon>
           <DashboardIcon />
@@ -171,7 +176,7 @@ const CustomAppBar = () => {
       </ListItem>
     </List>
   );
-
+  
   return (
     <React.Fragment>
       <AppBar position="static">
@@ -191,12 +196,20 @@ const CustomAppBar = () => {
           </Typography>
           <div style={{ flexGrow: 1 }} />
           <div style={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit"
+            >
               <Badge badgeContent={4} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
@@ -215,7 +228,11 @@ const CustomAppBar = () => {
           </div>
         </Toolbar>
       </AppBar>
-      <Drawer anchor="left" open={isDrawerOpen} onClose={handleDrawerToggleLocal}>
+      <Drawer
+        anchor="left"
+        open={isDrawerOpen}
+        onClose={handleDrawerToggleLocal}
+      >
         {sidebarContent}
       </Drawer>
       {renderMobileMenu}

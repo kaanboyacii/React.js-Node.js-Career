@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./joblist.scss";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
@@ -11,117 +11,14 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const countries = [
-  { code: "AD", label: "Andorra", phone: "376" },
+  { code: "AD", label: "AB", phone: "376" },
   {
-    code: "AE",
-    label: "United Arab Emirates",
+    code: "TR",
+    label: "TURKEY",
     phone: "971",
   },
-  { code: "AF", label: "Afghanistan", phone: "93" },
-  {
-    code: "AG",
-    label: "Antigua and Barbuda",
-    phone: "1-268",
-  },
-  { code: "AI", label: "Anguilla", phone: "1-264" },
-  { code: "AL", label: "Albania", phone: "355" },
-  { code: "AM", label: "Armenia", phone: "374" },
-  { code: "AO", label: "Angola", phone: "244" },
-  { code: "AQ", label: "Antarctica", phone: "672" },
-  { code: "AR", label: "Argentina", phone: "54" },
-  { code: "AS", label: "American Samoa", phone: "1-684" },
-  { code: "AT", label: "Austria", phone: "43" },
-  {
-    code: "AU",
-    label: "Australia",
-    phone: "61",
-    suggested: true,
-  },
-  { code: "AW", label: "Aruba", phone: "297" },
-  { code: "AX", label: "Alland Islands", phone: "358" },
-  { code: "AZ", label: "Azerbaijan", phone: "994" },
-  {
-    code: "BA",
-    label: "Bosnia and Herzegovina",
-    phone: "387",
-  },
-
-  {
-    code: "VC",
-    label: "Saint Vincent and the Grenadines",
-    phone: "1-784",
-  },
-  { code: "VE", label: "Venezuela", phone: "58" },
-  {
-    code: "VG",
-    label: "British Virgin Islands",
-    phone: "1-284",
-  },
-  {
-    code: "VI",
-    label: "US Virgin Islands",
-    phone: "1-340",
-  },
-  { code: "VN", label: "Vietnam", phone: "84" },
-  { code: "VU", label: "Vanuatu", phone: "678" },
-  { code: "WF", label: "Wallis and Futuna", phone: "681" },
-  { code: "WS", label: "Samoa", phone: "685" },
-  { code: "XK", label: "Kosovo", phone: "383" },
-  { code: "YE", label: "Yemen", phone: "967" },
-  { code: "YT", label: "Mayotte", phone: "262" },
-  { code: "ZA", label: "South Africa", phone: "27" },
-  { code: "ZM", label: "Zambia", phone: "260" },
-  { code: "ZW", label: "Zimbabwe", phone: "263" },
 ];
 const jobCardsData = [
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
   {
     title: "Software Developer",
     company: "İzmir Yazılım",
@@ -156,6 +53,25 @@ const jobCardsData = [
 
 const Joblist = () => {
   const [visibleJobCards, setVisibleJobCards] = useState(8);
+  const [jobCardsData, setJobCardsData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8800/api/jobs/getAllJobs"
+        );
+        const data = await response.json();
+        setJobCardsData(data);
+      } catch (error) {
+        console.error("Error fetching job data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   return (
     <div className="joblist">
       <Navbar />
@@ -231,12 +147,12 @@ const Joblist = () => {
           {jobCardsData.slice(0, visibleJobCards).map((job, index) => (
             <div className="job-card" key={index}>
               <h3>{job.title}</h3>
-              <p>Şirket: {job.company}</p>
+              <p>Şirket: {job.company.companyName}</p>
               <p>Lokasyon: {job.location}</p>
-              <p>Kategori: {job.category}</p>
-              <Link to="/job">
+              <p>İş Tipi: {job.type}</p>
+              <Link to={`/job/${job._id}`}>
                 <button>Detayları İncele</button>
-              </Link>{" "}
+              </Link>
             </div>
           ))}
         </motion.div>

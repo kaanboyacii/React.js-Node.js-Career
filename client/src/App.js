@@ -50,7 +50,7 @@ function App() {
   return (
     <div className={darkMode ? "app dark" : "app"}>
       {isLoading && (
-        <LoadingScreen/>
+        <LoadingScreen />
       )}
       {!isLoading && (
         <BrowserRouter>
@@ -63,7 +63,9 @@ function App() {
               <Route path="company-login" element={<CompanyLogin />} />
               <Route path="company-signup" element={<CompanySignup />} />
               <Route path="job-list" element={<Joblist />} />
-              <Route path="job" element={<Job />} />
+              <Route path="job">
+                <Route path=":id" element={<Job />} />
+              </Route>
               <Route path="aboutus" element={<Aboutus />} />
               <Route path="event" element={<Event />} />
               <Route path="events" element={<Events />} />

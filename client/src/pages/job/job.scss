@@ -55,8 +55,11 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-
       .apply-job-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         .apply-job {
           font-size: 20px;
           margin-bottom: 20px;
@@ -102,27 +105,25 @@
     .jobcontainer {
       flex-direction: column;
       align-items: center;
-  
+
       .left-side,
       .right-side {
         width: 100%;
         margin-top: 1rem;
-        margin-left: 1rem; 
+        margin-left: 1rem;
       }
-
     }
-  
+
     .apply-job-button {
       .apply-job {
         width: 100%;
       }
     }
-  
+
     .features {
       grid-template-columns: 1fr;
       grid-gap: 1rem;
       text-align: center;
     }
   }
-  
 }

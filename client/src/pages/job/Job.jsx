@@ -6,23 +6,54 @@ import { motion } from "framer-motion";
 import Logo from "../../img/logo.png";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import JobConfirmation from "../../components/messages/JobConfirmation";
+import { useSelector } from "react-redux";
 
 const Job = () => {
+  const { currentUser } = useSelector((state) => state.user);
   const path = useLocation().pathname.split("/")[2];
   const [jobData, setJobData] = useState(null);
+  const [isConfirmationOpen, setConfirmationOpen] = useState(false);
+  const [isAlreadyApplied, setAlreadyApplied] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`/jobs/${path}`);
         setJobData(res.data);
+        setAlreadyApplied(currentUser.jobApplications.includes(res.data._id));
+        console.log(currentUser.jobApplications)
       } catch (err) {
         console.log("User AUTH Error");
       }
     };
     fetchData();
-  }, [path]);
-  
+  }, [path, currentUser.jobApplications]);
+
+
+  const handleApplyClick = async () => {
+    if (!isAlreadyApplied) {
+      try {
+        const response = await axios.post(`/users/apply-job/${path}`);
+        if (response.data.success) {
+          console.log("Job application successful!");
+        } else {
+          console.error("Job application failed:", response.data.message);
+        }
+        setConfirmationOpen(true);
+      } catch (error) {
+        console.error("Error applying for the job:", error.message);
+      }
+    } else {
+      // User has already applied, handle accordingly (show a message, disable the button, etc.)
+      console.log("User has already applied to this job");
+    }
+  };
+
+  const handleCloseConfirmation = () => {
+    setConfirmationOpen(false);
+  };
 
   return (
     <div className="job">
@@ -60,10 +91,27 @@ const Job = () => {
               transition={{ duration: 0.3 }}
             >
               <div className="apply-job-button">
-                <Link to="/job">
-                  <button className="apply-job">Şimdi Başvur</button>
-                </Link>
+                {!isAlreadyApplied && (
+                  <button className="apply-job" onClick={handleApplyClick}>
+                    Şimdi Başvur
+                  </button>
+                )}
+                {isAlreadyApplied && (
+                  <p className="already-applied-message">
+                    Bu işe zaten başvurdunuz
+                  </p>
+                )}
+                {isAlreadyApplied && (
+                  <button className="applied-job" disabled>
+                    Başvuru Yapıldı
+                  </button>
+                )}
               </div>
+
+              <JobConfirmation
+                open={isConfirmationOpen}
+                handleClose={handleCloseConfirmation}
+              />
               <div className="logo-company">
                 <Link to="/job">
                   <img src={Logo} alt="" />

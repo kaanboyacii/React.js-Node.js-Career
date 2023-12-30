@@ -116,14 +116,18 @@ const UserSchema = new mongoose.Schema(
             ],
             default: [],
         },
-        jobApplications: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Job'
-        }],
-        eventApplications: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Event'
-        }],
+        jobApplications: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Job",
+            },
+        ],
+        eventApplications: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Event",
+            },
+        ],
         subscribers: {
             type: Number,
             default: 0

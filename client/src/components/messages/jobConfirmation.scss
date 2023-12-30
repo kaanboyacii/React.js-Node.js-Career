@@ -1,0 +1,41 @@
+.dialog-title,
+.dialog-content,
+.dialog-actions {
+  text-align: center;
+}
+
+.dialog-title {
+  color: #4caf50;
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.dialog-title::after {
+  content: "\2713";
+  display: block;
+  color: #4caf50;
+  font-size: 2em;
+  animation: checkmark 0.9s ease-in-out;
+}
+
+.dialog-actions button {
+  width: 100%;
+  background-color: #4caf50; 
+  color: white;
+  border-radius: 10px;
+  padding: 8px 16px;
+}
+
+.dialog-actions button:hover {
+  background-color: #45a049; 
+}

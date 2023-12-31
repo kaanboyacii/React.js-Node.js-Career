@@ -54,7 +54,7 @@ const jobCardsData = [
 const Joblist = () => {
   const [visibleJobCards, setVisibleJobCards] = useState(8);
   const [jobCardsData, setJobCardsData] = useState([]);
-
+  const showMoreButton = jobCardsData.length > 8;
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -158,9 +158,11 @@ const Joblist = () => {
         </motion.div>
       </div>
       <div className="more-button">
-        <button onClick={() => setVisibleJobCards(visibleJobCards + 4)}>
-          Daha Fazla Göster
-        </button>
+      {showMoreButton && (
+          <button onClick={() => setVisibleJobCards(visibleJobCards + 4)}>
+            Daha Fazla Göster
+          </button>
+        )}
       </div>
       <Footer />
     </div>

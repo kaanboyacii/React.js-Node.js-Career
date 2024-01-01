@@ -18,38 +18,6 @@ const countries = [
     phone: "971",
   },
 ];
-const jobCardsData = [
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
-  {
-    title: "Software Developer",
-    company: "İzmir Yazılım",
-    location: "İzmir / Konak",
-    category: "Yazılım",
-  },
-];
 
 const Joblist = () => {
   const [visibleJobCards, setVisibleJobCards] = useState(8);

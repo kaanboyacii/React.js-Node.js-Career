@@ -3,7 +3,6 @@ import Company from "../models/CompanyModel.js"
 import bcrypt from "bcrypt";
 
 export const updateCompany = async (req, res, next) => {
-
     if (req.params.id === req.user.id) {
         try {
             if (req.body.password) {
@@ -11,7 +10,6 @@ export const updateCompany = async (req, res, next) => {
                 const hash = bcrypt.hashSync(req.body.password, salt);
                 req.body.password = hash;
             }
-
             const updatedCompany = await Company.findByIdAndUpdate(
                 req.params.id,
                 {
@@ -45,7 +43,7 @@ export const updateImg = async (req, res, next) => {
         const updatedCompany = await Company.findByIdAndUpdate(
             req.params.id,
             {
-                $set: { img: req.body.img }, 
+                $set: { img: req.body.img },
             },
             {
                 new: true,
@@ -65,7 +63,6 @@ export const deleteCompany = async (req, res, next) => {
             if (!deletedCompany) {
                 return next(createError(404, "Company not found"));
             }
-
             res.status(200).json({
                 message: "Company has been deleted",
                 deletedCompany: deletedCompany

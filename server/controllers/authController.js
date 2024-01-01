@@ -26,6 +26,7 @@ export const signup = async (req, res, next) => {
     next(err);
   }
 }
+
 export const signin = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });

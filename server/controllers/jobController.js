@@ -5,24 +5,16 @@ import Company from "../models/CompanyModel.js";
 export const createJob = async (req, res, next) => {
     try {
         const jobData = req.body;
-
-        // Fetch the company details using the user ID
         const companyId = req.user.id;
         const company = await Company.findById(companyId);
-
         if (!company) {
             return res.status(404).json({ success: false, message: "Company not found!" });
         }
-
-        // Set the company name in the jobData before creating the job
         jobData.company = {
             companyId: company._id,
             companyName: company.name,
         };
-
         const newJob = await Job.create(jobData);
-
-        // Update the company's jobs array
         company.jobs.push(newJob._id);
         await company.save();
 

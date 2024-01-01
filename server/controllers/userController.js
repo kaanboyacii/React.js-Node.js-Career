@@ -58,8 +58,6 @@ export const checkPassword = async (req, res, next) => {
     }
 };
 
-
-
 export const updateImg = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id);
@@ -100,7 +98,6 @@ export const deleteUser = async (req, res, next) => {
         return next(createError(403, "You can delete only your account!"));
     }
 };
-
 
 export const getUser = async (req, res, next) => {
     try {
@@ -143,7 +140,6 @@ export const unsubscribe = async (req, res, next) => {
     }
 };
 
-
 export const applyJob = async (req, res, next) => {
     try {
         const userId = req.user.id;
@@ -172,7 +168,6 @@ export const applyJob = async (req, res, next) => {
         next(err);
     }
 };
-
 
 export const applyEvent = async (req, res, next) => {
     try {

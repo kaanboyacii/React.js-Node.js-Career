@@ -27,7 +27,7 @@ const Joblist = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8800/api/jobs/getAllJobs"
+          "/jobs/getAllJobs"
         );
         const data = await response.json();
         setJobCardsData(data);

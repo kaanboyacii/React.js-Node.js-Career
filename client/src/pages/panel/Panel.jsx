@@ -14,6 +14,7 @@ import Profile from "../../components/panel/profile/Profile";
 import Settings from "../../components/panel/settings/Settings";
 import Inbox from "../../components/panel/inbox/Inbox";
 import Cv from "../../components/panel/cv/Cv";
+import Applications from "../../components/panel/applications/Applications";
 
 const Panel = () => {
   const [selectedItem, setSelectedItem] = useState("Profil");
@@ -31,6 +32,8 @@ const Panel = () => {
     selectedContent = <Inbox />;
   } else if (selectedItem === "cvOluştur") {
     selectedContent = <Cv />;
+  } else if (selectedItem === "Başvurularım") {
+    selectedContent = <Applications />;
   }
 
   return (

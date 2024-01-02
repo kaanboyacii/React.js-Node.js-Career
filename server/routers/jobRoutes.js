@@ -4,7 +4,8 @@ import {
     deleteJob,
     getJobById,
     getJobs,
-    updateJob
+    updateJob,
+    getJobsByIds
 } from "../controllers/jobController.js";
 import { verifyToken } from "../utility/verifyToken.js";
 
@@ -24,6 +25,9 @@ router.get("/getAllJobs", getJobs);
 
 //get job by id
 router.get("/:id", getJobById);
+
+//get jobs by ids
+router.get("/", getJobsByIds);
 
 
 export default router;

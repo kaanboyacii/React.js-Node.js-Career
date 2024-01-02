@@ -48,6 +48,24 @@ export const getJobById = async (req, res, next) => {
     }
 };
 
+export const getJobsByIds = async (req, res, next) => {
+    const jobIds = req.query.ids; // Assuming the IDs are passed as a query parameter, e.g., /api/jobs?ids=id1,id2,id3
+    const idsArray = jobIds.split(',');
+
+    try {
+        const jobs = await Job.find({ _id: { $in: idsArray } });
+        
+        if (jobs.length > 0) {
+            res.status(200).json({ jobApplications: jobs });
+        } else {
+            const customError = createError(404, 'İşler bulunamadı.');
+            res.status(customError.status).json({ error: customError.message });
+        }
+    } catch (err) {
+        next(err);
+    }
+};
+
 export const updateJob = async (req, res, next) => {
     const jobId = req.params.id;
     const updatedJobData = req.body;

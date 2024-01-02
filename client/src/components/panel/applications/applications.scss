@@ -1,0 +1,49 @@
+@import "../../../style/color.scss";
+
+.applications-card {
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 20px;
+  transition: transform 0.3s;
+  max-height: 100vh;
+  position: relative;
+
+  .applications-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .applications-details {
+    flex-grow: 1;
+    margin-left: 16px;
+
+    a {
+      color: $secondary-color;
+      text-decoration: none;
+    }
+  }
+  .applications-status {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+  }
+
+  .status-label {
+    margin-right: 5px; // Add margin for spacing
+    color: #4caf50; // Change the color as needed
+  }
+
+  .status-mark {
+    color: #4caf50; // Change the color as needed
+    font-size: 24px;
+  }
+}

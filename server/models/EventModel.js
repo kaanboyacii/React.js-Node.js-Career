@@ -7,9 +7,15 @@ const eventSchema = new mongoose.Schema({
         trim: true,
     },
     company: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Company',
-        required: true,
+        companyId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Company',
+            required: true,
+        },
+        companyName: {
+            type: String,
+            required: true,
+        },
     },
     description: {
         type: String,
@@ -20,6 +26,10 @@ const eventSchema = new mongoose.Schema({
         required: true,
     },
     date: {
+        type: Date,
+        required: true,
+    },
+    applicationDeadline: {
         type: Date,
         required: true,
     },

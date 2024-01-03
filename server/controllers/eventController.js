@@ -5,13 +5,16 @@ import Company from "../models/CompanyModel.js";
 export const createEvent = async (req, res, next) => {
     try {
         const eventData = req.body;
-        const newEvent = await Event.create(eventData);
-        
         const companyId = req.user.id;
         const company = await Company.findById(companyId);
         if (!company) {
             return res.status(404).json({ success: false, message: "Company not found!" });
         }
+        eventData.company = {
+            companyId: company._id,
+            companyName: company.name,
+        };
+        const newEvent = await Event.create(eventData);
         company.events.push(newEvent._id);
         await company.save();
         res.status(201).json(newEvent);

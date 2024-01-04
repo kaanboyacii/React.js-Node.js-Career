@@ -16,7 +16,6 @@ const Job = () => {
   const [isConfirmationOpen, setConfirmationOpen] = useState(false);
   const [isAlreadyApplied, setAlreadyApplied] = useState(false);
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {

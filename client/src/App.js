@@ -67,8 +67,10 @@ function App() {
                 <Route path=":id" element={<Job />} />
               </Route>
               <Route path="aboutus" element={<Aboutus />} />
-              <Route path="event" element={<Event />} />
               <Route path="events" element={<Events />} />
+              <Route path="event">
+                <Route path=":id" element={<Event />} />
+              </Route>
               <Route path="courses" element={<Courses />} />
               <Route path="contact" element={<ContactPage />} />
             </Route>

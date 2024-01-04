@@ -78,7 +78,7 @@ const Events = () => {
                     </strong>
                   </span>
                 </div>
-                <Link to={`/events/${event._id}`}>
+                <Link to={`/event/${event._id}`}>
                   <button>Etkinlik Detaylarını Gör</button>
                 </Link>
               </motion.div>

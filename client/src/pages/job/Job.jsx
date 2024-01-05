@@ -22,14 +22,12 @@ const Job = () => {
         const res = await axios.get(`/jobs/${path}`);
         setJobData(res.data);
         setAlreadyApplied(currentUser.jobApplications.includes(res.data._id));
-        console.log(currentUser.jobApplications)
       } catch (err) {
         console.log("User AUTH Error");
       }
     };
     fetchData();
   }, [path, currentUser.jobApplications]);
-
 
   const handleApplyClick = async () => {
     if (!isAlreadyApplied) {
@@ -45,7 +43,6 @@ const Job = () => {
         console.error("Error applying for the job:", error.message);
       }
     } else {
-      // User has already applied, handle accordingly (show a message, disable the button, etc.)
       console.log("User has already applied to this job");
     }
   };
@@ -106,7 +103,6 @@ const Job = () => {
                   </button>
                 )}
               </div>
-
               <JobConfirmation
                 open={isConfirmationOpen}
                 handleClose={handleCloseConfirmation}

@@ -57,6 +57,10 @@
       justify-content: flex-start;
 
       .apply-job-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         .apply-job {
           font-size: 20px;
           margin-bottom: 20px;

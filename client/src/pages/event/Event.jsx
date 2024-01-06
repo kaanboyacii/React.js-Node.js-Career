@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import Logo from "../../img/logo.png";
 import { useSelector } from "react-redux";
-import JobConfirmation from "../../components/messages/JobConfirmation";
+import EventConfirmation from "../../components/messages/EventConfirmation";
 import axios from "axios";
 
 const Event = () => {
@@ -96,7 +96,7 @@ const Event = () => {
                   </button>
                 )}
               </div>
-              <JobConfirmation
+              <EventConfirmation
                 open={isConfirmationOpen}
                 handleClose={handleCloseConfirmation}
               />

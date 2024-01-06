@@ -7,7 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import "./confirmation.scss";
 
-const JobConfirmation = ({ open, handleClose }) => {
+const EventConfirmation = ({ open, handleClose }) => {
   const dialogStyle = {
     overflow: "hidden",
     borderRadius: "10px",
@@ -20,10 +20,10 @@ const JobConfirmation = ({ open, handleClose }) => {
       onClose={handleClose}
       PaperProps={{ style: dialogStyle }}
     >
-      <DialogTitle className="dialog-title">İş Başvurusu Onayı</DialogTitle>
+      <DialogTitle className="dialog-title">Etkinlik Başvurusu Onayı</DialogTitle>
       <DialogContent className="dialog-content">
         <DialogContentText>
-          İş başvurunuz başarıyla alındı. Teşekkür ederiz!
+          Etkinliğe olan başvurunuz başarıyla tarafımıza alındı. Teşekkür ederiz!
         </DialogContentText>
       </DialogContent>
       <DialogActions className="dialog-actions">
@@ -35,4 +35,4 @@ const JobConfirmation = ({ open, handleClose }) => {
   );
 };
 
-export default JobConfirmation;
+export default EventConfirmation;

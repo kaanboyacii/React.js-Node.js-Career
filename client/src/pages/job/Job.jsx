@@ -35,6 +35,7 @@ const Job = () => {
         const response = await axios.post(`/users/apply-job/${path}`);
         if (response.data.success) {
           console.log("Job application successful!");
+          setAlreadyApplied(true);
         } else {
           console.error("Job application failed:", response.data.message);
         }

@@ -28,13 +28,13 @@ const Event = () => {
     };
     fetchData();
   }, [path, currentUser.eventApplications]);
-
   const handleApplyClick = async () => {
     if (!isAlreadyApplied) {
       try {
         const response = await axios.post(`/users/apply-event/${path}`);
         if (response.data.success) {
           console.log("Event application successful!");
+          setAlreadyApplied(true);
         } else {
           console.error("Event application failed:", response.data.message);
         }
@@ -46,6 +46,7 @@ const Event = () => {
       console.log("User has already applied to this Event");
     }
   };
+  
 
   const handleCloseConfirmation = () => {
     setConfirmationOpen(false);

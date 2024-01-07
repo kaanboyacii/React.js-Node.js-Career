@@ -15,6 +15,7 @@ import Event from "./pages/event/Event";
 import Courses from "./pages/courses/Courses";
 import Panel from "./pages/panel/Panel";
 import ContactPage from "./pages/contactPage/ContactPage";
+import CompanyProfile from "./pages/companyProfile/CompanyProfile";
 import CompanyPanel from "./pages/companyPages/panel/AdminPanel";
 import LoadingScreen from "./components/loading/LoadingScreen";
 import { useSelector } from "react-redux";
@@ -66,12 +67,15 @@ function App() {
               <Route path="job">
                 <Route path=":id" element={<Job />} />
               </Route>
-              <Route path="aboutus" element={<Aboutus />} />
+              <Route path="company">
+                <Route path=":id" element={<CompanyProfile />} />
+              </Route>
               <Route path="events" element={<Events />} />
               <Route path="event">
                 <Route path=":id" element={<Event />} />
               </Route>
               <Route path="courses" element={<Courses />} />
+              <Route path="aboutus" element={<Aboutus />} />
               <Route path="contact" element={<ContactPage />} />
             </Route>
           </Routes>

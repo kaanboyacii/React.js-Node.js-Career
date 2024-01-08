@@ -25,10 +25,14 @@
         font-size: 32px;
         margin-bottom: 20px;
       }
-
+      a {
+        color: $secondary-color;
+        text-decoration: none;
+      }
       h2 {
         font-size: 24px;
         margin-bottom: 20px;
+
       }
 
       h3 {
@@ -40,7 +44,7 @@
         font-size: 16px;
         margin-bottom: 10px;
         display: block;
-        text-align: left; /* Yazıları sola hizala */
+        text-align: left;
       }
     }
     .right-side {

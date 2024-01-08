@@ -31,7 +31,9 @@ const Applications = () => {
               <Link to={`/job/${data._id}`}>
                 <h2>{data.title}</h2>
               </Link>
-              <h3>{data.company.companyName}</h3>
+              <Link to={`/company/${data.company.companyId}`}>
+                <h3>{data.company.companyName}</h3>
+              </Link>
             </div>
             <div className="applications-status">
               <span className="status-label">Başvuruldu</span>

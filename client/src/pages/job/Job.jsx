@@ -65,7 +65,9 @@ const Job = () => {
               transition={{ duration: 0.3 }}
             >
               <h1>{jobData.title}</h1>
-              <h2>{jobData.company.companyName}</h2>
+              <Link to={`/company/${jobData.company.companyId}`}>
+                <h2>{jobData.company.companyName}</h2>
+              </Link>
               <h3>İş Detayları</h3>
               <p>{jobData.description}</p>
               <h3>İstenen Nitelikler</h3>
@@ -109,7 +111,7 @@ const Job = () => {
                 handleClose={handleCloseConfirmation}
               />
               <div className="logo-company">
-                <Link to="/job">
+                <Link to={`/company/${jobData.company.companyId}`}>
                   <img src={Logo} alt="" />
                 </Link>
               </div>

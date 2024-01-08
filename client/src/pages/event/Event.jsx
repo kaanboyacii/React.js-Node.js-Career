@@ -46,7 +46,6 @@ const Event = () => {
       console.log("User has already applied to this Event");
     }
   };
-  
 
   const handleCloseConfirmation = () => {
     setConfirmationOpen(false);
@@ -64,7 +63,11 @@ const Event = () => {
               transition={{ duration: 0.3 }}
             >
               <h1>{eventData.title}</h1>
-              <h3>{eventData.company.companyName} tarafından düzenleniyor.</h3>
+              <h3>
+                <Link to={`/company/${eventData.company.companyId}`}>
+                  <h2>{eventData.company.companyName}</h2>
+                </Link>
+              </h3>
               <h3>Etkinlik Detayları</h3>
               <p>{eventData.description}</p>
               <h3>İstenen Nitelikler</h3>
@@ -102,9 +105,8 @@ const Event = () => {
                 handleClose={handleCloseConfirmation}
               />
               <div className="logo-company">
-                <Link to="/event">
-                  {/* Assuming Logo is the company logo */}
-                  <img src={Logo} />
+                <Link to={`/company/${eventData.company.companyId}`}>
+                  <img src={Logo} alt="" />
                 </Link>
               </div>
               <div className="features">

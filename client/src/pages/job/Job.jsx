@@ -55,7 +55,7 @@ const Job = () => {
   return (
     <div className="job">
       <Navbar />
-      <div className="jobcontainer">
+      <div className="jobContainer">
         {jobData && (
           <>
             <motion.div

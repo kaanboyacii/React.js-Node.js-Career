@@ -85,3 +85,12 @@ export const getCompany = async (req, res, next) => {
         next(err)
     }
 }
+
+export const getCompanies = async (req, res, next) => {
+    try {
+        const companies = await Company.find();
+        res.status(200).json(companies);
+    } catch (err) {
+        next(err);
+    }
+};

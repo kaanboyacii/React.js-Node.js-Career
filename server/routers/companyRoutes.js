@@ -4,6 +4,7 @@ import {
     deleteCompany,
     getCompany,
     updateImg,
+    getCompanies
 } from "../controllers/companyController.js";
 import { verifyToken } from "../utility/verifyToken.js";
 
@@ -19,7 +20,10 @@ router.put("/updateImg/:id", verifyToken, updateImg);
 router.delete("/:id", verifyToken, deleteCompany);
 
 //get a Company
-router.get("/find/:id", getCompany);
+router.get("/:id", getCompany);
+
+//get all Companies
+router.get("/", getCompanies);
 
 
 export default router;

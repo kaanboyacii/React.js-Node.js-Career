@@ -1,69 +1,119 @@
+@import "../../style/color.scss";
+
 .company {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-  
-    .companyContainer {
-      margin-top: 10vh;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .companyContainer {
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .company-card {
+      margin-top: 2rem;
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       display: flex;
-      width: 100%;
-  
-      .company-card {
-        flex: 3;
-        margin-top: 2rem;
-        background-color: #fff;
-        padding: 2rem;
-        border-radius: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-  
-        .MuiAvatar-root {
-          margin-bottom: 1rem;
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+
+      img {
+        height: 150px;
+        width: 150px;
+        margin: 25px;
+      }
+
+      .company-info {
+        text-align: center;
+        margin-bottom: 1rem;
+        margin: 20px 150px 20px 150px;
+        h1 {
+          font-size: 1.5rem;
+          margin-bottom: 0.5rem;
         }
-  
-        .company-info {
-          text-align: center;
-          margin-bottom: 1rem;
-  
-          h1 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        a {
+          color: $secondary-color;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
           }
-  
-          p {
-            font-size: 1rem;
-            margin-bottom: 0.2rem;
-          }
-  
-          a {
-            color: #3498db;
-            text-decoration: none;
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-        }
-  
-        .company-description {
-          font-size: 1rem;
-          line-height: 1.5;
         }
       }
+
+      .company-description {
+        margin-top: 1rem;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
     }
-  
-    @media (max-width: 768px) {
-      .companyContainer {
+    .company-job-card {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      padding: 2rem 0 2rem 0;
+
+      .job-card {
+        display: flex;
         flex-direction: column;
-        align-items: center;
-  
-        .company-card {
-          width: 100%;
-          margin-top: 1rem;
-          margin-left: 1rem;
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 16px;
+        padding: 16px;
+        border-radius: 10px;
+        transition: transform 0.3s;
+        max-height: 100vh;
+
+        &:hover {
+          transform: translateY(-5px);
+        }
+
+        h3 {
+          font-size: 1.2rem;
+          margin-bottom: 0.5rem;
+        }
+
+        p {
+          font-size: 1rem;
+          color: #777;
+          margin-bottom: 0.5rem;
+        }
+
+        button {
+          margin-top: auto;
+          background: $secondary-color;
+          color: #fff;
+          padding: 0.5rem 1rem;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background 0.2s;
+
+          &:hover {
+            background-color: $accent-color;
+          }
         }
       }
     }
   }
-  
+  @media (max-width: 768px) {
+    .companyContainer {
+      flex-direction: column;
+      align-items: center;
+
+      .company-card {
+        width: 80%;
+        margin-top: 4rem;
+      }
+
+      .company-job-card {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 2rem 1rem;
+      }
+    }
+  }
+}

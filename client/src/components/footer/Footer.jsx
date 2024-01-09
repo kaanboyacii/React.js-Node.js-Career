@@ -17,13 +17,10 @@ const Footer = () => {
               <a href="/">Ana Sayfa</a>
             </li>
             <li>
-              <a href="/">Hakkımızda</a>
+              <a href="/aboutus">Hakkımızda</a>
             </li>
             <li>
-              <a href="/">Ürünler</a>
-            </li>
-            <li>
-              <a href="/">İletişim</a>
+              <a href="/contact">İletişim</a>
             </li>
           </ul>
         </div>
@@ -34,13 +31,10 @@ const Footer = () => {
               <a href="/">Kariyer Rehberi</a>
             </li>
             <li>
-              <a href="/">Bootcamp</a>
+              <a href="/events">Etkinlikler</a>
             </li>
             <li>
-              <a href="/">Blog</a>
-            </li>
-            <li>
-              <a href="/">İş İlanları</a>
+              <a href="/job-list">İş İlanları</a>
             </li>
           </ul>
         </div>

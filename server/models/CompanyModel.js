@@ -13,6 +13,10 @@ const CompanySchema = new mongoose.Schema({
     password: {
         type: String,
     },
+    img: {
+        type: String,
+        required: false,
+    },
     industry: {
         type: String,
         trim: true,

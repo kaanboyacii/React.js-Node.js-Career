@@ -22,13 +22,26 @@ const countries = [
 const Joblist = () => {
   const [visibleJobCards, setVisibleJobCards] = useState(8);
   const [jobCardsData, setJobCardsData] = useState([]);
+  const [filters, setFilters] = useState({
+    location: null,
+    jobType: {
+      fullTime: false,
+      partTime: false,
+      remote: false,
+    },
+    workFrom: {
+      office: false,
+      remote: false,
+      hybrid: false,
+    },
+  });
+
   const showMoreButton = jobCardsData.length > 8;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "/jobs/getAllJobs"
-        );
+        const response = await fetch("/jobs/getAllJobs");
         const data = await response.json();
         setJobCardsData(data);
       } catch (error) {
@@ -39,6 +52,31 @@ const Joblist = () => {
     fetchData();
   }, []);
 
+  const handleCheckboxChange = (group, key) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [group]: {
+        ...prevFilters[group],
+        [key]: !prevFilters[group][key],
+      },
+    }));
+  };
+
+  const filterJobs = (job) => {
+    const typeFilter =
+      (!filters.jobType.fullTime || job.type === "Full-Time") &&
+      (!filters.jobType.partTime || job.type === "Part-Time") &&
+      (!filters.jobType.remote || job.type === "Remote");
+
+    const workFromFilter =
+      (!filters.workFrom.office || job.workFrom === "Ofis") &&
+      (!filters.workFrom.remote || job.workFrom === "Uzaktan") &&
+      (!filters.workFrom.hybrid || job.workFrom === "Hybrid");
+
+    return typeFilter && workFromFilter;
+  };
+
+  const filteredJobs = jobCardsData.filter(filterJobs);
 
   return (
     <div className="joblist">
@@ -46,8 +84,8 @@ const Joblist = () => {
       <div className="joblist-container">
         <motion.div
           className="sidebar"
-          initial={{ opacity: 0, scale: 0.8 }} // Başlangıç durumu
-          animate={{ opacity: 1, scale: 1 }} // Animasyon sırasında
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
           <h1>Filtreleme</h1>
@@ -89,21 +127,63 @@ const Joblist = () => {
           </div>
           <div className="filter-group">
             <h3>İş Tipi</h3>
-            <FormControlLabel control={<Checkbox />} label="Tam Zamanlı" />
-            <FormControlLabel control={<Checkbox />} label="Yarı Zamanlı" />
-            <FormControlLabel control={<Checkbox />} label="Uzaktan Çalışma" />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={filters.jobType.fullTime}
+                  onChange={() => handleCheckboxChange("jobType", "fullTime")}
+                />
+              }
+              label="Tam Zamanlı"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={filters.jobType.partTime}
+                  onChange={() => handleCheckboxChange("jobType", "partTime")}
+                />
+              }
+              label="Yarı Zamanlı"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={filters.jobType.internship}
+                  onChange={() => handleCheckboxChange("jobType", "internship")}
+                />
+              }
+              label="Stajyerlik"
+            />
           </div>
           <div className="filter-group">
-            <h3>Kategori</h3>
-            <FormControlLabel control={<Checkbox />} label="Yazılım" />
-            <FormControlLabel control={<Checkbox />} label="Donanım" />
-            <FormControlLabel control={<Checkbox />} label="Finans" />
-          </div>
-          <div className="filter-group">
-            <h3>Deneyim</h3>
-            <FormControlLabel control={<Checkbox />} label="0-1 Yıl" />
-            <FormControlLabel control={<Checkbox />} label="1-3 Yıl" />
-            <FormControlLabel control={<Checkbox />} label="3+ Yıl" />
+            <h3>Çalışma Yeri</h3>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={filters.workFrom.office}
+                  onChange={() => handleCheckboxChange("workFrom", "office")}
+                />
+              }
+              label="Ofis"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={filters.workFrom.remote}
+                  onChange={() => handleCheckboxChange("workFrom", "remote")}
+                />
+              }
+              label="Uzaktan"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={filters.workFrom.hybrid}
+                  onChange={() => handleCheckboxChange("workFrom", "hybrid")}
+                />
+              }
+              label="Hybrid"
+            />
           </div>
         </motion.div>
         <motion.div
@@ -112,7 +192,7 @@ const Joblist = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          {jobCardsData.slice(0, visibleJobCards).map((job, index) => (
+          {filteredJobs.slice(0, visibleJobCards).map((job, index) => (
             <div className="job-card" key={index}>
               <h3>{job.title}</h3>
               <p>Şirket: {job.company.companyName}</p>
@@ -126,7 +206,7 @@ const Joblist = () => {
         </motion.div>
       </div>
       <div className="more-button">
-      {showMoreButton && (
+        {showMoreButton && (
           <button onClick={() => setVisibleJobCards(visibleJobCards + 4)}>
             Daha Fazla Göster
           </button>

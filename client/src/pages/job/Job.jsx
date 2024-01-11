@@ -21,13 +21,13 @@ const Job = () => {
       try {
         const res = await axios.get(`/jobs/${path}`);
         setJobData(res.data);
-        setAlreadyApplied(currentUser.jobApplications.includes(res.data._id));
+        setAlreadyApplied(currentUser && currentUser.jobApplications.includes(res.data._id));
       } catch (err) {
         console.log("User AUTH Error");
       }
     };
     fetchData();
-  }, [path, currentUser.jobApplications]);
+  }, [path, currentUser && currentUser.jobApplications]);
 
   const handleApplyClick = async () => {
     if (!isAlreadyApplied) {

@@ -10,16 +10,8 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const countries = [
-  { code: "AD", label: "AB", phone: "376" },
-  {
-    code: "TR",
-    label: "TURKEY",
-    phone: "971",
-  },
-];
-
 const Joblist = () => {
+  const API_ENDPOINT = "https://turkiyeapi.dev/api/v1/provinces";
   const [visibleJobCards, setVisibleJobCards] = useState(8);
   const [jobCardsData, setJobCardsData] = useState([]);
   const [filters, setFilters] = useState({
@@ -35,11 +27,24 @@ const Joblist = () => {
       hybrid: false,
     },
   });
-
-  const showMoreButton = jobCardsData.length > 8;
+  const [locations, setLocations] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProvinces = async () => {
+      try {
+        const response = await fetch(API_ENDPOINT);
+        const { data } = await response.json();
+        const simplifiedLocations = data.map((province) => ({
+          id: province.id.toString(),
+          name: province.name,
+        }));
+        setLocations(simplifiedLocations);
+      } catch (error) {
+        console.error("Error fetching provinces:", error);
+      }
+    };
+    const fetchJobData = async () => {
       try {
         const response = await fetch("/jobs/getAllJobs");
         const data = await response.json();
@@ -48,9 +53,11 @@ const Joblist = () => {
         console.error("Error fetching job data:", error);
       }
     };
-
-    fetchData();
+    fetchProvinces();
+    fetchJobData();
   }, []);
+
+  const showMoreButton = jobCardsData.length > 8;
 
   const handleCheckboxChange = (group, key) => {
     setFilters((prevFilters) => ({
@@ -73,7 +80,10 @@ const Joblist = () => {
       (!filters.workFrom.remote || job.workFrom === "Uzaktan") &&
       (!filters.workFrom.hybrid || job.workFrom === "Hybrid");
 
-    return typeFilter && workFromFilter;
+    const locationFilter =
+      !selectedLocation ||
+      job.location.toLowerCase() === selectedLocation.name.toLowerCase();
+    return typeFilter && workFromFilter && locationFilter;
   };
 
   const filteredJobs = jobCardsData.filter(filterJobs);
@@ -92,31 +102,16 @@ const Joblist = () => {
           <div className="filter-group">
             <h3>Lokasyon</h3>
             <Autocomplete
-              id="country-select-demo"
+              id="location-select-demo"
               sx={{ width: 300 }}
-              options={countries}
-              autoHighlight
-              getOptionLabel={(option) => option.label}
-              renderOption={(props, option) => (
-                <Box
-                  component="li"
-                  sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                  {...props}
-                >
-                  <img
-                    loading="lazy"
-                    width="20"
-                    srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                    src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                    alt=""
-                  />
-                  {option.label} ({option.code}) +{option.phone}
-                </Box>
-              )}
+              options={locations}
+              getOptionLabel={(option) => option.name}
+              onChange={(event, newValue) => setSelectedLocation(newValue)}
+              value={selectedLocation}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="Ülke Seç"
+                  label="Lokasyon Seç"
                   inputProps={{
                     ...params.inputProps,
                     autoComplete: "new-password",

@@ -5,7 +5,8 @@ import {
     getJobById,
     getJobs,
     updateJob,
-    getJobsByIds
+    getJobsByIds,
+    searchJobsByName
 } from "../controllers/jobController.js";
 import { verifyToken } from "../utility/verifyToken.js";
 
@@ -22,6 +23,9 @@ router.delete("/:id", verifyToken, deleteJob);
 
 //get all jobs
 router.get("/getAllJobs", getJobs);
+
+//get all jobs
+router.get("/search", searchJobsByName);
 
 //get job by id
 router.get("/:id", getJobById);

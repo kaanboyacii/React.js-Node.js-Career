@@ -54,7 +54,7 @@ export const getJobsByIds = async (req, res, next) => {
 
     try {
         const jobs = await Job.find({ _id: { $in: idsArray } });
-        
+
         if (jobs.length > 0) {
             res.status(200).json({ jobApplications: jobs });
         } else {
@@ -62,6 +62,25 @@ export const getJobsByIds = async (req, res, next) => {
             res.status(customError.status).json({ error: customError.message });
         }
     } catch (err) {
+        next(err);
+    }
+};
+
+export const searchJobsByName = async (req, res, next) => {
+    const { title } = req.query;
+
+    try {
+        const jobs = await Job.find({ "title": { $regex: new RegExp(title, "i") } });
+
+        if (jobs.length > 0) {
+            res.status(200).json(jobs);
+        } else {
+            console.log(`No jobs found with title: ${title}`);
+            const customError = createError(404, 'İşler bulunamadı.');
+            res.status(customError.status).json({ error: customError.message });
+        }
+    } catch (err) {
+        console.error('Error in searchJobsByName:', err);
         next(err);
     }
 };

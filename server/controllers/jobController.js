@@ -75,7 +75,7 @@ export const searchJobsByName = async (req, res, next) => {
         if (jobs.length > 0) {
             res.status(200).json(jobs);
         } else {
-            console.log(`No jobs found with title: ${title}`);
+            // console.log(`No jobs found with title: ${title}`);
             const customError = createError(404, 'İşler bulunamadı.');
             res.status(customError.status).json({ error: customError.message });
         }

@@ -4,7 +4,9 @@ import {
     deleteEvent,
     getEventById,
     getEvents,
-    updateEvent
+    updateEvent,
+    getTopApplicantEvents,
+    getLatestEvents
 } from "../controllers/eventController.js";
 import { verifyToken } from "../utility/verifyToken.js";
 
@@ -21,6 +23,12 @@ router.delete("/:id", verifyToken, deleteEvent);
 
 //get all events
 router.get("/getAllEvents", getEvents);
+
+//get top applicant events
+router.get("/getTopApplicantEvents", getTopApplicantEvents);
+
+//get latest events
+router.get("/getLatestEvents", getLatestEvents);
 
 //get event by id
 router.get("/:id", getEventById);

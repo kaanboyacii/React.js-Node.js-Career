@@ -1,50 +1,80 @@
 import React from "react";
-import { motion } from "framer-motion"; // Import the motion component
+import { motion } from "framer-motion";
+import {Link} from "react-router-dom";
 import "./services.scss";
-
-const cardContents = [
-  {
-    title: "İş İlanları",
-    content: "Size uygun iş pozisyonlarını bul.",
-
-  },
-  {
-    title: "CV Hazırlama",
-    content: "Sizi ön plana çıkaracak CV'yi oluştur.",
-  },
-  {
-    title: "Kariyer Etkinlikleri",
-    content: "Büyük kariyer etkinlerine katıl.",
-  },
-  {
-    title: "Şirketler",
-    content: "Sektörünün önde gelen firmalarıyla tanış.",
-  },
-  {
-    title: "Yetenek Programları",
-    content: "Kendinizi geliştirebileceğin programlara katıl.",
-  },
-];
 
 const Services = () => {
   return (
     <div className="container">
-      {cardContents.map((card, index) => (
-        <motion.div
-          key={index}
-          className="card"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 80,
-          }}
-        >
-          <h3>{card.title}</h3>
-          <p>{card.content}</p>
-        </motion.div>
-      ))}
+      <motion.div
+        className="card"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 80,
+        }}
+      >
+        <h3>İş İlanları</h3>
+        <p>Size uygun iş pozisyonlarını bul.</p>
+      </motion.div>
+
+      <motion.div
+        className="card"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 80,
+        }}
+      >
+        <h3>CV Hazırlama</h3>
+        <p>Sizi ön plana çıkaracak CV'yi oluştur.</p>
+      </motion.div>
+
+      <motion.div
+        className="card"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 80,
+        }}
+      >
+        <h3>Kariyer Etkinlikleri</h3>
+        <p>Büyük kariyer etkinlerine katıl.</p>
+      </motion.div>
+
+      <motion.div
+        className="card"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 80,
+        }}
+      >
+        <h3>Şirketler</h3>
+        <p>Sektörünün önde gelen firmalarıyla tanış.</p>
+      </motion.div>
+
+      <motion.div
+        className="card"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 80,
+        }}
+      >
+        <h3>Yetenek Programları</h3>
+        <p>Kendinizi geliştirebileceğin programlara katıl.</p>
+      </motion.div>
     </div>
   );
 };

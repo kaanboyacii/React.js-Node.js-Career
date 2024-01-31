@@ -33,6 +33,28 @@ export const getEvents = async (req, res, next) => {
     }
 };
 
+export const getLatestEvents = async (req, res, next) => {
+    try {
+        const latestEvents = await Event.find().sort({ datePosted: -1 }).limit(5);
+        res.status(200).json(latestEvents);
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const getTopApplicantEvents = async (req, res, next) => {
+    try {
+        const eventsWithTopApplicants = await Event.find()
+            .sort({ "applicants.length": -1, datePosted: -1 })
+            .limit(5);
+
+        res.status(200).json(eventsWithTopApplicants);
+    } catch (err) {
+        next(err);
+    }
+};
+
+
 export const getEventById = async (req, res, next) => {
     const eventId = req.params.id;
     try {

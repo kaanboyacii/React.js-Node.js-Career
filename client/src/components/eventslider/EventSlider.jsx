@@ -1,5 +1,4 @@
-import Image from "../../img/back.jpg";
-import Image2 from "../../img/people.webp";
+import { Link } from "react-router-dom";
 import "./eventSlider.scss";
 import Carousel from "react-material-ui-carousel";
 import Card from "@mui/material/Card";
@@ -7,34 +6,36 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions, Grid } from "@mui/material";
+import { useEffect, useState } from "react";
 
 const EventSlider = () => {
-  const eventData = [
-    {
-      title: "Etkinlik 1",
-      description:
-        "          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente, aut voluptatem aperiam magnam magni tenetur atque! Quia temporibus pariatur eos in aperiam ipsum repellat, debitis, aut tenetur, dignissimos numquam corporis nulla iure corrupti ea mollitia! Debitis ipsa veritatis accusamus incidunt voluptas inventore. Officia doloribus aut, est tempora rem eveniet quod.",
-      image: Image,
-    },
-    {
-      title: "Etkinlik 2",
-      description:
-        "          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente, aut voluptatem aperiam magnam magni tenetur atque! Quia temporibus pariatur eos in aperiam ipsum repellat, debitis, aut tenetur, dignissimos numquam corporis nulla iure corrupti ea mollitia! Debitis ipsa veritatis accusamus incidunt voluptas inventore. Officia doloribus aut, est tempora rem eveniet quod.",
-      image: Image2,
-    },
-    {
-      title: "Etkinlik 2",
-      description:
-        "          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente, aut voluptatem aperiam magnam magni tenetur atque! Quia temporibus pariatur eos in aperiam ipsum repellat, debitis, aut tenetur, dignissimos numquam corporis nulla iure corrupti ea mollitia! Debitis ipsa veritatis accusamus incidunt voluptas inventore. Officia doloribus aut, est tempora rem eveniet quod.",
-      image: Image2,
-    },
-    {
-      title: "Etkinlik 2",
-      description:
-        "          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente, aut voluptatem aperiam magnam magni tenetur atque! Quia temporibus pariatur eos in aperiam ipsum repellat, debitis, aut tenetur, dignissimos numquam corporis nulla iure corrupti ea mollitia! Debitis ipsa veritatis accusamus incidunt voluptas inventore. Officia doloribus aut, est tempora rem eveniet quod.",
-      image: Image2,
-    },
-  ];
+  const [latestEvents, setLatestEvents] = useState([]);
+  const [topApplicantEvents, setTopApplicantEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchLatestEvents = async () => {
+      try {
+        const response = await fetch("/events/getLatestEvents");
+        const data = await response.json();
+        setLatestEvents(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error("Error fetching latest events:", error);
+      }
+    };
+
+    const fetchTopApplicantEvents = async () => {
+      try {
+        const response = await fetch("/events/getTopApplicantEvents");
+        const data = await response.json();
+        setTopApplicantEvents(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error("Error fetching top applicant events:", error);
+      }
+    };
+
+    fetchLatestEvents();
+    fetchTopApplicantEvents();
+  }, []);
 
   return (
     <div className="eventSlider">
@@ -42,7 +43,7 @@ const EventSlider = () => {
         <Grid item xs={8}>
           <h1>Güncel Etkinlikler</h1>
           <Carousel>
-            {eventData.map((event, index) => (
+            {latestEvents.map((event, index) => (
               <Card
                 key={index}
                 sx={{
@@ -57,7 +58,7 @@ const EventSlider = () => {
                   <CardMedia
                     component="img"
                     height="250"
-                    image={event.image}
+                    image={event.img}
                     alt={event.title}
                   />
                   <CardContent>
@@ -67,9 +68,11 @@ const EventSlider = () => {
                     <Typography variant="body1" color="text.primary">
                       {event.description}
                     </Typography>
-                    <Button variant="contained" size="large">
-                      Hemen Başvur
-                    </Button>
+                    <Link to={`/event/${event._id}`}>
+                      <Button variant="contained" size="large">
+                        Hemen Başvur
+                      </Button>
+                    </Link>
                   </CardContent>
                 </CardActionArea>
               </Card>
@@ -77,9 +80,9 @@ const EventSlider = () => {
           </Carousel>
         </Grid>
         <Grid item xs={8}>
-          <h1>Online Etkinlikler</h1>
+          <h1>En Çok Başvurulan Etkinlikler</h1>
           <Carousel>
-            {eventData.map((event, index) => (
+            {topApplicantEvents.map((event, index) => (
               <Card
                 key={index}
                 sx={{
@@ -94,7 +97,7 @@ const EventSlider = () => {
                   <CardMedia
                     component="img"
                     height="250"
-                    image={event.image}
+                    image={event.img}
                     alt={event.title}
                   />
                   <CardContent>
@@ -104,9 +107,11 @@ const EventSlider = () => {
                     <Typography variant="body1" color="text.primary">
                       {event.description}
                     </Typography>
-                    <Button variant="contained" size="large">
-                      Hemen Başvur
-                    </Button>
+                    <Link to={`/event/${event._id}`}>
+                      <Button variant="contained" size="large">
+                        Hemen Başvur
+                      </Button>
+                    </Link>
                   </CardContent>
                 </CardActionArea>
               </Card>

@@ -30,12 +30,14 @@
   }
   .MuiTypography-h4 {
     color: $primary-color;
+    font-size: 4vh;
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
   }
   .MuiTypography-body1 {
     display: -webkit-box;
     -webkit-line-clamp: 5;
+    text-align: center;
     -webkit-box-orient: vertical;
     overflow: hidden;
     color: #000000;

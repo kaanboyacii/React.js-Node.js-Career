@@ -106,27 +106,29 @@ const Hero = () => {
                 />
               )}
               getOptionLabel={(option) => option}
-              renderOption={(props, option) => (
-                <Link
-                  to={`/job/${
-                    (
-                      (searchResults || []).find(
-                        (result) => result.title === option
-                      ) || {}
-                    )?._id
-                  }`}
-                  style={{
-                    textDecoration: "none",
-                    color: "inherit",
-                    overflow: "hidden",
-                    margin: 0,
-                  }}
-                >
-                  <Paper elevation={3} sx={{ p: 1 }}>
-                    <Typography variant="body1">{option}</Typography>
-                  </Paper>
-                </Link>
-              )}
+              renderOption={(props, option) => {
+                const selectedJob =
+                  (searchResults || []).find(
+                    (result) => result.title === option
+                  ) || {};
+                return (
+                  <Link
+                    to={`/job/${selectedJob._id}`}
+                    style={{
+                      textDecoration: "none",
+                      color: "inherit",
+                      overflow: "hidden",
+                      margin: 0,
+                    }}
+                  >
+                    <Paper elevation={3} sx={{ p: 1 }}>
+                      <Typography variant="body1">{`${option} at ${
+                        selectedJob.company.companyName || ""
+                      }`}</Typography>
+                    </Paper>
+                  </Link>
+                );
+              }}
             />
           </Stack>
         </div>

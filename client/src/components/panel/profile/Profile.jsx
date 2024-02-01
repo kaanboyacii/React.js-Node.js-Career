@@ -14,6 +14,8 @@ import ExperienceComponent from "./ExperienceComponent";
 import SkillComponent from "./SkillComponent";
 import ProjectComponent from "./ProjectComponent";
 import CertificationComponent from "./CertificationComponent";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../../../firebase";
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -21,7 +23,6 @@ const Profile = () => {
   const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(false);
   const [inputs, setInputs] = useState({});
-  const [isAddingSkill, setIsAddingSkill] = useState(false);
   const [isChangeAvatar, setIsChangeAvatar] = useState(false);
 
   const handleChange = (name, value) => {
@@ -54,16 +55,27 @@ const Profile = () => {
     setIsChangeAvatar(true);
   };
 
-  const handleAvatarChange = (event) => {
+  const handleAvatarChange = async (event) => {
     const file = event.target.files[0];
+
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const newImage = e.target.result;
-        // setUpdatedUser({ ...updatedUser, image: newImage });
+      const storageRef = ref(
+        storage,
+        `avatars/${currentUser._id}/${file.name}`
+      );
+
+      try {
+        await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(storageRef);
+
+        setInputs((prev) => ({
+          ...prev,
+          avatar: url, // avatar URL'sini güncelle
+        }));
         setIsChangeAvatar(false);
-      };
-      reader.readAsDataURL(file);
+      } catch (error) {
+        console.error("Error uploading avatar:", error);
+      }
     }
   };
 
@@ -76,7 +88,7 @@ const Profile = () => {
             <label htmlFor="avatar-input">
               <Avatar
                 alt={currentUser.name}
-                src={currentUser.img}
+                src={inputs.avatar || currentUser.img}
                 sx={{ width: 200, height: 200 }}
                 onClick={handleAvatarClick}
               />

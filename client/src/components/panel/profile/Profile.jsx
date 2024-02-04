@@ -16,6 +16,7 @@ import ProjectComponent from "./ProjectComponent";
 import CertificationComponent from "./CertificationComponent";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../firebase";
+import AvatarNotification from "../../messages/AvatarNotification";
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -24,6 +25,7 @@ const Profile = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [inputs, setInputs] = useState({});
   const [isChangeAvatar, setIsChangeAvatar] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
 
   const handleChange = (name, value) => {
     setInputs((prev) => {
@@ -67,17 +69,37 @@ const Profile = () => {
       try {
         await uploadBytes(storageRef, file);
         const url = await getDownloadURL(storageRef);
-
+        const updatedUser = {
+          ...currentUser,
+          img: url,
+        };
         setInputs((prev) => ({
           ...prev,
-          avatar: url, // avatar URL'sini güncelle
+          avatar: url,
         }));
         setIsChangeAvatar(false);
-      } catch (error) {
-        console.error("Error uploading avatar:", error);
-      }
-    }
+ // API
+ const res = await axios.put(`/users/${currentUser._id}`, updatedUser);
+ if (res.status === 200) {
+   console.log("User profile updated successfully");
+   setNotificationOpen(true);
+ } else {
+   console.error("Failed to update user profile");
+   // Hata durumunda bildirim gösterilebilir
+   setNotificationOpen(true);
+ }
+} catch (error) {
+ console.error("Error uploading avatar:", error);
+ // Hata durumunda bildirim gösterilebilir
+ setNotificationOpen(true);
+}
+}
+};
+
+  const handleNotificationClose = () => {
+    setNotificationOpen(false);
   };
+
 
   return (
     <div className="profile">
@@ -298,6 +320,7 @@ const Profile = () => {
       <SkillComponent />
       <CertificationComponent />
       <ProjectComponent />
+      <AvatarNotification open={notificationOpen} handleClose={handleNotificationClose} />
     </div>
   );
 };

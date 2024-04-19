@@ -27,7 +27,8 @@ const Event = () => {
       }
     };
     fetchData();
-  }, [path, currentUser.eventApplications]);
+  }, [path, currentUser && currentUser.eventApplications]);
+  
   const handleApplyClick = async () => {
     if (!isAlreadyApplied) {
       try {

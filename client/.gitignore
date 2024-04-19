@@ -2,8 +2,6 @@
 
 # dependencies
 /node_modules
-/package.json
-/package-lock.json
 /.pnp
 firebase.js
 .pnp.js

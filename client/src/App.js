@@ -16,9 +16,10 @@ import Courses from "./pages/courses/Courses";
 import Panel from "./pages/panel/Panel";
 import ContactPage from "./pages/contactPage/ContactPage";
 import CompanyProfile from "./pages/companyProfile/CompanyProfile";
-import CompanyPanel from "./pages/companyPages/panel/AdminPanel";
 import LoadingScreen from "./components/loading/LoadingScreen";
 import { useSelector } from "react-redux";
+import CompanyPanel from "./pages/companyPages/panel/CompanyPanel/CompanyPanel";
+import CompanyPanelProfile from "./pages/companyPages/panel/CompanyPanelProfile";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -44,6 +45,7 @@ function App() {
             element={<Navigate to="/company-panel" replace />}
           />
           <Route path="/company-panel" element={<CompanyPanel />} />
+          <Route path="/company-panel/profile" element={<CompanyPanelProfile />} />
         </Routes>
       </BrowserRouter>
     );

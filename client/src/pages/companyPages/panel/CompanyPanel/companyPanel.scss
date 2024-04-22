@@ -1,0 +1,29 @@
+.content{
+    padding: 20px;
+}
+.widget {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  
+    &.widget-1 {
+      background-color: #ff7961; 
+      color: white;
+    }
+  
+    &.widget-2 {
+      background-color: #4caf50; 
+      color: white;
+    }
+  
+    &.widget-3 {
+      background-color: #2196f3;
+      color: white;
+    }
+  
+    &.widget-4 {
+      background-color: #f44336;
+      color: white;
+    }
+  }
+  

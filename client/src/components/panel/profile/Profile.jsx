@@ -78,28 +78,24 @@ const Profile = () => {
           avatar: url,
         }));
         setIsChangeAvatar(false);
- // API
- const res = await axios.put(`/users/${currentUser._id}`, updatedUser);
- if (res.status === 200) {
-   console.log("User profile updated successfully");
-   setNotificationOpen(true);
- } else {
-   console.error("Failed to update user profile");
-   // Hata durumunda bildirim gösterilebilir
-   setNotificationOpen(true);
- }
-} catch (error) {
- console.error("Error uploading avatar:", error);
- // Hata durumunda bildirim gösterilebilir
- setNotificationOpen(true);
-}
-}
-};
+        const res = await axios.put(`/users/${currentUser._id}`, updatedUser);
+        if (res.status === 200) {
+          console.log("User profile updated successfully");
+          setNotificationOpen(true);
+        } else {
+          console.error("Failed to update user profile");
+          setNotificationOpen(true);
+        }
+      } catch (error) {
+        console.error("Error uploading avatar:", error);
+        setNotificationOpen(true);
+      }
+    }
+  };
 
   const handleNotificationClose = () => {
     setNotificationOpen(false);
   };
-
 
   return (
     <div className="profile">
@@ -320,7 +316,10 @@ const Profile = () => {
       <SkillComponent />
       <CertificationComponent />
       <ProjectComponent />
-      <AvatarNotification open={notificationOpen} handleClose={handleNotificationClose} />
+      <AvatarNotification
+        open={notificationOpen}
+        handleClose={handleNotificationClose}
+      />
     </div>
   );
 };

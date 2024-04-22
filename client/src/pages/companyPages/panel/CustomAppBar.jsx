@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -22,7 +23,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { companyLogout } from "../../../redux/companySlice";
-import "./adminPanel.scss";
+import "./panel.scss";
 import Logo from "../../../img/logo-back.png";
 
 const CustomAppBar = () => {
@@ -138,31 +139,28 @@ const CustomAppBar = () => {
   const { currentCompany } = useSelector((state) => state.company);
   const sidebarContent = (
     <List>
-      {/* Logo */}
       <ListItem>
-        <img src={Logo} alt="Logo" style={{ width: '200px', height: 'auto' }} />
+        <img src={Logo} alt="Logo" style={{ width: "200px", height: "auto" }} />
       </ListItem>
-  
-      {/* Other sidebar items */}
-      <ListItem button>
+      <ListItem button component={Link} to="/company-panel">
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Yönetim Paneli" />
       </ListItem>
-      <ListItem button>
+      <ListItem button component={Link} to="/company-panel/jobs">
         <ListItemIcon>
           <AppsIcon />
         </ListItemIcon>
         <ListItemText primary="İş İlanlarım" />
       </ListItem>
-      <ListItem button>
+      <ListItem button component={Link} to="/company-panel/applications">
         <ListItemIcon>
           <NotificationsIcon />
         </ListItemIcon>
         <ListItemText primary="Başvurular" />
       </ListItem>
-      <ListItem button>
+      <ListItem button component={Link} to="/company-panel/profile">
         <ListItemIcon>
           <AccountCircleIcon />
         </ListItemIcon>
@@ -176,7 +174,7 @@ const CustomAppBar = () => {
       </ListItem>
     </List>
   );
-  
+
   return (
     <React.Fragment>
       <AppBar position="static">

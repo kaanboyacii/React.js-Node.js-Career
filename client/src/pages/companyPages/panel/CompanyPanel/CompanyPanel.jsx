@@ -36,7 +36,7 @@ const CompanyPanel = () => {
 
   return (
     <Layout>
-      <div className="content">
+      <div className="company-panel">
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
             <Paper className="widget widget-1" elevation={3}>

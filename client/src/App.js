@@ -19,7 +19,7 @@ import CompanyProfile from "./pages/companyProfile/CompanyProfile";
 import LoadingScreen from "./components/loading/LoadingScreen";
 import { useSelector } from "react-redux";
 import CompanyPanel from "./pages/companyPages/panel/CompanyPanel/CompanyPanel";
-import CompanyPanelProfile from "./pages/companyPages/panel/CompanyPanelProfile";
+import CompanyPanelProfile from "./pages/companyPages/panel/CompanyPanelProfile/CompanyPanelProfile";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);

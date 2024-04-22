@@ -1,0 +1,33 @@
+.company-panel-profile {
+    padding: 20px;
+  
+    .avatar-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+  
+    .MuiCard-root {
+      width: 100%;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  
+      .MuiCardContent-root {
+        padding: 20px;
+  
+        form {
+          display: grid;
+          gap: 20px;
+        }
+  
+        .MuiTextField-root {
+          width: 100%;
+        }
+  
+        .MuiButton-root {
+          width: 100%;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+  

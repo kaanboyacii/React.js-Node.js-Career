@@ -69,7 +69,7 @@ const Job = () => {
                 <h2>{jobData.company.companyName}</h2>
               </Link>
               <h3>İş Detayları</h3>
-              <p>{jobData.description}</p>
+              <div dangerouslySetInnerHTML={{ __html: jobData.description }} />
               <h3>İstenen Nitelikler</h3>
               <ul>
                 {jobData.requirements.map((requirement, index) => (

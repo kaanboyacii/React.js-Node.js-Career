@@ -13,7 +13,6 @@ import axios from "axios";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../../firebase";
 import "./companyPanelProfile.scss";
-import { width } from "@mui/system";
 
 const CompanyPanelProfile = () => {
   const { currentCompany } = useSelector((state) => state.company);

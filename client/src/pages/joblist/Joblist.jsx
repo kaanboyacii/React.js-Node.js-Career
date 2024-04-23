@@ -19,7 +19,7 @@ const Joblist = () => {
     jobType: {
       fullTime: false,
       partTime: false,
-      remote: false,
+      internship: false,
     },
     workFrom: {
       office: false,
@@ -73,7 +73,7 @@ const Joblist = () => {
     const typeFilter =
       (!filters.jobType.fullTime || job.type === "Full-Time") &&
       (!filters.jobType.partTime || job.type === "Part-Time") &&
-      (!filters.jobType.remote || job.type === "Remote");
+      (!filters.jobType.internship || job.type === "Internship");
 
     const workFromFilter =
       (!filters.workFrom.office || job.workFrom === "Ofis") &&

@@ -166,7 +166,7 @@ const CustomAppBar = () => {
         </ListItemIcon>
         <ListItemText primary="Profil" />
       </ListItem>
-      <ListItem button onClick={handleProfileMenuOpen}>
+      <ListItem button onClick={handleLogout}>
         <ListItemIcon>
           <LogoutIcon />
         </ListItemIcon>

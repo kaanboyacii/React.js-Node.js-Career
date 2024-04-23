@@ -16,11 +16,11 @@
   .btn {
     width: 100%;
     margin-top: 20px;
-    background-color: $primary-color;
+    background-color: $secondary-color;
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: $secondary-color;
+      background-color: $primary-color;
     }
   }
 

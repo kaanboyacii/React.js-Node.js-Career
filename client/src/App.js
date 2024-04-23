@@ -20,6 +20,7 @@ import LoadingScreen from "./components/loading/LoadingScreen";
 import { useSelector } from "react-redux";
 import CompanyPanel from "./pages/companyPages/panel/CompanyPanel/CompanyPanel";
 import CompanyPanelProfile from "./pages/companyPages/panel/CompanyPanelProfile/CompanyPanelProfile";
+import CompanyPanelJobs from "./pages/companyPages/panel/CompanyPanelJobs/CompanyPanelJobs";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -46,6 +47,7 @@ function App() {
           />
           <Route path="/company-panel" element={<CompanyPanel />} />
           <Route path="/company-panel/profile" element={<CompanyPanelProfile />} />
+          <Route path="/company-panel/jobs" element={<CompanyPanelJobs />} />
         </Routes>
       </BrowserRouter>
     );

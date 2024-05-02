@@ -15,10 +15,12 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import CompanyPanelJobsCreate from "./CompanyPanelJobsCreate"; 
 
 const CompanyPanelJobs = () => {
   const { currentCompany } = useSelector((state) => state.company);
   const [jobApplications, setJobApplications] = useState([]);
+  const [isCreateJobOpen, setIsCreateJobOpen] = useState(false);
 
   useEffect(() => {
     const fetchJobApplications = async () => {
@@ -34,9 +36,27 @@ const CompanyPanelJobs = () => {
     fetchJobApplications();
   }, [currentCompany]);
 
+  const handleAddJob = () => {
+    setIsCreateJobOpen(true); 
+  };
+
+  const handleCloseCreateJob = () => {
+    setIsCreateJobOpen(false); 
+  };
+
   return (
     <Layout>
       <div className="company-panel-jobs">
+        <div className="add-job-button-container">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleAddJob}
+            className="add-job-button"
+          >
+            Yeni İş İlanı Ekle
+          </Button>
+        </div>
         <h1>İş İlanlarım</h1>
         <TableContainer component={Paper} className="table-container">
           <Table>
@@ -73,6 +93,7 @@ const CompanyPanelJobs = () => {
           </Table>
         </TableContainer>
       </div>
+      {isCreateJobOpen && <CompanyPanelJobsCreate onClose={handleCloseCreateJob} />}
     </Layout>
   );
 };

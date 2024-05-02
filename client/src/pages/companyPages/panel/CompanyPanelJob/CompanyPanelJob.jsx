@@ -204,7 +204,7 @@ const CompanyPanelJob = () => {
                     }
                     onChange={(e) =>
                       handleChange("requirements", e.target.value.split(", "))
-                    } // Diziye çevirirken virgülle ayrılmış stringleri diziye dönüştürüyoruz
+                    } 
                     variant="outlined"
                     fullWidth
                     size="small"

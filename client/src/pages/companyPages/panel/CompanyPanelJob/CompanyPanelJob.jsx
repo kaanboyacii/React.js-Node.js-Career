@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../Layout";
+import "./companyPanelJob.scss"
 import axios from "axios";
 import {
   TextField,
@@ -11,15 +12,18 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  IconButton,
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const CompanyPanelJob = () => {
+  const location = useLocation();
   const API_ENDPOINT = "https://turkiyeapi.dev/api/v1/provinces";
   const [locations, setLocations] = useState([]);
-  const location = useLocation();
   const jobId = location.pathname.split("/").pop();
   const [jobData, setJobData] = useState({});
 
@@ -74,6 +78,26 @@ const CompanyPanelJob = () => {
     }
   };
 
+  const goBack = () => {
+    window.history.back();
+  };
+
+  const deleteJob = async () => {
+    const confirmDelete = window.confirm("İş ilanını kaldırmak istediğinizden emin misiniz?");
+    if (confirmDelete) {
+      try {
+        const res = await axios.delete(`/jobs/${jobId}`);
+        if (res.status === 200) {
+          window.history.back();
+        } else {
+          console.error("Failed to delete job");
+        }
+      } catch (error) {
+        console.error("Error deleting job:", error);
+      }
+    }
+  };
+  
   return (
     <Layout>
       <div className="company-panel-job">
@@ -81,7 +105,18 @@ const CompanyPanelJob = () => {
           <Grid item xs={12}>
             <Card elevation={3}>
               <CardContent>
-                <h1>İş İlanını Düzenle</h1>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <h1>İş İlanını Düzenle</h1>
+                  <IconButton onClick={goBack} aria-label="Close">
+                    <ArrowBackIcon />
+                  </IconButton>
+                </div>
                 <form onSubmit={handleSaveClick}>
                   <TextField
                     id="title"
@@ -204,7 +239,7 @@ const CompanyPanelJob = () => {
                     }
                     onChange={(e) =>
                       handleChange("requirements", e.target.value.split(", "))
-                    } 
+                    }
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -225,6 +260,14 @@ const CompanyPanelJob = () => {
                   />
                   <Button variant="contained" color="primary" type="submit">
                     Güncelle
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    startIcon={<DeleteIcon />}
+                    onClick={deleteJob}
+                  >
+                    İş İlanını Kaldır
                   </Button>
                 </form>
               </CardContent>

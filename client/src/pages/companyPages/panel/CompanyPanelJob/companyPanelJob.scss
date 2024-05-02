@@ -36,16 +36,7 @@
       background-color: #f0f0f0;
     }
   }
-
   .MuiButton-root {
-    min-width: 0;
-    padding: 6px 16px;
-    text-transform: none;
-    background-color: $secondary-color;
-    color: white;
-
-    &:hover {
-      background-color: $primary-color;
-    }
+    margin: 10px 10px 10px 0;
   }
 }

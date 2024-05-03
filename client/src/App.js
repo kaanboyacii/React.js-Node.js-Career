@@ -12,7 +12,6 @@ import Job from "./pages/job/Job";
 import Aboutus from "./pages/aboutus/Aboutus";
 import Events from "./pages/events/Events";
 import Event from "./pages/event/Event";
-import Courses from "./pages/courses/Courses";
 import Panel from "./pages/panel/Panel";
 import ContactPage from "./pages/contactPage/ContactPage";
 import CompanyProfile from "./pages/companyProfile/CompanyProfile";
@@ -82,7 +81,6 @@ function App() {
               <Route path="event">
                 <Route path=":id" element={<Event />} />
               </Route>
-              <Route path="courses" element={<Courses />} />
               <Route path="aboutus" element={<Aboutus />} />
               <Route path="contact" element={<ContactPage />} />
             </Route>

@@ -1,5 +1,5 @@
 import "./navbar.scss";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Logo from "../../img/logo.png";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -66,7 +66,6 @@ const Navbar = () => {
           <a href="/">Anasayfa</a>
           <a href="/job-list">İş İlanları</a>
           <a href="/events">Etkinlikler</a>
-          <a href="/courses">Kurslarım</a>
           <a href="/aboutus">Hakkımızda</a>
           <a href="/contact">İletişim</a>
         </div>

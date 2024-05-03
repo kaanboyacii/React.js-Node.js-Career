@@ -8,7 +8,8 @@ import {
     updateImg,
     applyJob,
     applyEvent,
-    checkPassword
+    checkPassword,
+    getUsersByIds
 } from "../controllers/userController.js";
 import { verifyToken } from "../utility/verifyToken.js";
 
@@ -28,6 +29,9 @@ router.delete("/:id", verifyToken, deleteUser);
 
 //get a user
 router.get("/find/:id", getUser);
+
+//get users by ids
+router.get("/", getUsersByIds);
 
 //subscribe a user
 router.put("/sub/:id", verifyToken, subscribe);

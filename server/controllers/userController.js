@@ -108,6 +108,25 @@ export const getUser = async (req, res, next) => {
     }
 }
 
+
+export const getUsersByIds = async (req, res, next) => {
+    const userIds = req.query.ids; 
+    const idsArray = userIds.split(',');
+
+    try {
+        const users = await User.find({ _id: { $in: idsArray } });
+
+        if (users.length > 0) {
+            res.status(200).json({ Users: users });
+        } else {
+            const customError = createError(404, 'Kullanıcı bulunamadı.');
+            res.status(customError.status).json({ error: customError.message });
+        }
+    } catch (err) {
+        next(err);
+    }
+};
+
 export const subscribe = async (req, res, next) => {
     try {
         await User.findByIdAndUpdate(req.user.id, {

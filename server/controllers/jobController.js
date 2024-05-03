@@ -49,7 +49,7 @@ export const getJobById = async (req, res, next) => {
 };
 
 export const getJobsByIds = async (req, res, next) => {
-    const jobIds = req.query.ids; // Assuming the IDs are passed as a query parameter, e.g., /api/jobs?ids=id1,id2,id3
+    const jobIds = req.query.ids;
     const idsArray = jobIds.split(',');
 
     try {

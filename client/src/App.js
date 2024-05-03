@@ -21,6 +21,7 @@ import CompanyPanel from "./pages/companyPages/panel/CompanyPanel/CompanyPanel";
 import CompanyPanelProfile from "./pages/companyPages/panel/CompanyPanelProfile/CompanyPanelProfile";
 import CompanyPanelJobs from "./pages/companyPages/panel/CompanyPanelJobs/CompanyPanelJobs";
 import CompanyPanelJob from "./pages/companyPages/panel/CompanyPanelJob/CompanyPanelJob";
+import NotFound from "./error/NotFound";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -36,30 +37,27 @@ function App() {
     };
   }, []);
 
-
   if (currentCompany) {
     return (
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={<Navigate to="/company-panel" replace />}
-          />
+          <Route path="/" element={<Navigate to="/company-panel" replace />} />
           <Route path="company-panel" element={<CompanyPanel />} />
           <Route path="company-panel/profile" element={<CompanyPanelProfile />} />
           <Route path="company-panel/jobs" element={<CompanyPanelJobs />} />
           <Route path="company-panel/job">
             <Route path=":id" element={<CompanyPanelJob />} />
           </Route>
+          {/* Tanımsız rotalarda NotFound bileşenine yönlendir */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     );
   }
+
   return (
     <div className={darkMode ? "app dark" : "app"}>
-      {isLoading && (
-        <LoadingScreen />
-      )}
+      {isLoading && <LoadingScreen />}
       {!isLoading && (
         <BrowserRouter>
           <Routes>
@@ -83,6 +81,8 @@ function App() {
               </Route>
               <Route path="aboutus" element={<Aboutus />} />
               <Route path="contact" element={<ContactPage />} />
+              {/* Tanımsız rotalarda NotFound bileşenine yönlendir */}
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -22,6 +22,7 @@ import CompanyPanelProfile from "./pages/companyPages/panel/CompanyPanelProfile/
 import CompanyPanelJobs from "./pages/companyPages/panel/CompanyPanelJobs/CompanyPanelJobs";
 import CompanyPanelJob from "./pages/companyPages/panel/CompanyPanelJob/CompanyPanelJob";
 import NotFound from "./error/NotFound";
+import CompanyPanelApplications from "./pages/companyPages/panel/CompanyPanelJobs copy/CompanyPanelApplications";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -47,6 +48,9 @@ function App() {
           <Route path="company-panel/jobs" element={<CompanyPanelJobs />} />
           <Route path="company-panel/job">
             <Route path=":id" element={<CompanyPanelJob />} />
+          </Route>
+          <Route path="company-panel/applications">
+            <Route path=":id" element={<CompanyPanelApplications />} />
           </Route>
           {/* Tanımsız rotalarda NotFound bileşenine yönlendir */}
           <Route path="*" element={<NotFound />} />

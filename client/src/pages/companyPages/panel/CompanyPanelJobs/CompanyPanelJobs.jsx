@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import CompanyPanelJobsCreate from "./CompanyPanelJobsCreate"; 
 
 const CompanyPanelJobs = () => {
@@ -67,6 +68,7 @@ const CompanyPanelJobs = () => {
                 <TableCell className="table-header-cell">İş Tipi</TableCell>
                 <TableCell className="table-header-cell">Çalışma Şekli</TableCell>
                 <TableCell className="table-header-cell">Düzenle</TableCell>
+                <TableCell className="table-header-cell">Başvuranlar</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -78,6 +80,7 @@ const CompanyPanelJobs = () => {
                   <TableCell>{data.workFrom}</TableCell>
                   <TableCell>
                     <Button
+                      className="edit-btn"
                       variant="contained"
                       color="primary"
                       component={Link}
@@ -85,6 +88,18 @@ const CompanyPanelJobs = () => {
                       startIcon={<EditIcon />}
                     >
                       Düzenle
+                    </Button>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                    className="applications-btn"
+                      variant="contained"
+                      color="success"
+                      component={Link}
+                      to={`/company-panel/applications/${data._id}`}
+                      startIcon={<LibraryBooksIcon />}
+                    >
+                      Başvurular
                     </Button>
                   </TableCell>
                 </TableRow>

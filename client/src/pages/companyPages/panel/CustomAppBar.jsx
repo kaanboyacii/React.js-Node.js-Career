@@ -106,18 +106,6 @@ const CustomAppBar = () => {
         </IconButton>
         <p>Mesajlar</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Bildirimler</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -153,12 +141,6 @@ const CustomAppBar = () => {
           <AppsIcon />
         </ListItemIcon>
         <ListItemText primary="İş İlanlarım" />
-      </ListItem>
-      <ListItem button component={Link} to="/company-panel/applications">
-        <ListItemIcon>
-          <NotificationsIcon />
-        </ListItemIcon>
-        <ListItemText primary="Başvurular" />
       </ListItem>
       <ListItem button component={Link} to="/company-panel/profile">
         <ListItemIcon>
@@ -201,15 +183,6 @@ const CustomAppBar = () => {
             >
               <Badge badgeContent={4} color="error">
                 <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
               </Badge>
             </IconButton>
             <IconButton

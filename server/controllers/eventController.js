@@ -70,6 +70,24 @@ export const getEventById = async (req, res, next) => {
     }
 };
 
+export const getEventsByIds = async (req, res, next) => {
+    const eventIds = req.query.ids;
+    const idsArray = eventIds.split(',');
+
+    try {
+        const events = await Event.find({ _id: { $in: idsArray } });
+
+        if (events.length > 0) {
+            res.status(200).json({ eventApplications: events });
+        } else {
+            const customError = createError(404, 'Etkinlikler bulunamadı.');
+            res.status(customError.status).json({ error: customError.message });
+        }
+    } catch (err) {
+        next(err);
+    }
+}
+
 export const updateEvent = async (req, res, next) => {
     const eventId = req.params.id;
     const updatedEventData = req.body;

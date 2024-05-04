@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import MailIcon from "@mui/icons-material/MoveToInbox";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -19,6 +18,7 @@ import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AppsIcon from "@mui/icons-material/Apps";
+import EventIcon from '@mui/icons-material/Event';
 import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -141,6 +141,12 @@ const CustomAppBar = () => {
           <AppsIcon />
         </ListItemIcon>
         <ListItemText primary="İş İlanlarım" />
+      </ListItem>
+      <ListItem button component={Link} to="/company-panel/events">
+        <ListItemIcon>
+          <EventIcon />
+        </ListItemIcon>
+        <ListItemText primary="Etkinliklerim" />
       </ListItem>
       <ListItem button component={Link} to="/company-panel/profile">
         <ListItemIcon>

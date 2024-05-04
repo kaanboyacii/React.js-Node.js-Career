@@ -59,7 +59,7 @@ const CompanyPanelJobCreate = ({ onClose }) => {
   const handleSaveClick = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/jobs/create", jobData);
+      const res = await axios.post("/jobs/", jobData);
       if (res.status === 201) {
         onClose();
         window.location.reload();

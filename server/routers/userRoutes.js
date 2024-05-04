@@ -28,7 +28,7 @@ router.put("/updateImg/:id", verifyToken, updateImg);
 router.delete("/:id", verifyToken, deleteUser);
 
 //get a user
-router.get("/find/:id", getUser);
+router.get("/:id", getUser);
 
 //get users by ids
 router.get("/", getUsersByIds);
@@ -42,7 +42,7 @@ router.put("/unsub/:id", verifyToken, unsubscribe);
 //apply job
 router.post("/apply-job/:jobId", verifyToken, applyJob);
 
-//apply job
+//apply event
 router.post("/apply-event/:eventId", verifyToken, applyEvent);
 
 

@@ -68,7 +68,7 @@ const Settings = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`/users/find/${currentUser._id}`);
+        const response = await axios.get(`/users/${currentUser._id}`);
         const userData = response.data;
         setEmailSet(userData.emailSet);
         setSmsSet(userData.smsSet);

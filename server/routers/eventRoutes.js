@@ -13,7 +13,7 @@ import { verifyToken } from "../utility/verifyToken.js";
 const router = express.Router();
 
 //create event
-router.post("/create", verifyToken, createEvent);
+router.post("/", verifyToken, createEvent);
 
 //update event
 router.put("/:id", verifyToken, updateEvent);

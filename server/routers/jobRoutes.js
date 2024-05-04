@@ -13,7 +13,7 @@ import { verifyToken } from "../utility/verifyToken.js";
 const router = express.Router();
 
 //create job
-router.post("/create", verifyToken, createJob);
+router.post("/", verifyToken, createJob);
 
 //update job
 router.put("/:id", verifyToken, updateJob);
@@ -24,7 +24,7 @@ router.delete("/:id", verifyToken, deleteJob);
 //get all jobs
 router.get("/getAllJobs", getJobs);
 
-//get all jobs
+//get search jobs by name
 router.get("/search", searchJobsByName);
 
 //get job by id

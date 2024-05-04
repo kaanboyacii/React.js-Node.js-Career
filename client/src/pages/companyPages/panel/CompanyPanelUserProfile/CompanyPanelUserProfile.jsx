@@ -50,30 +50,44 @@ const CompanyPanelUserProfile = () => {
                   <Typography variant="h6">{userData.title}</Typography>
                   <Typography variant="body1">{userData.bio}</Typography>
                   <Divider style={{ margin: "16px 0" }} />
-                  <Typography variant="subtitle1">Temel Bilgiler</Typography>
+                  <Typography variant="subtitle1"> <strong>Temel Bilgiler</strong></Typography>
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
-                      <Typography variant="body2">
-                        <strong>Email:</strong> {userData.email}
+                      <Typography variant="body1">
+                        <strong>İsim:</strong> {userData.name}
                       </Typography>
-                      <Typography variant="body2">
+                      <Typography variant="body1">
+                        <strong>E-posta:</strong> {userData.email}
+                      </Typography>
+                      <Typography variant="body1">
                         <strong>Telefon:</strong> {userData.phone}
                       </Typography>
-                      <Typography variant="body2">
+                      <Typography variant="body1">
                         <strong>Şehir:</strong> {userData.city}
+                      </Typography>
+                      <Typography variant="body1">
+                        <strong>Ehliyet:</strong> {userData.drivingLicense}
                       </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Typography variant="body2">
+                      <Typography variant="body1">
                         <strong>Cinsiyet:</strong> {userData.gender}
                       </Typography>
-                      <Typography variant="body2">
-                        <strong>Doğum Tarihi:</strong>{" "}
+                      <Typography variant="body1">
+                        <strong>Doğum Tarihi:</strong>
                         {new Date(userData.birth).toLocaleDateString()}
                       </Typography>
-                      <Typography variant="body2">
-                        <strong>Çalışma Durumu:</strong>{" "}
+                      <Typography variant="body1">
+                        <strong>Çalışma Durumu:</strong>
                         {userData.workingStatus}
+                      </Typography>
+                      <Typography variant="body1">
+                        <strong>Çalışmak İstediği Alan:</strong>
+                        {userData.workingWant}
+                      </Typography>
+                      <Typography variant="body1">
+                        <strong>Deneyim:</strong>
+                        {userData.careerLevel}
                       </Typography>
                     </Grid>
                   </Grid>

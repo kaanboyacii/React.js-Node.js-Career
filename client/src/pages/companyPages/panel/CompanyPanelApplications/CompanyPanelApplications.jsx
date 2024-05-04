@@ -10,8 +10,9 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Button,
 } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 const CompanyPanelApplications = () => {
   const [applicants, setApplicants] = useState([]);
@@ -54,19 +55,32 @@ const CompanyPanelApplications = () => {
     <Layout>
       <div className="company-panel-applications">
         <h1>İş Başvuruları</h1>
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} className="table-container">
           <Table>
             <TableHead>
-              <TableRow>
-                <TableCell>Başvuran Adı</TableCell>
-                <TableCell>Durum</TableCell>
+              <TableRow className="table-header">
+                <TableCell className="table-header-cell">
+                  Başvuran Adı
+                </TableCell>
+                <TableCell className="table-header-cell">Durum</TableCell>
+                <TableCell className="table-header-cell">Profil</TableCell>{" "}
               </TableRow>
             </TableHead>
             <TableBody>
               {applicants.map((applicant, index) => (
-                <TableRow key={index}>
+                <TableRow key={index} className="table-row">
                   <TableCell>{userNames[applicant.user]}</TableCell>
                   <TableCell>{applicant.status}</TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      component={Link}
+                      to={`/company-panel/user-profile/${applicant.user}`}
+                    >
+                      Profili İncele
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

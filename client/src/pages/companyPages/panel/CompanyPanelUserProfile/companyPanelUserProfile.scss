@@ -1,42 +1,32 @@
 @import "../../../../style/color.scss";
 
-.company-panel-job {
+.company-panel-user-profile {
   padding: 20px;
 
-  h1 {
-    color: $primary-color;
-    font-size: 24px;
-    margin-bottom: 20px;
+  .chip-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
   }
 
-  .table-container {
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  }
-
-  .table-header {
-    background-color: $secondary-color;
-  }
-
-  .table-header-cell {
-    font-size: 14px;
-    font-weight: bold;
+  .chip {
+    background-color: $primary-color;
     color: white;
-    padding: 12px 16px;
-    text-align: left;
+    padding: 6px 12px;
+    border-radius: 16px;
   }
 
-  .table-row {
-    &:nth-child(even) {
-      background-color: #f7f7f7;
-    }
-
-    &:hover {
-      background-color: #f0f0f0;
-    }
+  ul {
+    list-style-type: none;
+    padding-left: 0;
   }
-  .MuiButton-root {
-    margin: 10px 10px 10px 0;
+
+  li {
+    margin-bottom: 16px;
+  }
+
+  strong {
+    font-weight: bold;
   }
 }

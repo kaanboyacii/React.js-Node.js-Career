@@ -28,7 +28,7 @@ const Event = () => {
     };
     fetchData();
   }, [path, currentUser && currentUser.eventApplications]);
-  
+
   const handleApplyClick = async () => {
     if (!isAlreadyApplied) {
       try {
@@ -70,13 +70,9 @@ const Event = () => {
                 </Link>
               </h3>
               <h3>Etkinlik Detayları</h3>
-              <p>{eventData.description}</p>
-              <h3>İstenen Nitelikler</h3>
-              <ul>
-                {eventData.requirements.map((requirement, index) => (
-                  <li key={index}>{requirement}</li>
-                ))}
-              </ul>
+              <p
+                dangerouslySetInnerHTML={{ __html: eventData.description }}
+              ></p>
             </motion.div>
             <motion.div
               className="right-side"

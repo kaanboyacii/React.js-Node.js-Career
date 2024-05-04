@@ -25,6 +25,7 @@ import NotFound from "./error/NotFound";
 import CompanyPanelApplications from "./pages/companyPages/panel/CompanyPanelApplications/CompanyPanelApplications";
 import CompanyPanelUserProfile from "./pages/companyPages/panel/CompanyPanelUserProfile/CompanyPanelUserProfile";
 import CompanyPanelEvents from "./pages/companyPages/panel/CompanyPanelEvents/CompanyPanelEvents";
+import CompanyPanelEvent from "./pages/companyPages/panel/CompanyPanelEvent/CompanyPanelEvent";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -55,7 +56,7 @@ function App() {
           //EVENT PAGES
           <Route path="company-panel/events" element={<CompanyPanelEvents />} />
           <Route path="company-panel/event">
-            <Route path=":id" element={<CompanyPanelJob />} />
+            <Route path=":id" element={<CompanyPanelEvent />} />
           </Route>
           <Route path="company-panel/applications">
             <Route path=":id" element={<CompanyPanelApplications />} />

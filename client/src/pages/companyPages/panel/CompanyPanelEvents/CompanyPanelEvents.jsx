@@ -16,6 +16,7 @@ import {
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import CompanyPanelEventsCreate from "./CompanyPanelEventsCreate";
 
 const CompanyPanelEvents = () => {
   const { currentCompany } = useSelector((state) => state.company);
@@ -107,6 +108,7 @@ const CompanyPanelEvents = () => {
           </Table>
         </TableContainer>
       </div>
+      {isCreateEventOpen && <CompanyPanelEventsCreate onClose={handleCloseCreateEvent} />}
     </Layout>
   );
 };

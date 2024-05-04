@@ -7,50 +7,20 @@ import {
   Card,
   CardContent,
   Grid,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   Modal,
   Fade,
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import "react-quill/dist/quill.snow.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const CompanyPanelEventsCreate = ({ onClose }) => {
-  const API_ENDPOINT = "https://turkiyeapi.dev/api/v1/provinces";
-  const [locations, setLocations] = useState([]);
-  const [jobData, setJobData] = useState({
-    title: "",
-    location: "",
-    type: "",
-    workFrom: "",
-    level: "",
-    description: "",
-    requirements: "",
-    salary: "",
-  });
-
-  useEffect(() => {
-    const fetchProvinces = async () => {
-      try {
-        const response = await fetch(API_ENDPOINT);
-        const { data } = await response.json();
-        const simplifiedLocations = data.map((province) => ({
-          id: province.id.toString(),
-          name: province.name,
-        }));
-        setLocations(simplifiedLocations);
-      } catch (error) {
-        console.error("Error fetching provinces:", error);
-      }
-    };
-    fetchProvinces();
-  }, []);
+  const [eventData, setEventData] = useState({});
 
   const handleChange = (name, value) => {
-    setJobData((prevData) => ({
+    setEventData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -59,15 +29,15 @@ const CompanyPanelEventsCreate = ({ onClose }) => {
   const handleSaveClick = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/jobs/", jobData);
+      const res = await axios.post("/events/", eventData);
       if (res.status === 201) {
         onClose();
         window.location.reload();
       } else {
-        console.error("Failed to create job");
+        console.error("Failed to create event");
       }
     } catch (error) {
-      console.error("Error creating job:", error);
+      console.error("Error creating event:", error);
     }
   };
 
@@ -76,7 +46,7 @@ const CompanyPanelEventsCreate = ({ onClose }) => {
       <Fade in={true}>
         <div className="modal-container">
           <Layout>
-            <div className="company-panel-job-create">
+            <div className="company-panel-event-create">
               <Card elevation={3}>
                 <CardContent>
                   <Grid
@@ -85,7 +55,7 @@ const CompanyPanelEventsCreate = ({ onClose }) => {
                     alignItems="center"
                   >
                     <Grid item>
-                      <h1>Yeni İş İlanı Oluştur</h1>
+                      <h1>Yeni Etkinlik Oluştur</h1>
                     </Grid>
                     <Grid item>
                       <IconButton onClick={onClose} aria-label="Close">
@@ -94,180 +64,146 @@ const CompanyPanelEventsCreate = ({ onClose }) => {
                     </Grid>
                   </Grid>
                   <form onSubmit={handleSaveClick}>
-                    <Grid
-                      container
-                      spacing={2}
-                      style={{
-                        overflowY: "auto",
-                        maxHeight: "calc(100vh - 100px)",
-                      }}
-                    >
-                      <Grid item xs={12} md={4}>
-                        <TextField
-                          id="title"
-                          label="İş Başlığı"
-                          value={jobData.title}
-                          onChange={(e) =>
-                            handleChange("title", e.target.value)
-                          }
-                          variant="outlined"
-                          fullWidth
-                          size="small"
-                          margin="dense"
-                          required
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={4}>
-                        <FormControl
-                          fullWidth
-                          variant="outlined"
-                          size="small"
-                          margin="dense"
-                          required
-                        >
-                          <InputLabel id="location-label">Lokasyon</InputLabel>
-                          <Select
-                            labelId="location-label"
-                            id="location"
-                            value={jobData.location}
-                            onChange={(e) =>
-                              handleChange("location", e.target.value)
-                            }
-                            label="Lokasyon"
-                            required
-                          >
-                            {locations.map((location) => (
-                              <MenuItem key={location.id} value={location.name}>
-                                {location.name}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} md={4}>
-                        <FormControl
-                          fullWidth
-                          variant="outlined"
-                          size="small"
-                          margin="dense"
-                        >
-                          <InputLabel id="type-label">İş Tipi</InputLabel>
-                          <Select
-                            labelId="type-label"
-                            id="type"
-                            value={jobData.type}
-                            onChange={(e) =>
-                              handleChange("type", e.target.value)
-                            }
-                            label="İş Tipi"
-                          >
-                            <MenuItem value="Full-Time">Full-Time</MenuItem>
-                            <MenuItem value="Part-Time">Part-Time</MenuItem>
-                            <MenuItem value="Internship">Internship</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} md={4}>
-                        <FormControl
-                          fullWidth
-                          variant="outlined"
-                          size="small"
-                          margin="dense"
-                          required
-                        >
-                          <InputLabel id="workFrom-label">
-                            Çalışma Şekli
-                          </InputLabel>
-                          <Select
-                            labelId="workFrom-label"
-                            id="workFrom"
-                            value={jobData.workFrom}
-                            onChange={(e) =>
-                              handleChange("workFrom", e.target.value)
-                            }
-                            label="Çalışma Şekli"
-                            required
-                          >
-                            <MenuItem value="Ofis">Ofis</MenuItem>
-                            <MenuItem value="Uzaktan">Uzaktan</MenuItem>
-                            <MenuItem value="Hybrid">Hybrid</MenuItem>
-                          </Select>
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} md={4}>
-                        <TextField
-                          id="level"
-                          label="Seviye"
-                          value={jobData.level}
-                          onChange={(e) =>
-                            handleChange("level", e.target.value)
-                          }
-                          variant="outlined"
-                          fullWidth
-                          size="small"
-                          margin="dense"
-                          required
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={4}>
-                        <TextField
-                          id="salary"
-                          label="Maaş"
-                          value={jobData.salary}
-                          onChange={(e) =>
-                            handleChange("salary", e.target.value)
-                          }
-                          variant="outlined"
-                          fullWidth
-                          size="small"
-                          margin="dense"
-                          required
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={12}>
-                        <TextField
-                          id="description"
-                          label="Açıklama"
-                          value={jobData.description}
-                          onChange={(e) =>
-                            handleChange("description", e.target.value)
-                          }
-                          variant="outlined"
-                          fullWidth
-                          size="small"
-                          margin="dense"
-                          multiline
-                          rows={4}
-                          required
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={12}>
-                        <TextField
-                          id="requirements"
-                          label="Gereksinimler"
-                          value={jobData.requirements}
-                          onChange={(e) =>
-                            handleChange("requirements", e.target.value)
-                          }
-                          variant="outlined"
-                          fullWidth
-                          size="small"
-                          margin="dense"
-                          multiline
-                          rows={4}
-                          required
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={12}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          type="submit"
-                          style={{ marginTop: "1rem" }}
-                        >
-                          Kaydet
-                        </Button>
-                      </Grid>
+                    <Grid item xs={12} md={4}>
+                      <TextField
+                        id="title"
+                        label="Etkinlik Başlığı"
+                        value={eventData.title}
+                        onChange={(e) => handleChange("title", e.target.value)}
+                        variant="outlined"
+                        fullWidth
+                        size="small"
+                        margin="dense"
+                        required
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <TextField
+                        id="img"
+                        label="Görsel URL"
+                        value={eventData.img}
+                        onChange={(e) => handleChange("img", e.target.value)}
+                        variant="outlined"
+                        fullWidth
+                        size="small"
+                        margin="dense"
+                        required
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <p>Açıklama:</p>
+                      <ReactQuill
+                        value={eventData.description || ""}
+                        onChange={(value) => handleChange("description", value)}
+                        theme="snow"
+                        modules={{
+                          toolbar: [
+                            [{ header: [1, 2, false] }],
+                            [
+                              "bold",
+                              "italic",
+                              "underline",
+                              "strike",
+                              "blockquote",
+                            ],
+                            [
+                              { list: "ordered" },
+                              { list: "bullet" },
+                              { indent: "-1" },
+                              { indent: "+1" },
+                            ],
+                            ["link", "image"],
+                            ["clean"],
+                          ],
+                        }}
+                        formats={[
+                          "header",
+                          "bold",
+                          "italic",
+                          "underline",
+                          "strike",
+                          "blockquote",
+                          "list",
+                          "bullet",
+                          "indent",
+                          "link",
+                          "image",
+                        ]}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <TextField
+                        id="location"
+                        label="Konum"
+                        value={eventData.location}
+                        onChange={(e) =>
+                          handleChange("location", e.target.value)
+                        }
+                        variant="outlined"
+                        fullWidth
+                        size="small"
+                        margin="dense"
+                        required
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <TextField
+                        id="type"
+                        label="Tip"
+                        value={eventData.type}
+                        onChange={(e) => handleChange("type", e.target.value)}
+                        variant="outlined"
+                        fullWidth
+                        size="small"
+                        margin="dense"
+                        required
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <TextField
+                        id="date"
+                        label="Tarih"
+                        type="date"
+                        value={eventData.date}
+                        onChange={(e) => handleChange("date", e.target.value)}
+                        variant="outlined"
+                        fullWidth
+                        size="small"
+                        margin="dense"
+                        required
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <TextField
+                        id="applicationDeadline"
+                        label="Başvuru Son Tarihi"
+                        type="date"
+                        value={eventData.applicationDeadline}
+                        onChange={(e) =>
+                          handleChange("applicationDeadline", e.target.value)
+                        }
+                        variant="outlined"
+                        fullWidth
+                        size="small"
+                        margin="dense"
+                        required
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={12}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        style={{ marginTop: "1rem" }}
+                      >
+                        Kaydet
+                      </Button>
                     </Grid>
                   </form>
                 </CardContent>

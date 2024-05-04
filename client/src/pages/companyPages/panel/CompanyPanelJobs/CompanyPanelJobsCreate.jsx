@@ -244,10 +244,17 @@ const CompanyPanelJobCreate = ({ onClose }) => {
                       <Grid item xs={12} md={12}>
                         <TextField
                           id="requirements"
-                          label="Gereksinimler"
-                          value={jobData.requirements}
+                          label="Gereksinimler (Virgül ve boşluk ile ayırarak yazınız)"
+                          value={
+                            jobData.requirements
+                              ? jobData.requirements.join(", ")
+                              : ""
+                          }
                           onChange={(e) =>
-                            handleChange("requirements", e.target.value)
+                            handleChange(
+                              "requirements",
+                              e.target.value.split(", ")
+                            )
                           }
                           variant="outlined"
                           fullWidth

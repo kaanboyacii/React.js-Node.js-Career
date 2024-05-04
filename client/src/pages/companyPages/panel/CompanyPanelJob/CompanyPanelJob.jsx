@@ -197,6 +197,7 @@ const CompanyPanelJob = () => {
                     size="small"
                     margin="dense"
                   />
+                  <p>Açıklama:</p>
                   <ReactQuill
                     value={jobData.description || ""}
                     onChange={(value) => handleChange("description", value)}

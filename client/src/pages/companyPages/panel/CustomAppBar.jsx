@@ -4,9 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
-import MailIcon from "@mui/icons-material/MoveToInbox";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -18,13 +16,14 @@ import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AppsIcon from "@mui/icons-material/Apps";
-import EventIcon from '@mui/icons-material/Event';
+import EventIcon from "@mui/icons-material/Event";
 import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { companyLogout } from "../../../redux/companySlice";
 import "./panel.scss";
 import Logo from "../../../img/logo-back.png";
+import { Avatar } from "@mui/material";
 
 const CustomAppBar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -76,8 +75,12 @@ const CustomAppBar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profilim</MenuItem>
-      <MenuItem onClick={handleLogout}>Çıkış yap</MenuItem>
+      <MenuItem component={Link} to="/company-panel/profile">
+        <AccountCircle /> Profilim
+      </MenuItem>
+      <MenuItem onClick={handleLogout}>
+        <LogoutIcon /> Çıkış yap
+      </MenuItem>
     </Menu>
   );
 
@@ -98,14 +101,6 @@ const CustomAppBar = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Mesajlar</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -183,16 +178,7 @@ const CustomAppBar = () => {
           <div style={{ flexGrow: 1 }} />
           <div style={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
+              size="small"
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
@@ -200,7 +186,12 @@ const CustomAppBar = () => {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <Avatar
+                alt="Company Logo"
+                sx={{ width: 25, height: 25 }}
+                src={currentCompany.img}
+                onClick={handleProfileMenuOpen}
+              />
             </IconButton>
           </div>
         </Toolbar>

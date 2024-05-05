@@ -43,8 +43,13 @@
         font-size: 16px;
         margin-bottom: 10px;
         display: block;
-        text-align: left; /* Yazıları sola hizala */
+        text-align: left; 
       }
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }      
     }
     .right-side {
       flex: 2;

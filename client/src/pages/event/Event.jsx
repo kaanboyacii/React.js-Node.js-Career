@@ -51,6 +51,7 @@ const Event = () => {
   const handleCloseConfirmation = () => {
     setConfirmationOpen(false);
   };
+
   return (
     <div className="event">
       <Navbar />
@@ -69,6 +70,7 @@ const Event = () => {
                   <h2>{eventData.company.companyName}</h2>
                 </Link>
               </h3>
+              <img alt="Company Logo" src={eventData.img} />
               <h3>Etkinlik Detayları</h3>
               <p
                 dangerouslySetInnerHTML={{ __html: eventData.description }}

@@ -1,18 +1,18 @@
-@import "../../../../style/color.scss";
+@import "../../../style/color.scss";
 
-.company-panel-jobs {
+.company-panel-events {
   padding: 20px;
 
   h1 {
     color: $primary-color;
     font-size: 24px;
     margin: 20px;
-    display: inline-block; 
+    display: inline-block;
   }
 
-  .add-job-button-container {
+  .add-event-button-container {
     float: right;
-    margin: 20px; 
+    margin: 20px;
   }
 
   .table-container {
@@ -54,7 +54,6 @@
       background-color: $primary-color;
     }
   }
-
   .applications-btn {
     min-width: 0;
     padding: 6px 16px;

@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import Layout from "../Layout";
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useDispatch, useSelector } from "react-redux";
-import { companyUpdateProfile } from "../../../../redux/companySlice";
+import { companyUpdateProfile } from "../../../redux/companySlice";
 import axios from "axios";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from "../../../../firebase";
+import { storage } from "../../../firebase";
 import "./companyPanelProfile.scss";
 
 const CompanyPanelProfile = () => {

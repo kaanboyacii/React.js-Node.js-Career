@@ -17,16 +17,16 @@ import ContactPage from "./pages/contactPage/ContactPage";
 import CompanyProfile from "./pages/companyProfile/CompanyProfile";
 import LoadingScreen from "./components/loading/LoadingScreen";
 import { useSelector } from "react-redux";
-import CompanyPanel from "./pages/companyPages/panel/CompanyPanel/CompanyPanel";
-import CompanyPanelProfile from "./pages/companyPages/panel/CompanyPanelProfile/CompanyPanelProfile";
-import CompanyPanelJobs from "./pages/companyPages/panel/CompanyPanelJobs/CompanyPanelJobs";
-import CompanyPanelJob from "./pages/companyPages/panel/CompanyPanelJob/CompanyPanelJob";
+import CompanyPanel from "./pages/companyPanelPages/CompanyPanel/CompanyPanel";
+import CompanyPanelProfile from "./pages/companyPanelPages/CompanyPanelProfile/CompanyPanelProfile";
+import CompanyPanelJobs from "./pages/companyPanelPages/CompanyPanelJobs/CompanyPanelJobs";
+import CompanyPanelJob from "./pages/companyPanelPages/CompanyPanelJob/CompanyPanelJob";
 import NotFound from "./error/NotFound";
-import CompanyPanelUserProfile from "./pages/companyPages/panel/CompanyPanelUserProfile/CompanyPanelUserProfile";
-import CompanyPanelEvents from "./pages/companyPages/panel/CompanyPanelEvents/CompanyPanelEvents";
-import CompanyPanelEvent from "./pages/companyPages/panel/CompanyPanelEvent/CompanyPanelEvent";
-import CompanyPanelJobApplications from "./pages/companyPages/panel/CompanyPanelJobApplications/CompanyPanelJobApplications";
-import CompanyPanelEventApplications from "./pages/companyPages/panel/CompanyPanelEventApplications/CompanyPanelEventApplications";
+import CompanyPanelUserProfile from "./pages/companyPanelPages/CompanyPanelUserProfile/CompanyPanelUserProfile";
+import CompanyPanelEvents from "./pages/companyPanelPages/CompanyPanelEvents/CompanyPanelEvents";
+import CompanyPanelEvent from "./pages/companyPanelPages/CompanyPanelEvent/CompanyPanelEvent";
+import CompanyPanelJobApplications from "./pages/companyPanelPages/CompanyPanelJobApplications/CompanyPanelJobApplications";
+import CompanyPanelEventApplications from "./pages/companyPanelPages/CompanyPanelEventApplications/CompanyPanelEventApplications";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);

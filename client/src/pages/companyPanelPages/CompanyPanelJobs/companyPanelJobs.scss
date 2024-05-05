@@ -1,6 +1,6 @@
-@import "../../../../style/color.scss";
+@import "../../../style/color.scss";
 
-.company-panel-applications {
+.company-panel-jobs {
   padding: 20px;
 
   h1 {
@@ -43,4 +43,27 @@
     }
   }
 
+  .edit-btn {
+    min-width: 0;
+    padding: 6px 16px;
+    text-transform: none;
+    background-color: $secondary-color;
+    color: white;
+
+    &:hover {
+      background-color: $primary-color;
+    }
+  }
+
+  .applications-btn {
+    min-width: 0;
+    padding: 6px 16px;
+    text-transform: none;
+    background-color: $accent-color;
+    color: black;
+
+    &:hover {
+      background-color: $soft-color;
+    }
+  }
 }

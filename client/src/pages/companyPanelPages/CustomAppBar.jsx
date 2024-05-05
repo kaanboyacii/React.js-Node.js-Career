@@ -20,9 +20,9 @@ import EventIcon from "@mui/icons-material/Event";
 import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { companyLogout } from "../../../redux/companySlice";
+import { companyLogout } from "../../redux/companySlice";
 import "./panel.scss";
-import Logo from "../../../img/logo-back.png";
+import Logo from "../../img/logo-back.png";
 import { Avatar } from "@mui/material";
 
 const CustomAppBar = () => {

@@ -1,18 +1,18 @@
 @import "../../../../style/color.scss";
 
-.company-panel-events {
+.company-panel-applications {
   padding: 20px;
 
   h1 {
     color: $primary-color;
     font-size: 24px;
     margin: 20px;
-    display: inline-block;
+    display: inline-block; 
   }
 
-  .add-event-button-container {
+  .add-job-button-container {
     float: right;
-    margin: 20px;
+    margin: 20px; 
   }
 
   .table-container {
@@ -43,26 +43,4 @@
     }
   }
 
-  .edit-btn {
-    min-width: 0;
-    padding: 6px 16px;
-    text-transform: none;
-    background-color: $secondary-color;
-    color: white;
-
-    &:hover {
-      background-color: $primary-color;
-    }
-  }
-  .applications-btn {
-    min-width: 0;
-    padding: 6px 16px;
-    text-transform: none;
-    background-color: $accent-color;
-    color: black;
-
-    &:hover {
-      background-color: $soft-color;
-    }
-  }
 }

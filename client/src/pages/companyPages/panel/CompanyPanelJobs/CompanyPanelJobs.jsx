@@ -96,7 +96,7 @@ const CompanyPanelJobs = () => {
                       variant="contained"
                       color="success"
                       component={Link}
-                      to={`/company-panel/applications/${data._id}`}
+                      to={`/company-panel/job-applications/${data._id}`}
                       startIcon={<LibraryBooksIcon />}
                     >
                       Başvurular

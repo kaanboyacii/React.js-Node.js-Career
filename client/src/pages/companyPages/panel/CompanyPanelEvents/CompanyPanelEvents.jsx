@@ -76,6 +76,7 @@ const CompanyPanelEvents = () => {
                 </TableCell>
                 <TableCell className="table-header-cell">Lokasyon</TableCell>
                 <TableCell className="table-header-cell">Düzenle</TableCell>
+                <TableCell className="table-header-cell">Başvurular</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -102,13 +103,27 @@ const CompanyPanelEvents = () => {
                       Düzenle
                     </Button>
                   </TableCell>
+                  <TableCell>
+                    <Button
+                      className="applications-btn"
+                      variant="contained"
+                      color="success"
+                      component={Link}
+                      to={`/company-panel/event-applications/${event._id}`}
+                      startIcon={<LibraryBooksIcon />}
+                    >
+                      Başvurular
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
       </div>
-      {isCreateEventOpen && <CompanyPanelEventsCreate onClose={handleCloseCreateEvent} />}
+      {isCreateEventOpen && (
+        <CompanyPanelEventsCreate onClose={handleCloseCreateEvent} />
+      )}
     </Layout>
   );
 };

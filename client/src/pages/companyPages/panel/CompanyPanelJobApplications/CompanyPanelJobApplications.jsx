@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../Layout";
 import axios from "axios";
-import "./companyPanelApplications.scss";
+import "./companyPanelJobApplications.scss";
 import {
   Table,
   TableBody,
@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useLocation, Link } from "react-router-dom";
 
-const CompanyPanelApplications = () => {
+const CompanyPanelJobApplications = () => {
   const [applicants, setApplicants] = useState([]);
   const [userNames, setUserNames] = useState({});
   const location = useLocation();
@@ -91,4 +91,4 @@ const CompanyPanelApplications = () => {
   );
 };
 
-export default CompanyPanelApplications;
+export default CompanyPanelJobApplications;

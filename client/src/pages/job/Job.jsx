@@ -21,7 +21,9 @@ const Job = () => {
       try {
         const res = await axios.get(`/jobs/${path}`);
         setJobData(res.data);
-        setAlreadyApplied(currentUser && currentUser.jobApplications.includes(res.data._id));
+        setAlreadyApplied(
+          currentUser && currentUser.jobApplications.includes(res.data._id)
+        );
       } catch (err) {
         console.log("User AUTH Error");
       }
@@ -70,18 +72,6 @@ const Job = () => {
               </Link>
               <h3>İş Detayları</h3>
               <div dangerouslySetInnerHTML={{ __html: jobData.description }} />
-              <h3>İstenen Nitelikler</h3>
-              <ul>
-                {jobData.requirements.map((requirement, index) => (
-                  <li key={index}>{requirement}</li>
-                ))}
-              </ul>
-              <h3>Sorumluluklar</h3>
-              <ul>
-                {jobData.responsibilities.map((responsibility, index) => (
-                  <li key={index}>{responsibility}</li>
-                ))}
-              </ul>
             </motion.div>
             <motion.div
               className="right-side"

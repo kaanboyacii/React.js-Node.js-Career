@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../Layout";
-import "./companyPanelJob.scss"
+import "./companyPanelJob.scss";
 import axios from "axios";
 import {
   TextField,
@@ -17,8 +17,8 @@ import {
 import { useLocation } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const CompanyPanelJob = () => {
   const location = useLocation();
@@ -83,7 +83,9 @@ const CompanyPanelJob = () => {
   };
 
   const deleteJob = async () => {
-    const confirmDelete = window.confirm("İş ilanını kaldırmak istediğinizden emin misiniz?");
+    const confirmDelete = window.confirm(
+      "İş ilanını kaldırmak istediğinizden emin misiniz?"
+    );
     if (confirmDelete) {
       try {
         const res = await axios.delete(`/jobs/${jobId}`);
@@ -97,7 +99,7 @@ const CompanyPanelJob = () => {
       }
     }
   };
-  
+
   return (
     <Layout>
       <div className="company-panel-job">
@@ -229,24 +231,6 @@ const CompanyPanelJob = () => {
                       "link",
                       "image",
                     ]}
-                  />
-                  <TextField
-                    id="requirements"
-                    label="Gereksinimler (Virgül ve boşluk ile ayırarak yazınız)"
-                    value={
-                      jobData.requirements
-                        ? jobData.requirements.join(", ")
-                        : ""
-                    }
-                    onChange={(e) =>
-                      handleChange("requirements", e.target.value.split(", "))
-                    }
-                    variant="outlined"
-                    fullWidth
-                    size="small"
-                    margin="dense"
-                    multiline
-                    rows={4}
                   />
                   <TextField
                     id="salary"

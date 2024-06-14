@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import "react-quill/dist/quill.snow.css";
+import ReactQuill from "react-quill";
 
 const CompanyPanelJobCreate = ({ onClose }) => {
   const API_ENDPOINT = "https://turkiyeapi.dev/api/v1/provinces";
@@ -77,7 +78,10 @@ const CompanyPanelJobCreate = ({ onClose }) => {
         <div className="modal-container">
           <Layout>
             <div className="company-panel-job-create">
-              <Card elevation={3}>
+              <Card
+                elevation={3}
+                style={{ maxHeight: "80vh", overflowY: "auto" }}
+              >
                 <CardContent>
                   <Grid
                     container
@@ -94,14 +98,7 @@ const CompanyPanelJobCreate = ({ onClose }) => {
                     </Grid>
                   </Grid>
                   <form onSubmit={handleSaveClick}>
-                    <Grid
-                      container
-                      spacing={2}
-                      style={{
-                        overflowY: "auto",
-                        maxHeight: "calc(100vh - 100px)",
-                      }}
-                    >
+                    <Grid container spacing={2}>
                       <Grid item xs={12} md={4}>
                         <TextField
                           id="title"
@@ -224,48 +221,44 @@ const CompanyPanelJobCreate = ({ onClose }) => {
                           required
                         />
                       </Grid>
-                      <Grid item xs={12} md={12}>
-                        <TextField
-                          id="description"
-                          label="Açıklama"
-                          value={jobData.description}
-                          onChange={(e) =>
-                            handleChange("description", e.target.value)
+                      <Grid item xs={12}>
+                        <p>Açıklama:</p>
+                        <ReactQuill
+                          value={jobData.description || ""}
+                          onChange={(value) =>
+                            handleChange("description", value)
                           }
-                          variant="outlined"
-                          fullWidth
-                          size="small"
-                          margin="dense"
-                          multiline
-                          rows={4}
-                          required
+                          theme="snow"
+                          modules={{
+                            toolbar: [
+                              [{ header: [1, 2, false] }],
+                              [
+                                "bold",
+                                "italic",
+                                "underline",
+                                "strike",
+                                "blockquote",
+                              ],
+                              [{ list: "ordered" }, { list: "bullet" }],
+                              ["link", "image"],
+                              ["clean"],
+                            ],
+                          }}
+                          formats={[
+                            "header",
+                            "bold",
+                            "italic",
+                            "underline",
+                            "strike",
+                            "blockquote",
+                            "list",
+                            "bullet",
+                            "link",
+                            "image",
+                          ]}
                         />
                       </Grid>
-                      <Grid item xs={12} md={12}>
-                        <TextField
-                          id="requirements"
-                          label="Gereksinimler (Virgül ve boşluk ile ayırarak yazınız)"
-                          value={
-                            jobData.requirements
-                              ? jobData.requirements.join(", ")
-                              : ""
-                          }
-                          onChange={(e) =>
-                            handleChange(
-                              "requirements",
-                              e.target.value.split(", ")
-                            )
-                          }
-                          variant="outlined"
-                          fullWidth
-                          size="small"
-                          margin="dense"
-                          multiline
-                          rows={4}
-                          required
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={12}>
+                      <Grid item xs={12}>
                         <Button
                           variant="contained"
                           color="primary"

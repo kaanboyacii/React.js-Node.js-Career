@@ -6,7 +6,8 @@ import {
     getJobs,
     updateJob,
     getJobsByIds,
-    searchJobsByName
+    searchJobsByName,
+    getJobsByCompanyId
 } from "../controllers/jobController.js";
 import { verifyToken } from "../utility/verifyToken.js";
 
@@ -33,5 +34,7 @@ router.get("/:id", getJobById);
 //get jobs by ids
 router.get("/", getJobsByIds);
 
+//get jobs by companyId
+router.get('/company/:companyId', getJobsByCompanyId);
 
 export default router;

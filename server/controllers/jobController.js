@@ -115,3 +115,25 @@ export const deleteJob = async (req, res, next) => {
         next(err);
     }
 };
+
+export const getJobsByCompanyId = async (req, res, next) => {
+    const companyId = req.params.companyId;
+    try {
+        const company = await Company.findById(companyId);
+        if (!company) {
+            const customError = createError(404, 'Şirket bulunamadı.');
+            return res.status(customError.status).json({ error: customError.message });
+        }
+        const jobs = await Job.find({ 'company.companyId': companyId });
+
+        if (jobs.length > 0) {
+            res.status(200).json(jobs);
+        } else {
+            const customError = createError(404, 'Şirkete ait işler bulunamadı.');
+            res.status(customError.status).json({ error: customError.message });
+        }
+    } catch (err) {
+        console.error('Error in getJobsByCompanyId:', err);
+        next(err);
+    }
+};

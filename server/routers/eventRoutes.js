@@ -7,7 +7,8 @@ import {
     updateEvent,
     getTopApplicantEvents,
     getLatestEvents,
-    getEventsByIds
+    getEventsByIds,
+    getEventsByCompanyId
 } from "../controllers/eventController.js";
 import { verifyToken } from "../utility/verifyToken.js";
 
@@ -36,6 +37,9 @@ router.get("/:id", getEventById);
 
 //get events by ids
 router.get("/", getEventsByIds);
+
+//get events by companyId
+router.get("/company/:companyId", getEventsByCompanyId);
 
 
 export default router;

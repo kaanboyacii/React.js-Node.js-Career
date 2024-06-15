@@ -23,7 +23,6 @@ export const createEvent = async (req, res, next) => {
     }
 };
 
-
 export const getEvents = async (req, res, next) => {
     try {
         const events = await Event.find();
@@ -53,7 +52,6 @@ export const getTopApplicantEvents = async (req, res, next) => {
         next(err);
     }
 };
-
 
 export const getEventById = async (req, res, next) => {
     const eventId = req.params.id;
@@ -115,6 +113,28 @@ export const deleteEvent = async (req, res, next) => {
             res.status(customError.status).json({ error: customError.message });
         }
     } catch (err) {
+        next(err);
+    }
+};
+
+export const getEventsByCompanyId = async (req, res, next) => {
+    const companyId = req.params.companyId;
+    try {
+        const company = await Company.findById(companyId);
+        if (!company) {
+            const customError = createError(404, 'Şirket bulunamadı.');
+            return res.status(customError.status).json({ error: customError.message });
+        }
+        const events = await Event.find({ 'company.companyId': companyId });
+
+        if (events.length > 0) {
+            res.status(200).json(events);
+        } else {
+            const customError = createError(404, 'Şirkete ait etkinlikler bulunamadı.');
+            res.status(customError.status).json({ error: customError.message });
+        }
+    } catch (err) {
+        console.error('Error in getJobsByCompanyId:', err);
         next(err);
     }
 };

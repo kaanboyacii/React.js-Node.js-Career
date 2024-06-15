@@ -26,9 +26,9 @@ const CompanyPanelEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const ids = currentCompany.events.join(",");
-        const response = await axios.get(`/events?ids=${ids}`);
-        setEvents(response.data.eventApplications);
+        const companyId = currentCompany._id;
+        const response = await axios.get(`/events/company/${companyId}`);
+        setEvents(response.data);
       } catch (error) {
         console.error("Error fetching events:", error);
       }

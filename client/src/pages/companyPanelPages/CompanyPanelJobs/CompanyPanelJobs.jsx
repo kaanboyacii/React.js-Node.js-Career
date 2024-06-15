@@ -15,8 +15,8 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
-import CompanyPanelJobsCreate from "./CompanyPanelJobsCreate"; 
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import CompanyPanelJobsCreate from "./CompanyPanelJobsCreate";
 
 const CompanyPanelJobs = () => {
   const { currentCompany } = useSelector((state) => state.company);
@@ -26,23 +26,24 @@ const CompanyPanelJobs = () => {
   useEffect(() => {
     const fetchJobApplications = async () => {
       try {
-        const ids = currentCompany.jobs.join(",");
-        const response = await axios.get(`/jobs?ids=${ids}`);
-        setJobApplications(response.data.jobApplications);
+        const companyId = currentCompany._id;
+        const response = await axios.get(`/jobs/company/${companyId}`);
+        setJobApplications(response.data);
       } catch (error) {
         console.error("Error fetching job applications:", error);
       }
     };
-
-    fetchJobApplications();
+    if (currentCompany) {
+      fetchJobApplications();
+    }
   }, [currentCompany]);
 
   const handleAddJob = () => {
-    setIsCreateJobOpen(true); 
+    setIsCreateJobOpen(true);
   };
 
   const handleCloseCreateJob = () => {
-    setIsCreateJobOpen(false); 
+    setIsCreateJobOpen(false);
   };
 
   return (
@@ -66,7 +67,9 @@ const CompanyPanelJobs = () => {
                 <TableCell className="table-header-cell">İş Başlığı</TableCell>
                 <TableCell className="table-header-cell">Lokasyon</TableCell>
                 <TableCell className="table-header-cell">İş Tipi</TableCell>
-                <TableCell className="table-header-cell">Çalışma Şekli</TableCell>
+                <TableCell className="table-header-cell">
+                  Çalışma Şekli
+                </TableCell>
                 <TableCell className="table-header-cell">Düzenle</TableCell>
                 <TableCell className="table-header-cell">Başvuranlar</TableCell>
               </TableRow>
@@ -92,7 +95,7 @@ const CompanyPanelJobs = () => {
                   </TableCell>
                   <TableCell>
                     <Button
-                    className="applications-btn"
+                      className="applications-btn"
                       variant="contained"
                       color="success"
                       component={Link}
@@ -108,7 +111,9 @@ const CompanyPanelJobs = () => {
           </Table>
         </TableContainer>
       </div>
-      {isCreateJobOpen && <CompanyPanelJobsCreate onClose={handleCloseCreateJob} />}
+      {isCreateJobOpen && (
+        <CompanyPanelJobsCreate onClose={handleCloseCreateJob} />
+      )}
     </Layout>
   );
 };

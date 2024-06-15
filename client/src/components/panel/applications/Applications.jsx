@@ -9,39 +9,51 @@ const Applications = () => {
 
   useEffect(() => {
     const fetchJobApplications = async () => {
-      try {
-        const ids = currentUser.jobApplications.join(",");
-        const response = await fetch(`/jobs?ids=${ids}`);
-        const data = await response.json();
-        setJobApplications(data.jobApplications);
-      } catch (error) {
-        console.error("Error fetching job applications:", error);
+      if (
+        currentUser &&
+        currentUser.jobApplications &&
+        currentUser.jobApplications.length > 0
+      ) {
+        try {
+          const ids = currentUser.jobApplications.join(",");
+          const response = await fetch(`/jobs?ids=${ids}`);
+          const data = await response.json();
+          setJobApplications(data.jobApplications || []);
+        } catch (error) {
+          console.error("Error fetching job applications:", error);
+        }
+      } else {
+        setJobApplications([]);
       }
     };
 
     fetchJobApplications();
-  }, [currentUser.jobApplications]);
+  }, [currentUser]);
 
   return (
     <div className="applications">
-      {jobApplications.map((data, index) => (
-        <div className="applications-card" key={index}>
-          <div className="applications-item">
-            <div className="applications-details">
-              <Link to={`/job/${data._id}`}>
-                <h2>{data.title}</h2>
-              </Link>
-              <Link to={`/company/${data.company.companyId}`}>
-                <h3>{data.company.companyName}</h3>
-              </Link>
-            </div>
-            <div className="applications-status">
-              <span className="status-label">Başvuruldu</span>
-              <span className="status-mark">&#10004;</span>
+      {jobApplications.length > 0 ? (
+        jobApplications.map((data, index) => (
+          <div className="applications-card" key={index}>
+            <div className="applications-item">
+              <div className="applications-details">
+                <Link to={`/job/${data._id}`}>
+                  <h2>{data.title}</h2>
+                </Link>
+                <Link to={`/company/${data.company.companyId}`}>
+                  <h3>{data.company.companyName}</h3>
+                </Link>
+              </div>
+              <div className="applications-status">
+                <span className="status-label">Başvuruldu</span>
+                <span className="status-mark">&#10004;</span>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p></p>
+      )}
     </div>
   );
 };

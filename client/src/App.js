@@ -17,7 +17,6 @@ import ContactPage from "./pages/contactPage/ContactPage";
 import CompanyProfile from "./pages/companyProfile/CompanyProfile";
 import LoadingScreen from "./components/loading/LoadingScreen";
 import { useSelector } from "react-redux";
-import CompanyPanel from "./pages/companyPanelPages/CompanyPanel/CompanyPanel";
 import CompanyPanelProfile from "./pages/companyPanelPages/CompanyPanelProfile/CompanyPanelProfile";
 import CompanyPanelJobs from "./pages/companyPanelPages/CompanyPanelJobs/CompanyPanelJobs";
 import CompanyPanelJob from "./pages/companyPanelPages/CompanyPanelJob/CompanyPanelJob";
@@ -46,8 +45,7 @@ function App() {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/company-panel" replace />} />
-          <Route path="company-panel" element={<CompanyPanel />} />
+          <Route path="/" element={<Navigate to="/company-panel/jobs" replace />} />
           <Route path="company-panel/profile" element={<CompanyPanelProfile />} />
           //JOBS PAGES
           <Route path="company-panel/jobs" element={<CompanyPanelJobs />} />

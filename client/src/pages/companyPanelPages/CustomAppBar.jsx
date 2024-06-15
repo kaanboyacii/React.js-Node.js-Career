@@ -13,7 +13,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AppsIcon from "@mui/icons-material/Apps";
 import EventIcon from "@mui/icons-material/Event";
@@ -124,12 +123,6 @@ const CustomAppBar = () => {
     <List>
       <ListItem>
         <img src={Logo} alt="Logo" style={{ width: "200px", height: "auto" }} />
-      </ListItem>
-      <ListItem button component={Link} to="/company-panel">
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <ListItemText primary="Yönetim Paneli" />
       </ListItem>
       <ListItem button component={Link} to="/company-panel/jobs">
         <ListItemIcon>

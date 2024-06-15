@@ -20,57 +20,9 @@ const variants = {
     },
   },
 };
-const eventCards = [
-  {
-    id: 1,
-    title: "Etkinlik 1",
-    description:
-      "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta suscipit saepe, fugit recusandae eveniet incidunt labore nihil, dolor tenetur nemo voluptas eligendi aspernatur, at beatae doloremque quis maxime! Blanditiis fugit, deleniti aspernatur sit non voluptatum saepe nisi. Aliquam sint enim illum cum rerum sapiente autem, libero iusto minima sequi quisquam!",
-    imageSrc: "resim1.jpg",
-    buttons: [
-      { label: "Düğme 1", link: "link1" },
-      { label: "Düğme 2", link: "link2" },
-    ],
-  },
-  {
-    id: 2,
-    title: "Etkinlik 2",
-    description:
-      "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta suscipit saepe, fugit recusandae eveniet incidunt labore nihil, dolor tenetur nemo voluptas eligendi aspernatur, at beatae doloremque quis maxime! Blanditiis fugit, deleniti aspernatur sit non voluptatum saepe nisi. Aliquam sint enim illum cum rerum sapiente autem, libero iusto minima sequi quisquam!",
-    imageSrc: "resim2.jpg",
-    buttons: [
-      { label: "Düğme 1", link: "link1" },
-      { label: "Düğme 2", link: "link2" },
-    ],
-  },
-  {
-    id: 3,
-    title: "Etkinlik 3",
-    description:
-      "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta suscipit saepe, fugit recusandae eveniet incidunt labore nihil, dolor tenetur nemo voluptas eligendi aspernatur, at beatae doloremque quis maxime! Blanditiis fugit, deleniti aspernatur sit non voluptatum saepe nisi. Aliquam sint enim illum cum rerum sapiente autem, libero iusto minima sequi quisquam!",
-    imageSrc: "resim3.jpg",
-    buttons: [
-      { label: "Düğme 1", link: "link1" },
-      { label: "Düğme 3", link: "link3" },
-    ],
-  },
-  {
-    id: 4,
-    title: "Etkinlik 4",
-    description:
-      "    Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta suscipit saepe, fugit recusandae eveniet incidunt labore nihil, dolor tenetur nemo voluptas eligendi aspernatur, at beatae doloremque quis maxime! Blanditiis fugit, deleniti aspernatur sit non voluptatum saepe nisi. Aliquam sint enim illum cum rerum sapiente autem, libero iusto minima sequi quisquam!",
-    imageSrc: "resim4.jpg",
-    buttons: [
-      { label: "Düğme 1", link: "link1" },
-      { label: "Düğme 4", link: "link4" },
-    ],
-  },
-  // Diğer etkinlik kartları...
-];
 
 const About = () => {
   const ref = useRef();
-
   const isInView = useInView(ref, { margin: "-100px" });
 
   return (
@@ -78,16 +30,11 @@ const About = () => {
       className="events"
       variants={variants}
       initial="initial"
-      // animate="animate"
-      // whileInView="animate"
-      ref={ref}
       animate={"animate"}
+      ref={ref}
     >
       <motion.div className="textContainer" variants={variants}>
-        <p>
-          Sizin daha iyi bir kariyer sahibi
-          <br /> olmanız için çalışıyoruz
-        </p>
+        <p>Size daha iyi bir kariyer sahibi olma yönünde yardımcı oluyoruz.</p>
         <hr />
       </motion.div>
       <motion.div className="titleContainer" variants={variants}>
@@ -103,8 +50,8 @@ const About = () => {
             <motion.b whileHover={{ color: "orange" }}>Bizim</motion.b>{" "}
             Gelişimimiz.
           </h1>
-          <Link  to="/aboutus">
-          <button>SİZE NE SUNUYORUZ?</button>
+          <Link to="/aboutus">
+            <button>SİZE NE SUNUYORUZ?</button>
           </Link>
         </div>
       </motion.div>
@@ -115,10 +62,11 @@ const About = () => {
         >
           <h2>CV Oluşturma</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            libero enim nisi aliquam consectetur expedita magni eius ex corrupti
-            animi! Ad nam pariatur assumenda quae mollitia libero repellat
-            explicabo maiores?
+            Kariyerinizde başarıyı sağlamak için etkili bir CV oluşturmanın
+            önemini biliyoruz. Deneyimlerinizi ve becerilerinizi en iyi şekilde
+            yansıtacak şekilde CV'nizi oluşturmanızda size yardımcı oluyoruz.
+            Ayrıca, CV'nizi gözden geçirme ve önerilerde bulunma gibi destekler
+            sunuyoruz.
           </p>
         </motion.div>
         <motion.div
@@ -127,10 +75,10 @@ const About = () => {
         >
           <h2>İş İlanları</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            libero enim nisi aliquam consectetur expedita magni eius ex corrupti
-            animi! Ad nam pariatur assumenda quae mollitia libero repellat
-            explicabo maiores?
+            Sizin kariyer hedeflerinize uygun iş fırsatlarını keşfetmenizi
+            sağlıyoruz. Geniş bir iş ilanı veritabanımız ile iş arama sürecinizi
+            kolaylaştırıyoruz. İstediğiniz sektörde ve konumda iş bulmanıza
+            yardımcı olacak araçlar ve kaynaklar sunuyoruz.
           </p>
         </motion.div>
         <motion.div
@@ -139,10 +87,10 @@ const About = () => {
         >
           <h2>Etkinlikler</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            libero enim nisi aliquam consectetur expedita magni eius ex corrupti
-            animi! Ad nam pariatur assumenda quae mollitia libero repellat
-            explicabo maiores?
+            Kariyerinizi ilerletmenize yardımcı olacak çeşitli etkinlikler
+            düzenliyoruz. Seminerler, workshop'lar ve network etkinlikleri ile
+            bilgi ve deneyim kazanmanızı sağlıyoruz. Profesyonellerle tanışma ve
+            bağlantı kurma fırsatları sunuyoruz.
           </p>
         </motion.div>
         <motion.div
@@ -151,10 +99,11 @@ const About = () => {
         >
           <h2>Programlar</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            libero enim nisi aliquam consectetur expedita magni eius ex corrupti
-            animi! Ad nam pariatur assumenda quae mollitia libero repellat
-            explicabo maiores?
+            Teknoloji ve iş dünyasında kendinizi geliştirmek için çeşitli eğitim
+            ve programlar sunuyoruz. İhtiyacınıza göre özelleştirilmiş eğitim
+            planları ve sertifika programları ile kariyerinizdeki ilerlemeyi
+            destekliyoruz. Yenilikçi ve pratik yaklaşımlarla sizi iş dünyasında
+            bir adım öne çıkarıyoruz.
           </p>
         </motion.div>
       </motion.div>

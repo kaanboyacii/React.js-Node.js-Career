@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./applications.scss";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Applications = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -9,16 +10,11 @@ const Applications = () => {
 
   useEffect(() => {
     const fetchJobApplications = async () => {
-      if (
-        currentUser &&
-        currentUser.jobApplications &&
-        currentUser.jobApplications.length > 0
-      ) {
+      if (currentUser && currentUser._id) {
         try {
-          const ids = currentUser.jobApplications.join(",");
-          const response = await fetch(`/jobs?ids=${ids}`);
-          const data = await response.json();
-          setJobApplications(data.jobApplications || []);
+          const userId = currentUser._id;
+          const response = await axios.get(`/jobs/user/${userId}`);
+          setJobApplications(response.data || []);
         } catch (error) {
           console.error("Error fetching job applications:", error);
         }
@@ -52,7 +48,7 @@ const Applications = () => {
           </div>
         ))
       ) : (
-        <p></p>
+        <p>Kullanıcıya ait başvuru bulunmamaktadır.</p>
       )}
     </div>
   );

@@ -1,6 +1,7 @@
 import { createError } from "../error/error.js";
 import Job from "../models/JobModel.js";
 import Company from "../models/CompanyModel.js";
+import User from "../models/UserModel.js";
 
 export const createJob = async (req, res, next) => {
     try {
@@ -134,6 +135,30 @@ export const getJobsByCompanyId = async (req, res, next) => {
         }
     } catch (err) {
         console.error('Error in getJobsByCompanyId:', err);
+        next(err);
+    }
+};
+
+export const getJobsByUserId = async (req, res, next) => {
+    const userId = req.params.userId;
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            const customError = createError(404, 'Kullanıcı bulunamadı.');
+            return res.status(customError.status).json({ error: customError.message });
+        }
+
+        // Fetch jobs using jobApplications array from user
+        const jobs = await Job.find({ _id: { $in: user.jobApplications } });
+
+        if (jobs.length > 0) {
+            res.status(200).json(jobs);
+        } else {
+            const customError = createError(404, 'Kullanıcıya ait işler bulunamadı.');
+            res.status(customError.status).json({ error: customError.message });
+        }
+    } catch (err) {
+        console.error('Error in getJobsByUserId:', err);
         next(err);
     }
 };

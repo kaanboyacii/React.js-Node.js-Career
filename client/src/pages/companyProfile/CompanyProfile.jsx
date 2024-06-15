@@ -17,7 +17,7 @@ const CompanyProfile = () => {
         const res = await axios.get(`/company/${path}`);
         setCompany(res.data);
       } catch (err) {
-        console.log("User AUTH Error");
+        console.log("Error fetching company data:", err);
       }
     };
     fetchData();
@@ -26,10 +26,11 @@ const CompanyProfile = () => {
   useEffect(() => {
     const fetchJobApplications = async () => {
       try {
-        const ids = company.jobs.join(",");
-        const response = await fetch(`/jobs?ids=${ids}`);
-        const data = await response.json();
-        setJobApplications(data.jobApplications);
+        if (company) {
+          const companyId = company._id;
+          const response = await axios.get(`/jobs/company/${companyId}`);
+          setJobApplications(response.data); // assuming response.data directly contains job applications
+        }
       } catch (error) {
         console.error("Error fetching job applications:", error);
       }

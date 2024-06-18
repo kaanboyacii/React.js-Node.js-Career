@@ -29,7 +29,7 @@ const CompanyProfile = () => {
         if (company) {
           const companyId = company._id;
           const response = await axios.get(`/jobs/company/${companyId}`);
-          setJobApplications(response.data); // assuming response.data directly contains job applications
+          setJobApplications(response.data);
         }
       } catch (error) {
         console.error("Error fetching job applications:", error);
@@ -63,7 +63,9 @@ const CompanyProfile = () => {
                 >
                   {company.website}
                 </a>
-                <p className="company-description">{company.description}</p>
+                <div
+                  dangerouslySetInnerHTML={{ __html: company.description }}
+                />
               </div>
             </motion.div>
             <motion.div

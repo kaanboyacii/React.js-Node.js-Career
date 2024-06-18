@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions, Grid } from "@mui/material";
+import { Button, CardActionArea, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const EventSlider = () => {
@@ -37,6 +37,14 @@ const EventSlider = () => {
     fetchTopApplicantEvents();
   }, []);
 
+  const truncateDescription = (description) => {
+    const words = description.split(" ");
+    if (words.length > 100) {
+      return words.slice(0, 100).join(" ") + "...";
+    }
+    return description;
+  };
+
   return (
     <div className="eventSlider">
       <Grid container spacing={2} columns={16}>
@@ -66,7 +74,11 @@ const EventSlider = () => {
                       {event.title}
                     </Typography>
                     <Typography variant="body1" color="text.primary">
-                      {event.description}
+                      <div
+                        dangerouslySetInnerHTML={{ __html: event.description }}
+                        style={{ marginBottom: "16px", whiteSpace: "pre-wrap" }}
+                      />
+                      {truncateDescription(event.description)}
                     </Typography>
                     <Link to={`/event/${event._id}`}>
                       <Button variant="contained" size="large">
@@ -105,7 +117,11 @@ const EventSlider = () => {
                       {event.title}
                     </Typography>
                     <Typography variant="body1" color="text.primary">
-                      {event.description}
+                      <div
+                        dangerouslySetInnerHTML={{ __html: event.description }}
+                        style={{ marginBottom: "16px", whiteSpace: "pre-wrap" }}
+                      />
+                      {truncateDescription(event.description)}
                     </Typography>
                     <Link to={`/event/${event._id}`}>
                       <Button variant="contained" size="large">

@@ -14,10 +14,12 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Firebase imports
+import { storage } from "../../../firebase"; // Firebase configuration
 
 const CompanyPanelEventsCreate = ({ onClose }) => {
   const [eventData, setEventData] = useState({});
+  const [file, setFile] = useState(null);
 
   const handleChange = (name, value) => {
     setEventData((prevData) => ({
@@ -26,10 +28,26 @@ const CompanyPanelEventsCreate = ({ onClose }) => {
     }));
   };
 
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
   const handleSaveClick = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/events/", eventData);
+      let imgUrl = eventData.img;
+      if (file) {
+        const storageRef = ref(storage, `events/${file.name}`);
+        await uploadBytes(storageRef, file);
+        imgUrl = await getDownloadURL(storageRef);
+      }
+
+      const newEventData = {
+        ...eventData,
+        img: imgUrl,
+      };
+
+      const res = await axios.post("/events/", newEventData);
       if (res.status === 201) {
         onClose();
         window.location.reload();
@@ -47,16 +65,9 @@ const CompanyPanelEventsCreate = ({ onClose }) => {
         <div className="modal-container">
           <Layout>
             <div className="company-panel-event-create">
-              <Card
-                elevation={3}
-                style={{ maxHeight: "80vh", overflowY: "auto" }}
-              >
+              <Card elevation={3} style={{ maxHeight: "80vh", overflowY: "auto" }}>
                 <CardContent>
-                  <Grid
-                    container
-                    justifyContent="space-between"
-                    alignItems="center"
-                  >
+                  <Grid container justifyContent="space-between" alignItems="center">
                     <Grid item>
                       <h1>Yeni Etkinlik Oluştur</h1>
                     </Grid>
@@ -73,9 +84,7 @@ const CompanyPanelEventsCreate = ({ onClose }) => {
                           id="title"
                           label="Etkinlik Başlığı"
                           value={eventData.title || ""}
-                          onChange={(e) =>
-                            handleChange("title", e.target.value)
-                          }
+                          onChange={(e) => handleChange("title", e.target.value)}
                           variant="outlined"
                           fullWidth
                           size="small"
@@ -84,36 +93,34 @@ const CompanyPanelEventsCreate = ({ onClose }) => {
                         />
                       </Grid>
                       <Grid item xs={12} md={6}>
-                        <TextField
-                          id="img"
-                          label="Görsel URL"
-                          value={eventData.img || ""}
-                          onChange={(e) => handleChange("img", e.target.value)}
-                          variant="outlined"
+                        <Button
+                          variant="contained"
+                          component="label"
+                          color="primary"
                           fullWidth
                           size="small"
                           margin="dense"
-                          required
-                        />
+                        >
+                          Görsel Yükle
+                          <input
+                            type="file"
+                            hidden
+                            accept="image/*"
+                            onChange={handleFileChange}
+                          />
+                        </Button>
+                        {file && <p>{file.name}</p>}
                       </Grid>
                       <Grid item xs={12}>
                         <p>Açıklama:</p>
                         <ReactQuill
                           value={eventData.description || ""}
-                          onChange={(value) =>
-                            handleChange("description", value)
-                          }
+                          onChange={(value) => handleChange("description", value)}
                           theme="snow"
                           modules={{
                             toolbar: [
                               [{ header: [1, 2, false] }],
-                              [
-                                "bold",
-                                "italic",
-                                "underline",
-                                "strike",
-                                "blockquote",
-                              ],
+                              ["bold", "italic", "underline", "strike", "blockquote"],
                               [{ list: "ordered" }, { list: "bullet" }],
                               ["link", "image"],
                               ["clean"],
@@ -138,9 +145,7 @@ const CompanyPanelEventsCreate = ({ onClose }) => {
                           id="location"
                           label="Konum"
                           value={eventData.location || ""}
-                          onChange={(e) =>
-                            handleChange("location", e.target.value)
-                          }
+                          onChange={(e) => handleChange("location", e.target.value)}
                           variant="outlined"
                           fullWidth
                           size="small"

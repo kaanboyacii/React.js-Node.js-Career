@@ -8,10 +8,6 @@ import {
   Card,
   CardContent,
   Grid,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   IconButton,
 } from "@mui/material";
 import { useLocation } from "react-router-dom";
@@ -19,11 +15,14 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../../../firebase";
 
 const CompanyPanelEvent = () => {
   const location = useLocation();
   const eventId = location.pathname.split("/").pop();
   const [eventData, setEventData] = useState({});
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -45,10 +44,26 @@ const CompanyPanelEvent = () => {
     }));
   };
 
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
   const handleSaveClick = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`/events/${eventId}`, eventData);
+      let imgUrl = eventData.img;
+      if (file) {
+        const storageRef = ref(storage, `events/${file.name}`);
+        await uploadBytes(storageRef, file);
+        imgUrl = await getDownloadURL(storageRef);
+      }
+
+      const newEventData = {
+        ...eventData,
+        img: imgUrl,
+      };
+
+      const res = await axios.put(`/events/${eventId}`, newEventData);
       if (res.status === 200) {
         window.location.reload();
       } else {
@@ -103,7 +118,7 @@ const CompanyPanelEvent = () => {
                 <form onSubmit={handleSaveClick}>
                   <TextField
                     id="title"
-                    label="İş Başlığı"
+                    label="Etkinlik Başlığı"
                     value={eventData.title || ""}
                     onChange={(e) => handleChange("title", e.target.value)}
                     variant="outlined"
@@ -111,18 +126,37 @@ const CompanyPanelEvent = () => {
                     size="small"
                     margin="dense"
                   />
-                  <TextField
-                    id="title"
-                    label="Görsel URL"
-                    value={eventData.img || ""}
-                    onChange={(e) => handleChange("img", e.target.value)}
-                    variant="outlined"
+                  {eventData.img && (
+                    <div style={{ margin: "10px 0" }}>
+                      <img
+                        src={eventData.img}
+                        alt="Current Event"
+                        style={{
+                          width: "100%",
+                          maxHeight: "300px",
+                          objectFit: "cover",
+                        }}
+                      />
+                    </div>
+                  )}
+                  <Button
+                    variant="contained"
+                    component="label"
+                    color="primary"
                     fullWidth
                     size="small"
                     margin="dense"
-                  />
+                  >
+                    Görseli Değiştir
+                    <input
+                      type="file"
+                      hidden
+                      accept="image/*"
+                      onChange={handleFileChange}
+                    />
+                  </Button>
                   <TextField
-                    id="title"
+                    id="location"
                     label="Konum"
                     value={eventData.location || ""}
                     onChange={(e) => handleChange("location", e.target.value)}
@@ -132,7 +166,7 @@ const CompanyPanelEvent = () => {
                     margin="dense"
                   />
                   <TextField
-                    id="title"
+                    id="type"
                     label="Etkinlik Tipi"
                     value={eventData.type || ""}
                     onChange={(e) => handleChange("type", e.target.value)}
@@ -206,7 +240,12 @@ const CompanyPanelEvent = () => {
                       "image",
                     ]}
                   />
-                  <Button variant="contained" color="primary" type="submit">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    style={{ marginTop: "10px" }}
+                  >
                     Güncelle
                   </Button>
                   <Button
@@ -214,6 +253,7 @@ const CompanyPanelEvent = () => {
                     color="error"
                     startIcon={<DeleteIcon />}
                     onClick={deleteEvent}
+                    style={{ marginTop: "10px" }}
                   >
                     İş İlanını Kaldır
                   </Button>

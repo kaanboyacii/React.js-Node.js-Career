@@ -10,7 +10,6 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { motion } from "framer-motion";
 import Profile from "../../components/panel/profile/Profile";
 import Settings from "../../components/panel/settings/Settings";
-import Cv from "../../components/panel/cv/Cv";
 import Applications from "../../components/panel/applications/Applications";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../redux/userSlice.js";
@@ -29,8 +28,6 @@ const Panel = () => {
     selectedContent = <Profile />;
   } else if (selectedItem === "Ayarlar") {
     selectedContent = <Settings />;
-  } else if (selectedItem === "cvOluştur") {
-    selectedContent = <Cv />;
   } else if (selectedItem === "Başvurularım") {
     selectedContent = <Applications />;
   }
@@ -58,10 +55,6 @@ const Panel = () => {
             <AccountCircleIcon />
             <span>Profil</span>
           </div>
-          <div className="sidebar-item" onClick={() => selectItem("cvOluştur")}>
-            <DescriptionIcon />
-            <span>CV Oluştur</span>
-          </div>
           <div
             className="sidebar-item"
             onClick={() => selectItem("Başvurularım")}
@@ -73,8 +66,7 @@ const Panel = () => {
             <SettingsIcon />
             <span>Ayarlar</span>
           </div>
-          <div className="sidebar-item"
-          onClick={handleLogout}>
+          <div className="sidebar-item" onClick={handleLogout}>
             <LogoutIcon />
             <span>Çıkış Yap</span>
           </div>

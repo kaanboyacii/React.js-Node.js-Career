@@ -14,106 +14,70 @@
     padding: 2rem;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 
-    .contact-form-container {
+    .contact-columns {
       display: flex;
       flex: 1;
-      align-items: center;
-      justify-content: space-between;
-      .contact-form {
+
+      .left-column {
         flex: 1;
-        max-width: 500px; // You can adjust this value based on your design
-        margin-right: 2rem;
-    
-        form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: #fff;
+
+        .contact-info-container {
           display: flex;
           flex-direction: column;
-    
-          label {
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: white;
-          }
-    
-          input,
-          textarea {
-            width: 100%; 
-            padding: 0.5rem;
-            margin-top: 0.5rem;
-            margin-bottom: 1rem;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-    
-            &:focus {
-              outline: none;
-              background-color: rgba(255, 255, 255, 0.2);
-            }
-          }
-    
-          button {
-            font-size: large;
-            font-weight: bold;
-            margin-top: 20px;
-            background: $accent-color;
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background 0.3s;
+          justify-content: flex-start;
+          margin-right: 2rem;
 
-            &:hover {
-              background: #fff;
-              color: $primary-color;
+          h1 {
+            font-size: 3rem;
+            margin-top: 0;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+          }
+
+          .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            .contact-row {
+              display: flex;
+              align-items: center;
+              margin-bottom: 1rem;
+
+              svg {
+                margin-right: 10px;
+              }
+            }
+
+            .email-icon,
+            .phone-icon,
+            .address-icon {
+              color: $accent-color;
+              font-size: 1.5rem;
+              margin-right: 10px;
             }
           }
         }
       }
 
-      .contact-info {
+      .right-column {
         flex: 1;
         display: flex;
-        flex-direction: column;
-        color: #fff;
-        margin-right: 2rem;
-        position: relative;
+        align-items: center;
+        justify-content: center;
 
-        h1 {
-          font-size: 2.5rem;
-          margin-bottom: 1rem;
-        }
-
-        img {
-          height: 250px;
-          width: 300px;
-          margin-bottom: 1rem;
-          position: relative;
-          z-index: 1;
-        }
-
-        span {
-          display: flex;
-          align-items: center;
-          margin-bottom: 1rem;
-
-          svg {
-            margin-right: 10px;
+        .contact-image {
+          max-width: 100%;
+          max-height: 100%;
+          img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
           }
-        }
-
-        .email-icon,
-        .phone-icon,
-        .address-icon {
-          color: $primary-color;
-          font-size: 1.5rem;
-          margin-right: 10px;
-        }
-
-        .email-icon,
-        .phone-icon,
-        .address-icon {
-          color: $accent-color;
         }
       }
     }
@@ -125,15 +89,22 @@
       padding: 2rem 1rem;
       height: auto;
 
-      .contact-form-container {
-        flex-direction: column;
+      .contact-columns {
+        .left-column {
+          .contact-info-container {
+            margin-right: 0;
+            margin-bottom: 2rem;
 
-        .contact-form {
-          margin-right: 0;
+            h1 {
+              font-size: 2.5rem;
+            }
+          }
         }
 
-        .contact-info {
-          margin-right: 0;
+        .right-column {
+          .contact-image {
+            margin-bottom: 2rem;
+          }
         }
       }
     }

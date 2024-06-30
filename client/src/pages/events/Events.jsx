@@ -43,7 +43,7 @@ const Events = () => {
                   alt={event.title}
                 /> */}
                 <div className="event-details">
-                  <Link to="/event">
+                  <Link to={`/event/${event._id}`}>
                     <h3>{event.title}</h3>
                   </Link>
                   <p>

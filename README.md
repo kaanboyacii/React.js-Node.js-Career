@@ -2,6 +2,8 @@
 
 Welcome to the CareerHub web application repository! This is a full-stack web application built with Node.js and React, designed to serve as a career platform connecting job seekers and employers. The platform includes features such as job listings, events, and courses to enhance the overall career experience.
 
+Project Review Video: https://www.youtube.com/watch?v=0mTIeqcjIF4&t=219s
+
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
